@@ -1,0 +1,9 @@
+.dash__width {
+    width: 75%;
+}
+
+@media (max-width: 768px) {
+    .dash__width {
+        width: 100%;
+    }
+}

@@ -1,0 +1,17 @@
+.fixed-button.active {
+    display: none !important;
+}
+.pointer {
+    cursor: pointer;
+    font-size: 18px;
+}
+.order-modal {
+    max-width: 50% !important;
+}
+.invalid {
+    color: #d9534f !important;
+    font-weight: 500 !important;
+}
+.ck-content {
+    height: 300px;
+}
