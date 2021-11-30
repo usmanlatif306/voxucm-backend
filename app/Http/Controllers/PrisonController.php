@@ -32,6 +32,17 @@ class PrisonController extends Controller
     // updating password
     public function updatePassword(Request $request)
     {
+        $request->validate([
+            'old_password' => ['required', 'string', 'min:8'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        if (Auth::attempt(['email' => auth()->user()->email, 'password' => $request->old_password])) {
+            $user = User::where('email', auth()->user()->email)->first();
+            $user->password = Hash::make($request->password);
+            $user->save();
+            return redirect()->back()->with('success', 'Password Successfully Updated');
+        }
+        return redirect()->back()->with('error', 'Invalid Old Password');
         $validId = auth()->user()->email === $request->email;
         if ($validId) {
             $request->validate([
@@ -49,6 +60,10 @@ class PrisonController extends Controller
     public function updateDetails(Request $request)
     {
         $user = User::where('id', $request->id)->first();
+        if ($request->phone !== $user->phone) {
+            $user->is_phone_verified = 0;
+            $user->save();
+        }
         $user->update($request->all());
         return redirect()->back()->with('status', 'User Details Successfully Updated');
     }

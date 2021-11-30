@@ -3,19 +3,20 @@
 use App\Http\Controllers\Admin\AAuthController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\content\AboutController;
-use App\Http\Controllers\content\FaqController;
-use App\Http\Controllers\content\FeatureController;
+use App\Http\Controllers\Content\AboutController;
+use App\Http\Controllers\Content\FaqController;
+use App\Http\Controllers\Content\FeatureController;
 use App\Http\Controllers\Content\HomeController;
-use App\Http\Controllers\content\ProductController;
-use App\Http\Controllers\content\ServiceController;
-use App\Http\Controllers\content\TestController;
-use App\Http\Controllers\content\WorkController;
+use App\Http\Controllers\Content\ProductController;
+use App\Http\Controllers\Content\ServiceController;
+use App\Http\Controllers\Content\TestController;
+use App\Http\Controllers\Content\WorkController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PrisonController;
 use App\Models\content\Contact;
@@ -27,22 +28,30 @@ Route::get('/storage-link', function () {
     Artisan::call('storage:link');
     return "Storage link established";
 });
+Route::get('/cache-clear', function () {
+    Artisan::call('cache:clear');
+    return "Cache is clear";
+});
+Route::get('/config-clear', function () {
+    Artisan::call('config:clear');
+    return "Config is clear";
+});
 // Auth Routes
 // Auth::routes();
 // Prison Auth
-Route::get('/register', [RegisterController::class, 'register'])->name('prison.register');
+Route::get('/register', [RegisterController::class, 'register'])->name('prison.register')->middleware('guest');
 Route::post('/register', [RegisterController::class, "registerUser"])->name('prison.registeruser');
 
-Route::get('/login', [LoginController::class, 'loginForm'])->name('prison.login');
+Route::get('/login', [LoginController::class, 'loginForm'])->name('prison.login')->middleware('guest');
 Route::post('/login', [LoginController::class, "loginUser"])->name('prison.loginuser');
 
 
-Route::get('/verification', function () {
-    return view('prison.auth.verify');
-})->name('prison.verify');
+Route::get('/account/verification', [VerificationController::class, 'verification'])->name('prison.verify');
+
 // verify User
-Route::get('account/verify/{token}', [RegisterController::class, 'verifyAccount'])->name('user.verify');
-Route::post('send-email-token-again', [RegisterController::class, 'sendtokenagain'])->name('user.reverify');
+Route::get('account/verify/{token}', [VerificationController::class, 'verifyAccount'])->name('user.verify');
+
+Route::post('send-email-token-again', [VerificationController::class, 'resendToken'])->name('user.reverify');
 // forget password
 Route::get('/forget-password', [ForgotPasswordController::class, 'forgetPasswordView'])->name('prison.forgetView');
 Route::post('/forget-password', [ForgotPasswordController::class, 'forgetPassword'])->name('prison.forget');
@@ -52,8 +61,15 @@ Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword']
 // logout
 Route::get('/logout', [PrisonController::class, 'logout'])->name('prison.logout')->middleware('auth');
 
-// prison my account
+// // prison my account
 Route::group(['middleware' => 'auth'], function () {
+    Route::post('/user/phone', [VerificationController::class, 'sendOTP'])->name('prison.mobile');
+    Route::get("/user/verify/phone", function () {
+        return view('prison.auth.mobile');
+    })->name('prison.mobile.show');
+    Route::post('/user/verify/phone', [VerificationController::class, 'verifyOTP'])->name('mobile.verify');
+    Route::post('/user/verify/phone/resend', [VerificationController::class, 'resendOTP'])->name('prison.mobile.resend');
+
     Route::get('/user/dashboard', [PrisonController::class, 'dashboard'])->name('prison.dashboard');
     Route::get('/user/setting', [PrisonController::class, 'setting'])->name('user.setting');
     Route::put('/user/setting/update-password', [PrisonController::class, 'updatePassword'])->name('user.setting.password');

@@ -29,12 +29,6 @@ class LoginController extends Controller
     // Show login form
     public function loginForm(Request $request)
     {
-        // session(['redirect' => $request->redirect]);
-        $request->session()->put('redirect', $request->redirect);
-        if (Auth::check()) {
-            return redirect()->back();
-        }
-
         return view('prison.auth.login');
     }
     // login user
@@ -55,9 +49,6 @@ class LoginController extends Controller
                 if ($request->session()->has('redirect')) {
                     $request->session()->forget('redirect');
                     return redirect()->route('prison.cart');
-                    // if ($request->session()->get('redirect') === "cart") {
-
-                    // }
                 }
 
                 return redirect()->route('prison.dashboard')
@@ -90,12 +81,5 @@ class LoginController extends Controller
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:8'],
         ]);
-    }
-    public function __construct()
-    {
-        if (Auth::check()) {
-            return view('prison.dashboard.home');
-        }
-        // $this->middleware('guest')->except('logout');
     }
 }

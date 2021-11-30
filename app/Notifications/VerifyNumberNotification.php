@@ -8,18 +8,19 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Lang;
 
-class VerifyEmailNotification extends Notification
+class VerifyNumberNotification extends Notification
 {
     use Queueable;
-    public $token;
+    public $otp;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($token)
+    public function __construct($otp)
     {
-        $this->token = $token;
+        $this->otp = $otp;
     }
 
     /**
@@ -41,16 +42,11 @@ class VerifyEmailNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url(route('user.verify', [
-            'token' => $this->token,
-            'email' => $notifiable->getEmailForPasswordReset(),
-        ], false));
-
-        // $url = 'http://localhost:8000/account/verify/' . $this->token;
         return (new MailMessage)
-            ->subject(Lang::get('Verify Email Address'))
-            ->line(Lang::get('Please click the button below to verify your email address.'))
-            ->action(Lang::get('Verify Email Address'), url($url))
+            ->subject(Lang::get('Verify Mobile Number'))
+            ->line('To verify your mobile number please use this One Time Password (OTP).')
+            ->line($this->otp)
+            ->line('Kindly donot share this OTP with anyone')
             ->line(Lang::get('If you did not create an account, no further action is required.'));
     }
 

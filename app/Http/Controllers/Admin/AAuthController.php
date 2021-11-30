@@ -17,6 +17,9 @@ class AAuthController extends Controller
     // show register page
     public function showregister()
     {
+        if (Auth::guard('admin')->user()) {
+            return redirect()->route('admin.dashboard');
+        }
         return view('admin.auth.register');
     }
 
@@ -39,6 +42,9 @@ class AAuthController extends Controller
     // show login page
     public function showlogin()
     {
+        if (Auth::guard('admin')->user()) {
+            return redirect()->route('admin.dashboard');
+        }
         return view('admin.auth.login');
     }
 

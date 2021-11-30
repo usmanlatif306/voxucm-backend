@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Mail\VerifyEmail;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use App\Models\UserVerify;
 use App\Notifications\VerifyEmailNotification;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -14,7 +12,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -33,9 +30,7 @@ class RegisterController extends Controller
 
     public function register()
     {
-        if (Auth::check()) {
-            return redirect()->back();
-        }
+
         return view('prison.auth.register');
     }
 
@@ -44,50 +39,16 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
         $user = $this->create($request->all());
 
-        $token = Str::random(64);
-        UserVerify::create([
-            'user_id' => $user->id,
-            'token' => $token
-        ]);
-        $user = User::first();
-        $user->notify(new VerifyEmailNotification($token));
-
-        return redirect()->route('prison.verify');
-    }
-
-    // Verify Account
-    public function verifyAccount($token)
-    {
-        $verifyUser = UserVerify::where('token', $token)->first();
-
-
-        if (!is_null($verifyUser)) {
-            $user = $verifyUser->user;
-
-            if (!$user->is_email_verified) {
-                $verifyUser->user->is_email_verified = 1;
-                $verifyUser->user->save();
-                $message = "Your e-mail is verified. You can now login.";
-            } else {
-                $message = "Your e-mail is already verified. You can now login.";
-            }
-        } else {
-            $message = "Invalid Token";
-            return redirect()->route('prison.login')->with('error', $message);
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $token = Str::random(64);
+            $user->verification_token = $token;
+            $user->save();
+            $user->notify(new VerifyEmailNotification($token));
         }
-
-        return redirect()->route('prison.login')->with('success', $message);
+        return view('prison.auth.verify', compact('user'));
     }
 
-    // Send Again email verification token
-    public function sendtokenagain()
-    {
-        $token = Str::random(64);
-        $user = User::first();
-        $user->notify(new VerifyEmailNotification($token));
 
-        return redirect()->route('prison.verify')->with('resent', "Email verification code send again");
-    }
 
     /**
      * Where to redirect users after registration.
@@ -116,6 +77,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['required', 'numeric',],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -131,6 +93,7 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
     }
