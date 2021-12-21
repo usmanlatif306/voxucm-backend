@@ -5,10 +5,7 @@
         <div class="banner-image-wrapper">
             <div class="banner-image">
                 <div class="banner-image-cell">
-                    <img
-                        src="{{ asset('/storage/images/'.$home->image) }}"
-                        alt="image"
-                    />
+                    <img src="{{ asset('/storage/images/'.$home->image) }}" alt="image" />
                     <!-- banner/2.png -->
                 </div>
             </div>
@@ -23,16 +20,8 @@
                         {{$home->detail}}
                     </p>
                     <div class="banner-button">
-                        <a
-                            class="default-btn button"
-                            href="#"
-                            >{{$home->button1}}</a
-                        >
-                        <a
-                            class="default-btn button"
-                            href="#"
-                            >{{$home->button2}}</a
-                        >
+                        <a class="default-btn button" href="#">{{$home->button1}}</a>
+                        <a class="default-btn button" href="#">{{$home->button2}}</a>
                     </div>
                 </div>
             </div>
@@ -45,14 +34,12 @@
     <div class="container">
         <div class="service-section">
             <div class="row">
-                <div
-                    class="
+                <div class="
                         offset-xl-6
                         col-xl-6 col-lg-8
                         offset-lg-4
                         col-md-12 col-12
-                    "
-                >
+                    ">
                     <div class="service-container">
                         <h2>Why Chose Us</h2>
                         <div class="service-column">
@@ -115,17 +102,8 @@
                                 </h3>
                             </div>
                             <div class="newsletter-form">
-                                <form
-                                    action="#"
-                                    id="mc-form"
-                                    class="mc-form fix"
-                                >
-                                    <input
-                                        id="mc-email"
-                                        type="email"
-                                        name="email"
-                                        placeholder="Enter your E-mail"
-                                    />
+                                <form action="#" id="mc-form" class="mc-form fix">
+                                    <input id="mc-email" type="email" name="email" placeholder="Enter your E-mail" />
                                     <button id="mc-submit" type="submit">
                                         <i class="fa fa-send"></i>
                                     </button>
@@ -155,8 +133,7 @@
                         <div class="fun-icon"><i class="fa fa-users"></i></div>
                         <h4>{{$news->ser1}}</h4>
                         <h5>
-                            <span class="counter">{{$news->ser1_count}}</span
-                            >K
+                            <span class="counter">{{$news->ser1_count}}</span>K
                         </h5>
                     </div>
                 </div>
@@ -165,8 +142,7 @@
                         <div class="fun-icon"><i class="fa fa-usb"></i></div>
                         <h4>{{$news->ser2}}</h4>
                         <h5>
-                            <span class="counter">{{$news->ser2_count}}</span
-                            >K
+                            <span class="counter">{{$news->ser2_count}}</span>K
                         </h5>
                     </div>
                 </div>
@@ -175,8 +151,7 @@
                         <div class="fun-icon"><i class="fa fa-server"></i></div>
                         <h4>{{$news->ser3}}</h4>
                         <h5>
-                            <span class="counter">{{$news->ser3_count}}</span
-                            >K
+                            <span class="counter">{{$news->ser3_count}}</span>K
                         </h5>
                     </div>
                 </div>
@@ -187,8 +162,7 @@
                         </div>
                         <h4>{{$news->ser4}}</h4>
                         <h5>
-                            <span class="counter">{{$news->ser4_count}}</span
-                            >K
+                            <span class="counter">{{$news->ser4_count}}</span>K
                         </h5>
                     </div>
                 </div>
@@ -212,18 +186,8 @@
             <div class="col-lg-3 col-md-6 mb-4">
                 <form method="POST" action="{{ route('order.save') }}">
                     @csrf
-                    <input
-                        type="hidden"
-                        name="user_id"
-                        @auth
-                        value="{{auth()->user()->id}}"
-                        @endauth
-                    />
-                    <input
-                        type="hidden"
-                        name="product_id"
-                        value="{{$product->id}}"
-                    />
+                    <input type="hidden" name="user_id" @auth value="{{auth()->user()->id}}" @endauth />
+                    <input type="hidden" name="product_id" value="{{$product->id}}" />
                     <div class="single-table">
                         <div class="table-title">
                             <h4>{{$product->name}}</h4>
@@ -232,18 +196,10 @@
                         </div>
                         <div class="table-content">
                             <span>Number of Lines {{$product->lines}}</span>
-                            <span
-                                >Number of minutes allowed
-                                {{$product->numbers}}</span
-                            >
+                            <span>Number of minutes allowed
+                                {{$product->numbers}}</span>
                             <span>Plan used for {{$product->month}} Month</span>
-                            <button
-                                class="default-btn table-btn"
-                                type="submit"
-                                @guest
-                                disabled
-                                @endguest
-                            >
+                            <button class="default-btn table-btn" type="submit" @guest disabled @endguest>
                                 Add Plan
                             </button>
                         </div>
@@ -281,23 +237,9 @@
                     <h3>Call Registration</h3>
                     <form action="#" method="post">
                         <div class="form-box fix d-flex flex-wrap">
-                            <input
-                                type="text"
-                                name="name"
-                                placeholder="Name"
-                                required
-                            />
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder="E-mail"
-                                required
-                            />
-                            <input
-                                type="text"
-                                name="number"
-                                placeholder="Mobile Number"
-                            />
+                            <input type="text" name="name" placeholder="Name" required />
+                            <input type="email" name="email" placeholder="E-mail" required />
+                            <input type="text" name="number" placeholder="Mobile Number" />
                             <select name="price">
                                 <option value="110">110$</option>
                                 <option value="240">240$</option>
@@ -337,10 +279,7 @@
                             <h3>{{$faq->intro_title}}</h3>
                         </div>
                         <div class="faq-image">
-                            <img
-                                src="{{ asset('/storage/images/'.$faq->image) }}"
-                                alt=""
-                            />
+                            <img src="{{ asset('/storage/images/'.$faq->image) }}" alt="" />
                         </div>
                     </div>
                     <div class="faq-wrapper fix">
@@ -361,24 +300,14 @@
                     <div class="card">
                         <div class="card-header" id="headingOne">
                             <h4 class="card-title">
-                                <a
-                                    role="button"
-                                    data-toggle="collapse"
-                                    aria-expanded="true"
-                                    href="#one"
-                                    aria-controls="one"
-                                >
+                                <a role="button" data-toggle="collapse" aria-expanded="true" href="#one"
+                                    aria-controls="one">
                                     <span></span> {{$faq->q1}}
                                 </a>
                             </h4>
                         </div>
-                        <div
-                            id="one"
-                            class="collapse show"
-                            role="tabpanel"
-                            aria-labelledby="headingOne"
-                            data-parent="#accordionExample"
-                        >
+                        <div id="one" class="collapse show" role="tabpanel" aria-labelledby="headingOne"
+                            data-parent="#accordionExample">
                             <div class="card-body">
                                 <p>
                                     {{$faq->ans1}}
@@ -390,24 +319,14 @@
                     <div class="card">
                         <div class="card-header" id="headingTwo">
                             <h4 class="card-title">
-                                <a
-                                    class="collapsed"
-                                    data-toggle="collapse"
-                                    aria-expanded="false"
-                                    href="#two"
-                                    aria-controls="two"
-                                >
+                                <a class="collapsed" data-toggle="collapse" aria-expanded="false" href="#two"
+                                    aria-controls="two">
                                     <span></span> {{$faq->q2}}
                                 </a>
                             </h4>
                         </div>
-                        <div
-                            id="two"
-                            class="collapse"
-                            role="tabpanel"
-                            aria-labelledby="headingTwo"
-                            data-parent="#accordionExample"
-                        >
+                        <div id="two" class="collapse" role="tabpanel" aria-labelledby="headingTwo"
+                            data-parent="#accordionExample">
                             <div class="card-body">
                                 <p>
                                     {{$faq->ans2}}
@@ -419,24 +338,14 @@
                     <div class="card">
                         <div class="card-header" role="tab" id="headingThree">
                             <h4 class="card-title">
-                                <a
-                                    class="collapsed"
-                                    data-toggle="collapse"
-                                    aria-expanded="false"
-                                    href="#three"
-                                    aria-controls="three"
-                                >
+                                <a class="collapsed" data-toggle="collapse" aria-expanded="false" href="#three"
+                                    aria-controls="three">
                                     <span></span> {{$faq->q3}}
                                 </a>
                             </h4>
                         </div>
-                        <div
-                            id="three"
-                            class="collapse"
-                            role="tabpanel"
-                            aria-labelledby="headingThree"
-                            data-parent="#accordionExample"
-                        >
+                        <div id="three" class="collapse" role="tabpanel" aria-labelledby="headingThree"
+                            data-parent="#accordionExample">
                             <div class="card-body">
                                 <p>
                                     {{$faq->ans3}}
@@ -448,24 +357,14 @@
                     <div class="card">
                         <div class="card-header" role="tab" id="headingFour">
                             <h4 class="card-title">
-                                <a
-                                    class="collapsed"
-                                    data-toggle="collapse"
-                                    aria-expanded="false"
-                                    href="#four"
-                                    aria-controls="four"
-                                >
+                                <a class="collapsed" data-toggle="collapse" aria-expanded="false" href="#four"
+                                    aria-controls="four">
                                     <span></span> {{$faq->q4}}
                                 </a>
                             </h4>
                         </div>
-                        <div
-                            id="four"
-                            class="collapse"
-                            role="tabpanel"
-                            aria-labelledby="headingFour"
-                            data-parent="#accordionExample"
-                        >
+                        <div id="four" class="collapse" role="tabpanel" aria-labelledby="headingFour"
+                            data-parent="#accordionExample">
                             <div class="card-body">
                                 <p>
                                     {{$faq->ans4}}
@@ -477,24 +376,14 @@
                     <div class="card">
                         <div class="card-header" role="tab" id="headingFive">
                             <h4 class="card-title">
-                                <a
-                                    class="collapsed"
-                                    data-toggle="collapse"
-                                    aria-expanded="false"
-                                    href="#five"
-                                    aria-controls="five"
-                                >
+                                <a class="collapsed" data-toggle="collapse" aria-expanded="false" href="#five"
+                                    aria-controls="five">
                                     <span></span> {{$faq->q5}}
                                 </a>
                             </h4>
                         </div>
-                        <div
-                            id="five"
-                            class="collapse"
-                            role="tabpanel"
-                            aria-labelledby="headingFive"
-                            data-parent="#accordionExample"
-                        >
+                        <div id="five" class="collapse" role="tabpanel" aria-labelledby="headingFive"
+                            data-parent="#accordionExample">
                             <div class="card-body">
                                 <p>
                                     {{$faq->ans5}}
@@ -525,23 +414,11 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="feature-image-content">
-                    <div
-                        class="about-image wow fadeInLeft"
-                        data-wow-duration="2s"
-                        data-wow-delay=".3s"
-                    >
-                        <img
-                            src="{{ asset('/storage/images/'.$service->image) }}"
-                            alt="image"
-                            class="floatright"
-                        />
+                    <div class="about-image wow fadeInLeft" data-wow-duration="2s" data-wow-delay=".3s">
+                        <img src="{{ asset('/storage/images/'.$service->image) }}" alt="image" class="floatright" />
                     </div>
                 </div>
-                <div
-                    class="feature-text-content wow fadeInRight"
-                    data-wow-duration="2s"
-                    data-wow-delay="2s"
-                >
+                <div class="feature-text-content wow fadeInRight" data-wow-duration="2s" data-wow-delay="2s">
                     <div class="feature-wrapper">
                         <div class="single-feature">
                             <div class="feature-icon">
@@ -667,10 +544,7 @@
             </div>
         </div>
         <div class="service-right">
-            <img
-                src="{{ asset('/storage/images/'.$service->image1) }}"
-                alt="image"
-            />
+            <img src="{{ asset('/storage/images/'.$service->image1) }}" alt="image" />
         </div>
     </div>
 </div>
@@ -727,10 +601,7 @@
                     <form id="contact-form" action="mail.php" method="post">
                         <input name="name" type="text" placeholder="Name" />
                         <input name="email" type="text" placeholder="Email" />
-                        <textarea
-                            name="message"
-                            placeholder="Your message"
-                        ></textarea>
+                        <textarea name="message" placeholder="Your message"></textarea>
                         <input class="submit" type="submit" value="SUBMIT" />
                     </form>
                     <p class="form-messege"></p>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\Api\ResetPasswordController;
+use App\Http\Controllers\Api\User\UserDetailController;
 use App\Http\Controllers\Api\VerificationController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ConferenceController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\PurchaseDetailController;
 use App\Http\Controllers\QueuesController;
 use App\Http\Controllers\RingController;
+use App\Http\Controllers\TenantController;
 use App\Http\Controllers\VoiceController;
 use App\Http\Controllers\VoxExtensions;
 use Illuminate\Http\Request;
@@ -59,7 +61,14 @@ Route::get('/{did}/details', [PurchaseDetailController::class, 'index']);
 Route::post('did_details', [PurchaseDetailController::class, 'store']);
 Route::put('/diddetailupdate', [PurchaseDetailController::class, 'update']);
 
+// get tanet
+Route::post('/tenant/add', [TenantController::class, 'index']);
+
+// User details
+Route::get('user/info', [UserDetailController::class, 'index']);
+
 // Api routes for voxucm Extensions
+
 Route::get('/accounts', [ExtController::class, 'accounts']);
 Route::post('/addextension', [ExtController::class, 'addextension']);
 Route::get('/allowcodec', [ExtController::class, 'allowcodec']);

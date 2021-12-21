@@ -30,7 +30,7 @@ class AboutController extends Controller
             $image = $request->image->getClientOriginalName();
             $filename = pathinfo($image, PATHINFO_FILENAME);
             $extension = pathinfo($image, PATHINFO_EXTENSION);
-            $imageName = $filename . "-" . time() . "-" . $extension;
+            $imageName = $filename . "-" . time() . "." . $extension;
             $request->image->storeAs("images", $imageName, "public");
         }
         if ($about->image) {

@@ -1,6 +1,6 @@
 <!-- breadcrumbs start -->
-<section class="breadcrumbs-area pt-200 pb-140 bg-1 bg-blue fix">
-    <div class="container">
+<section class="breadcrumbs-area pt-120  bg-1 bg-blue fix">
+    <!-- <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
                 <div class="breadcrumbs">
@@ -8,6 +8,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </section>
 <!-- breadcrumbs end -->

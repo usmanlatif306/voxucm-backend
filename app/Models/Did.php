@@ -11,4 +11,9 @@ class Did extends Model
     protected $fillable = [
         'status'
     ];
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
 }

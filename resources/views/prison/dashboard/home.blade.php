@@ -1,4 +1,4 @@
-@extends('layouts.master')@section('title', 'Dashboard') @section('content')
+@extends('layouts.master')@section('title', 'My Account') @section('content')
 @include('prison.dashboard.bread')
 <div class="container pt-40 pb-40">
     @if(session('success'))
@@ -6,49 +6,113 @@
         {!! session('success') !!}
     </div>
     @endif
+
     <div class="row">
         <div class="col-12 col-md-3">@include('prison.dashboard.nav')</div>
         <div class="col-12 col-md-9">
-            <div class="border rounded ml-4 w-75">
-                <div class="card__header p-3">Account Details</div>
-                <div class="px-3">
-                    <h6 class="py-2 semi-bold">
-                        Name: {{auth()->user()->name}}
-                    </h6>
-                    <h6 class="py-2 semi-bold">
-                        Address: {{auth()->user()->address}}
-                    </h6>
-                    <h6 class="py-2 semi-bold">
-                        Phone: {{auth()->user()->phone}}
-                        @if (auth()->user()->is_phone_verified === 0)
-                        <a class="btn btn-link p-0 ml-3 align-baseline text-danger"
-                            onclick="document.getElementById('verifyOtp').submit();"
-                            title="Click here to send OTP">unverify</a>
-                        @else
-                        <span class="text-success ml-3">verified</span>
-                        @endif
-                        <form class="d-inline" id="verifyOtp" method="POST" action="{{ route('prison.mobile') }}">
-                            @csrf
-                        </form>
-                    </h6>
-                    <h6 class="py-2 semi-bold">
-                        Country: {{auth()->user()->country}}
-                    </h6>
-                    <h6 class="py-2 semi-bold">
-                        City: {{auth()->user()->city}}
-                    </h6>
-                    <h6 class="py-2 semi-bold">
-                        Postcode: {{auth()->user()->postcode}}
-                    </h6>
-                    <h6 class="py-2 semi-bold">
-                        Email: {{auth()->user()->email}}
-                        @if (auth()->user()->is_email_verified === 1)
-                        <span class="text-success ml-3">verified</span>
-                        @endif
-                    </h6>
+            <div class="row mb-3">
+                <div class="text-white py-2 px-3 ml-3" style="background: rgba(0, 145, 234, 0.95);">
+                    Welcome {{$user->username}}
                 </div>
+                <div class="text-white py-2 px-3 ml-3" style="background: #0071bc;">
+                    Balance {{number_format((float)$user->credit, 4, '.', '')}}
+                </div>
+
+            </div>
+            <div class="row">
+                <!-- pie graph show here -->
+                <div class="col-12">
+                    <div id="google-line-chart" style="height: 300px;"></div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <table class="table table-bordered table-hover tenant-dash">
+                        <thead>
+                            <tr>
+                                <th colspan="2" style="background: rgba(0, 145, 234, 0.95); color: #fff;">Live Calls
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Active Calls</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>Total Calls Calls</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>Total Minutes</td>
+                                <td>0.0</td>
+                            </tr>
+                            <tr>
+                                <td>PSTN Minutes</td>
+                                <td>0.0</td>
+                            </tr>
+                            <tr>
+                                <td>DID Minutes</td>
+                                <td>0.0</td>
+                            </tr>
+                            <tr>
+                                <td>Total Cost</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-12 col-md-6">
+                    <table class="table table-bordered table-hover tenant-dash">
+                        <thead>
+                            <tr>
+                                <th colspan="2" style="background: rgba(0, 145, 234, 0.95); color: #fff;">Extensions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Active</td>
+                                <td>{{count($extensions)}}</td>
+                            </tr>
+                            <tr>
+                                <td>Inactive</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>Online</td>
+                                <td>2</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
+@push('scripts')
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+            ['Month Name', 'Mintues'],
+            ['January', 120], ['February', 140], ['March', 80], ['April', 65], ['May', 180],
+        ]);
+
+        // var options = {
+        //     title: 'Register Users Month Wise',
+        //     curveType: 'function',
+        //     legend: { position: 'bottom' }
+        // };
+
+        var chart = new google.visualization.LineChart(document.getElementById('google-line-chart'));
+
+        chart.draw(data);
+    }
+</script>
+@endpush
 @endsection

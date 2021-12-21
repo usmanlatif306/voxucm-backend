@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Content;
 
 use App\Http\Controllers\Controller;
-use App\Models\content\Contact;
-use App\Models\content\Faq;
-use App\Models\content\Feature;
+use App\Models\Content\Contact;
+use App\Models\Content\Faq;
+use App\Models\Content\Feature;
 use App\Models\Content\Home;
-use App\Models\content\NewsLetter;
-use App\Models\content\Service;
-use App\Models\content\Test;
-use App\Models\content\Product;
-use App\Models\content\TestCall;
+use App\Models\Content\NewsLetter;
+use App\Models\Content\Service;
+use App\Models\Content\Test;
+use App\Models\Content\Product;
+use App\Models\Content\TestCall;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -29,6 +29,7 @@ class HomeController extends Controller
         $contact = Contact::get()->first();
         $news = NewsLetter::get()->first();
         $call = TestCall::get()->first();
+
         return view('prison.index', [
             'home' => $home,
             'products' => $products,
@@ -69,7 +70,7 @@ class HomeController extends Controller
             $image = $request->navlogo->getClientOriginalName();
             $filename = pathinfo($image, PATHINFO_FILENAME);
             $extension = pathinfo($image, PATHINFO_EXTENSION);
-            $imageName = $filename . "-" . time() . "-" . $extension;
+            $imageName = $filename . "-" . time() . "." . $extension;
             $request->navlogo->storeAs("images", $imageName, "public");
         }
         if ($home->navlogo) {
@@ -78,7 +79,7 @@ class HomeController extends Controller
         $home->update([
             'navlogo' => $imageName,
         ]);
-        return redirect()->back()->with('success', 'Data has been updated');
+        return redirect()->back()->with('success', 'Nav Logo has been updated');
     }
     // Update top header section
     public function update(Home $home, Request $request)
@@ -90,7 +91,7 @@ class HomeController extends Controller
             $image = $request->image->getClientOriginalName();
             $filename = pathinfo($image, PATHINFO_FILENAME);
             $extension = pathinfo($image, PATHINFO_EXTENSION);
-            $imageName = $filename . "-" . time() . "-" . $extension;
+            $imageName = $filename . "-" . time() . "." . $extension;
             $request->image->storeAs("images", $imageName, "public");
         }
         if ($home->image) {

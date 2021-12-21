@@ -1,12 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Prison;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Vox;
+use App\Models\Voxucm;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 
 class PrisonController extends Controller
 {
@@ -21,8 +26,36 @@ class PrisonController extends Controller
     // dashboard
     public function dashboard()
     {
-        return view('prison.dashboard.home');
+        return view('prison.dashboard.myaccount');
     }
+
+    // account
+    public function account()
+    {
+        $user = $this->getUserDetails();
+        $extensions = $this->getExtensions();
+
+        return view('prison.dashboard.home', compact('user', 'extensions'));
+    }
+
+    // Extensions
+    public function extensions()
+    {
+        $extensions = $this->getExtensions();
+
+        return view('prison.dashboard.extensions', compact('extensions'));
+    }
+
+    // call history
+    public function callHistory()
+    {
+        return view('prison.dashboard.callhistory');
+    }
+    public function callHistorySearch(Request $request)
+    {
+        dd($request->all());
+    }
+
     // setting
     public function setting()
     {
@@ -98,5 +131,26 @@ class PrisonController extends Controller
         // Session::flush();
 
         return Redirect('login');
+    }
+    // getting user details from msql2 connection
+    private function getUserDetails()
+    {
+        return  DB::connection('mysql2')->table('vox_tenant')->where('tenant_id', 21)->first();
+    }
+    // getting extensions for users
+    private function getExtensions()
+    {
+        $postdata = json_encode(array(
+            'APIUSER' => '21_apiuser',
+            'APIPASSWORD' => MD5('123456'),
+            'SECTION' => 'EXTENSION',
+            'ACTION' => 'GETEXTENSIONS',
+            'DATA' => array("USERNAME" => "21_991010")
+        ));
+
+        $data = Voxucm::curlRequest($postdata);
+        $data = json_decode($data, true);
+
+        return $data['DATA']['RESULTLIST'];
     }
 }

@@ -32,7 +32,7 @@ class ServiceController extends Controller
             $image = $request->image->getClientOriginalName();
             $filename = pathinfo($image, PATHINFO_FILENAME);
             $extension = pathinfo($image, PATHINFO_EXTENSION);
-            $imageName = $filename . "-" . time() . "-" . $extension;
+            $imageName = $filename . "-" . time() . "." . $extension;
             $request->image->storeAs("images", $imageName, "public");
         }
         if ($service->image) {
@@ -42,7 +42,7 @@ class ServiceController extends Controller
             $image1 = $request->image1->getClientOriginalName();
             $filename = pathinfo($image1, PATHINFO_FILENAME);
             $extension = pathinfo($image1, PATHINFO_EXTENSION);
-            $imageName1 = $filename . "-" . time() . "-" . $extension;
+            $imageName1 = $filename . "-" . time() . "." . $extension;
             $request->image1->storeAs("images", $imageName1, "public");
         }
         if ($service->image1) {

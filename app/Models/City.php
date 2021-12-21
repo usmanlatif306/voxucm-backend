@@ -9,6 +9,11 @@ class City extends Model
 {
     use HasFactory;
 
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
     public function dids()
     {
         return $this->hasMany(Did::class);
