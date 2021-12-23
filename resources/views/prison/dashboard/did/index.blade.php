@@ -4,10 +4,20 @@
     <div class="row">
         <div class="col-12 col-md-3">@include('prison.dashboard.nav')</div>
         <div class="col-12 col-md-9">
+            @if(session('success'))
+            <div class="alert alert-success ml-md-4">
+                {!! session('success') !!}
+            </div>
+            @endif
+            @if(session('error'))
+            <div class="alert alert-danger ml-md-4">
+                {!! session('error') !!}
+            </div>
+            @endif
             <div class="border rounded ml-md-4 mt-3 mt-md-0">
                 <div class="card__header p-2 d-flex justify-content-between">
                     Order History
-                    <a href="{{route('prison.did.country')}}" class="btn btn-sm btn-primary">Purchase New DID</a>
+                    <a href="{{route('prison.did.cities')}}" class="btn btn-sm btn-primary">Purchase New DID</a>
                 </div>
                 <div class="py-2 px-3">
                     <!-- extension list here -->
@@ -16,13 +26,11 @@
                             <thead>
                                 <tr class="tableheading" style="text-align: center;">
                                     <th>No</th>
-                                    <th>User Name</th>
-                                    <th>Country</th>
+                                    <th>User</th>
+                                    <th>State</th>
                                     <th>City</th>
                                     <th>DID</th>
-                                    <th>Prefix</th>
-                                    <th>Setup Fee</th>
-                                    <th>Monthly Fee</th>
+                                    <th>Payment</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -36,12 +44,20 @@
                                 <tr class="text-center">
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$number->user->name}}</td>
-                                    <td>{{$number->country}}</td>
+                                    <td>{{$number->state}}</td>
                                     <td>{{$number->city}}</td>
-                                    <td>{{$number->did}}</td>
-                                    <td>{{$number->prefix}}</td>
-                                    <td>{{$number->setup_fee}}</td>
-                                    <td>{{$number->monthly_fee}}</td>
+                                    <td>{{$number->dialing_code}}</td>
+                                    <td>
+                                        @if($number->order_status==='Unpaid')
+                                        <span class="text-danger">
+                                            {{$number->order_status}}
+                                        </span>
+                                        @else
+                                        <span class="text-success">
+                                            {{$number->order_status}}
+                                        </span>
+                                        @endif
+                                    </td>
                                     <td>
                                         <form action="{{route('prison.did.delete',$number->id)}}" method="post"
                                             id='did-{{$number->id}}'>
@@ -57,6 +73,7 @@
                                 @endif
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>

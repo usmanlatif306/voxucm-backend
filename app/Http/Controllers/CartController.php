@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BillDetail;
-use App\Models\Cart;
-use App\Models\PrisonerDetail;
 use Illuminate\Http\Request;
+use Stripe;
 
 class CartController extends Controller
 {
     public function cart()
     {
-        $orders = auth()->user()->orders;
-        // dd($orders[0]->billdetail);
-        // dd($orders[0]->prisonerdetail);
+        $orders = auth()->user()->orders()->where('order_status', 'Unpaid')->get();
         $price = 0;
         foreach ($orders as $order) {
-            $price = $price + $order->product->price;
+            $price = $price + $order->price;
         }
 
         return view('prison.cart', [
@@ -28,9 +24,23 @@ class CartController extends Controller
     // Save records
     public function saveRecords(Request $request)
     {
-        // dd($request->all());
-        BillDetail::create($request->all());
-        PrisonerDetail::create($request->all());
-        dd("Added");
+        $orders = auth()->user()->orders;
+
+        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        $payment = Stripe\Charge::create([
+            "amount" => 100 * $request->price,
+            "currency" => "eur",
+            "source" => $request->stripeToken,
+            "description" => "Making test payment."
+        ]);
+        foreach ($orders as $order) {
+            $order->update(['order_status' => 'Paid', 'payment_id' => $payment->id, '	invoiced' => now()]);
+            $order->billdetail()->create($request->all());
+            $order->prisonerdetail()->create($request->all());
+        }
+        // BillDetail::create($request->all());
+        // PrisonerDetail::create($request->all());
+
+        return redirect()->route('prison.did.index')->with('success', "Payment has been successfully done.");
     }
 }

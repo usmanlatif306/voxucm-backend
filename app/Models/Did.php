@@ -9,7 +9,7 @@ class Did extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'status'
+        'status', 'city_id', 'dialing_code'
     ];
 
     public function city()

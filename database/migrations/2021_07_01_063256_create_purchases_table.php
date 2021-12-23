@@ -19,26 +19,15 @@ class CreatePurchasesTable extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('country');
+            $table->string('state');
             $table->string('city');
-            $table->string('prefix');
-            $table->string('setup_fee');
-            $table->string('monthly_fee');
-            $table->string('did');
+            $table->string('dialing_code');
+            $table->string('payment_id')->default(false);
+            $table->timestamp('invoiced')->nullable();
+            $table->string('prefix')->nullable();
+            $table->string('setup_fee')->nullable();
+            $table->string('monthly_fee')->nullable();
             $table->string('note')->nullable();
-            $table->string('routes')->nullable();
-            $table->string('redirect')->nullable();
-            $table->string('voice_mail')->nullable();
-            $table->string('voice_id')->nullable();
-            $table->string('voice_user')->nullable();
-            $table->string('voice_email')->nullable();
-            $table->string('voice_secret')->nullable();
-            $table->boolean('voice_mail_status')->default(true);
-            $table->string('sip_address')->nullable();
-            $table->boolean('is_route')->default(true);
-            $table->boolean('is_redirect')->default(false);
-            $table->boolean('is_voice_mail')->default(false);
-            $table->boolean('is_sip')->default(false);
             $table->timestamps();
         });
     }

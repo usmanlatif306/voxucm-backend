@@ -82,4 +82,14 @@ class LoginController extends Controller
             'password' => ['required', 'string', 'min:8'],
         ]);
     }
+
+    // logout
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->flush();
+        // Session::flush();
+
+        return Redirect('login');
+    }
 }

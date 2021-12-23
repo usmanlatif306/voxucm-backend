@@ -9,10 +9,7 @@ class City extends Model
 {
     use HasFactory;
 
-    public function country()
-    {
-        return $this->belongsTo(Country::class);
-    }
+    protected $fillable = ['name', 'state'];
 
     public function dids()
     {

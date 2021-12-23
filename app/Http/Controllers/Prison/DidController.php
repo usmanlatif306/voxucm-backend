@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Did;
+use App\Models\Order;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
 
@@ -24,9 +25,9 @@ class DidController extends Controller
     }
 
     // cities
-    public function cities(Country $country)
+    public function cities()
     {
-        $cities = $country->cities()->with('country')->get();
+        $cities = City::paginate(8);
         return view('prison.dashboard.did.cities', compact('cities'));
     }
 
@@ -40,14 +41,12 @@ class DidController extends Controller
     // purchase Did
     public function purchase(Did $did)
     {
-        $purchase = Purchase::create([
+        $purchase = Order::create([
             'user_id' => auth()->user()->id,
-            'country' => $did->city->country->name,
+            "state" => 'United Kingdom',
             'city' => $did->city->name,
-            'prefix' => 123456,
-            'setup_fee' => 30,
-            'monthly_fee' => 5,
-            'did' => $did->did,
+            'dialing_code' => $did->dialing_code,
+            'price' => $did->price,
         ]);
 
         $did->update(['status' => true]);
@@ -59,7 +58,7 @@ class DidController extends Controller
     public function delete(Purchase $purchase)
     {
 
-        $did = Did::where('did', $purchase->did)->first();
+        $did = Did::where('dialing_code', $purchase->dialing_code)->first();
         $did->update(['status' => false]);
         $purchase->delete();
         return back()->with('success', 'Did deleted successfully');

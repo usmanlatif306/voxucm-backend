@@ -15,12 +15,13 @@
                             <thead>
                                 <tr class="tableheading" style="text-align: center;">
                                     <th>No</th>
-                                    <th>Country</th>
+                                    <th>State</th>
+                                    <th>City</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($countries as $country)
+                                @foreach($cities as $city)
                                 <tr class="text-center">
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$country->name}}</td>

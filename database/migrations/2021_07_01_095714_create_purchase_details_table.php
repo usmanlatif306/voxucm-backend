@@ -22,11 +22,16 @@ class CreatePurchaseDetailsTable extends Migration
             $table->string('routes')->nullable();
             $table->string('redirect')->nullable();
             $table->string('voice_mail')->nullable();
+            $table->string('voice_id')->nullable();
+            $table->string('voice_user')->nullable();
+            $table->string('voice_email')->nullable();
+            $table->string('voice_secret')->nullable();
+            $table->boolean('voice_mail_status')->default(true);
             $table->string('sip_address')->nullable();
-            $table->boolean('is_route')->default(0);
-            $table->boolean('is_redirect')->default(0);
-            $table->boolean('is_voice_mail')->default(0);
-            $table->boolean('is_sip')->default(0);
+            $table->boolean('is_route')->default(true);
+            $table->boolean('is_redirect')->default(false);
+            $table->boolean('is_voice_mail')->default(false);
+            $table->boolean('is_sip')->default(false);
             $table->timestamps();
         });
     }

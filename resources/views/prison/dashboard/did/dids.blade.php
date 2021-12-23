@@ -15,9 +15,9 @@
                             <thead>
                                 <tr class="tableheading" style="text-align: center;">
                                     <th>No</th>
-                                    <th>Country</th>
                                     <th>City</th>
-                                    <th>Did</th>
+                                    <th>Dialing Code</th>
+                                    <th>Price</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -30,9 +30,9 @@
                                 @foreach($dids as $did)
                                 <tr class="text-center">
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$did->city->country->name}}</td>
                                     <td>{{$did->city->name}}</td>
-                                    <td>{{$did->did}}</td>
+                                    <td>{{$did->dialing_code}}</td>
+                                    <td>£{{$did->price}}</td>
                                     <td>
                                         <a href="{{route('prison.did.purchase',$did->id)}}">select</a>
                                     </td>

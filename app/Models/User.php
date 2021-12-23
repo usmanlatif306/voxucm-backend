@@ -54,7 +54,8 @@ class User extends Authenticatable implements MustVerifyEmail
     // User relation with purchases Numbers
     public function numbers()
     {
-        return $this->hasMany(Purchase::class);
+        // return $this->hasMany(Purchase::class);
+        return $this->hasMany(Order::class);
     }
 
 

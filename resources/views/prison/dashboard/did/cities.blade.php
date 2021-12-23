@@ -15,7 +15,7 @@
                             <thead>
                                 <tr class="tableheading" style="text-align: center;">
                                     <th>No</th>
-                                    <th>Country</th>
+                                    <th>State</th>
                                     <th>City</th>
                                     <th>Actions</th>
                                 </tr>
@@ -24,7 +24,7 @@
                                 @foreach($cities as $city)
                                 <tr class="text-center">
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$city->country->name}}</td>
+                                    <td>{{$city->state}}</td>
                                     <td>{{$city->name}}</td>
                                     <td><a href="{{route('prison.did.dids',$city->id)}}">select</a>
                                     </td>
@@ -33,6 +33,7 @@
                             </tbody>
                         </table>
                     </div>
+                    {{ $cities->links() }}
                 </div>
             </div>
         </div>

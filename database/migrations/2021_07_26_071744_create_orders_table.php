@@ -15,18 +15,31 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
+            // $table->id();
+            // $table->foreignId('user_id')
+            //     ->constrained()
+            //     ->onUpdate('cascade')
+            //     ->onDelete('cascade');
+            // $table->foreignId('product_id')
+            //     ->constrained()
+            //     ->onUpdate('cascade')
+            //     ->onDelete('cascade');
+            // $table->boolean('order_status')->default(0);
+            // $table->boolean('payment_status')->default(0);
+            // $table->timestamp('expiry_date')->default(Carbon::now()->addMonth());
+            // $table->timestamps();
             $table->id();
             $table->foreignId('user_id')
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreignId('product_id')
-                ->constrained()
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-            $table->boolean('order_status')->default(0);
-            $table->boolean('payment_status')->default(0);
-            $table->timestamp('expiry_date')->default(Carbon::now()->addMonth());
+            $table->string('state');
+            $table->string('city');
+            $table->string('dialing_code');
+            $table->string('price');
+            $table->string('order_status')->default('Unpaid');
+            $table->string('payment_id')->default(false);
+            $table->timestamp('invoiced')->nullable();
             $table->timestamps();
         });
     }

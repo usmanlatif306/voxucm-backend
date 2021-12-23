@@ -9,15 +9,6 @@ class PrisonerDetail extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'order_id',
-        'prison_fname',
-        'prison_lname',
-        'prison_number',
-        'prison_status',
-        'release_date',
-        'prison',
-        'prison_relation',
-        'prison_contact',
-        'prison_contact_name',
+        'order_id', 'prison_fname', 'prison_lname', 'prison_number', 'prison_status', 'release_date', 'prison', 'prison_relation', 'prison_contact', 'prison_contact_name',
     ];
 }

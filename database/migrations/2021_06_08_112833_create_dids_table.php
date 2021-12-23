@@ -19,7 +19,9 @@ class CreateDidsTable extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('did');
+            $table->string('dialing_code');
+            $table->string('price');
+            $table->string('status');
             $table->timestamps();
         });
     }

@@ -39,5 +39,8 @@ return [
         'client_secret' => env('FACEBOOK_APP_SECRET'),
         'redirect' => env('FACEBOOK_REDIRECT_URL'),
     ],
+    'stripe' => [
+        'secret' => env('STRIPE_SECRET'),
+    ],
 
 ];

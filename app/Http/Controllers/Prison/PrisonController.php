@@ -123,15 +123,7 @@ class PrisonController extends Controller
         return view('prison.dashboard.expiry');
     }
 
-    // logout
-    public function logout(Request $request)
-    {
-        Auth::logout();
-        $request->session()->flush();
-        // Session::flush();
 
-        return Redirect('login');
-    }
     // getting user details from msql2 connection
     private function getUserDetails()
     {

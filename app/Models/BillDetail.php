@@ -20,10 +20,6 @@ class BillDetail extends Model
         'postcode',
         'area_prefix',
         'pay_method',
-        'card_number',
-        'mm_expiry',
-        'year_expiry',
-        'card_cvc',
         'card_holder_name',
     ];
 }

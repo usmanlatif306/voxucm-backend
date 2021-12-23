@@ -29,10 +29,6 @@ class CreateBillDetailsTable extends Migration
             $table->string('postcode');
             $table->string('area_prefix');
             $table->string('pay_method')->nullable();
-            $table->string('card_number')->nullable();
-            $table->string('mm_expiry')->nullable();
-            $table->string('year_expiry')->nullable();
-            $table->string('card_cvc')->nullable();
             $table->string('card_holder_name')->nullable();
             $table->timestamps();
         });

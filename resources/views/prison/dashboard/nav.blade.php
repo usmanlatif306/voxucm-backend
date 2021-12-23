@@ -16,6 +16,10 @@
     </div>
 
     <div class="p-3 border-bottom bg-lightgray">
+        <a href="{{ route('prison.extension.index') }}" class="text-primary">Extensions</a>
+    </div>
+
+    <div class="p-3 border-bottom bg-lightgray">
         <a href="{{ route('user.buymore') }}" class="text-primary">Buy More Minutes</a>
     </div>
     <div class="p-3 border-bottom bg-lightgray">

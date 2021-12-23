@@ -7,7 +7,6 @@ use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\PrisonController;
 use Illuminate\Support\Facades\Route;
 
 // google auth
@@ -38,7 +37,7 @@ Route::post('/forget-password', [ForgotPasswordController::class, 'forgetPasswor
 Route::get('/reset-password', [ResetPasswordController::class, 'resetView'])->name('prison.reset');
 Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('prison.update');
 // logout
-Route::get('/logout', [PrisonController::class, 'logout'])->name('prison.logout')->middleware('auth');
+Route::get('/logout', [LoginController::class, 'logout'])->name('prison.logout')->middleware('auth');
 
 // mobile verification
 Route::group(['middleware' => 'auth'], function () {

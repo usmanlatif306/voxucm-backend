@@ -10,11 +10,9 @@ class Purchase extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'country', 'city', 'prefix', 'setup_fee', 'monthly_fee', 'did', 'note', 'routes', 'redirect', 'voice_mail', 'voice_id', 'voice_mail_status', 'sip_address', 'is_route', 'is_redirect', 'is_voice_mail', 'is_sip'
+        'user_id', 'state', 'city', 'prefix', 'setup_fee', 'monthly_fee', 'dialing_code', 'note', 'payment_id', 'invoiced',
     ];
-    // protected $fillable = [
-    //     '*',
-    // ];
+
 
     public function purchase_details()
     {
