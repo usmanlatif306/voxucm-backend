@@ -15,7 +15,7 @@ class DidController extends Controller
     public function index()
     {
         $numbers = auth()->user()->numbers()->get();
-        return view('prison.dashboard.did.index', compact('numbers'));
+        return view('prison.config.did.index', compact('numbers'));
     }
     // purchase
     public function countries()
@@ -28,14 +28,14 @@ class DidController extends Controller
     public function cities()
     {
         $cities = City::paginate(8);
-        return view('prison.dashboard.did.cities', compact('cities'));
+        return view('prison.config.did.cities', compact('cities'));
     }
 
     // dids
     public function dids(City $city)
     {
         $dids = $city->dids()->with('city')->where('status', false)->get();
-        return view('prison.dashboard.did.dids', compact('dids'));
+        return view('prison.config.did.dids', compact('dids'));
     }
 
     // purchase Did
@@ -55,12 +55,11 @@ class DidController extends Controller
     }
 
     // delete a did
-    public function delete(Purchase $purchase)
+    public function delete(Order $order)
     {
-
-        $did = Did::where('dialing_code', $purchase->dialing_code)->first();
+        $did = Did::where('dialing_code', $order->dialing_code)->first();
         $did->update(['status' => false]);
-        $purchase->delete();
+        $order->delete();
         return back()->with('success', 'Did deleted successfully');
     }
 }

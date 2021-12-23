@@ -35,14 +35,16 @@
 /*  1.  Default CSS
 /*----------------------------------------*/
 
-@import url("https://fonts.googleapis.com/css?family=Exo+2:400,700|Raleway:400,500");
+/* @import url("https://fonts.googleapis.com/css?family=Exo+2:400,700|Raleway:400,500"); */
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 html,
 body {
     height: 100%;
 }
 body {
     color: #666666;
-    font-family: "Raleway", sans-serif;
+    /* font-family: "Raleway", sans-serif; */
+    font-family: "Poppins", sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -1172,19 +1174,7 @@ button.nav-btn span {
     margin: 0;
     padding-right: 22px;
 }
-.card {
-    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-    border: 0 none;
-    box-shadow: none;
-}
-.card > .card-header {
-    background: #fafafa none repeat scroll 0 0;
-    border-left: 10px solid #eeeeee;
-    border-radius: 0;
-    margin: 0;
-    padding: 0;
-    border-bottom: none;
-}
+
 .faq-area .card h4 {
     font-size: 16px;
     font-weight: 400;
@@ -1244,12 +1234,12 @@ button.nav-btn span {
     color: #666666;
     line-height: 23px;
 }
-.card-body {
+/* .card-body {
     padding: 5px 13px 28px 32px;
     position: relative;
     -webkit-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
-}
+} */
 .accordion .card + .card {
     margin-top: 30px;
 }
@@ -1674,7 +1664,7 @@ button.nav-btn span {
     color: #666666;
 }
 .modal-body form {
-    margin-top: 25px;
+    margin-top: 10px;
 }
 .modal-body input[type="checkbox"] {
     height: 15px;

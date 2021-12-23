@@ -31,6 +31,9 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('layouts.master', function ($view) {
             $view->with('orders',  auth()->user() ? auth()->user()->orders()->where('order_status', 'Unpaid')->get() : [])->with('navlogo', Home::get()->first()->navlogo);
         });
+        view()->composer('layouts.account', function ($view) {
+            $view->with('orders',  auth()->user() ? auth()->user()->orders()->where('order_status', 'Unpaid')->get() : [])->with('navlogo', Home::get()->first()->navlogo);
+        });
 
         Paginator::useBootstrap();
     }

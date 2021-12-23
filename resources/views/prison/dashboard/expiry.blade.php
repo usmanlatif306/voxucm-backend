@@ -1,12 +1,12 @@
-@extends('layouts.master')@section('title', 'Dashboard') @section('content')
-@include('prison.dashboard.bread')
-<div class="container pt-40 pb-40">
+@extends('layouts.account')@section('title', 'Dashboard') @section('content')
+<div class="container pb-40">
     <div class="row">
-        <div class="col-12 col-md-3">@include('prison.dashboard.nav')</div>
-        <div class="col-12 col-md-9">
-            <div class="border rounded ml-md-4 mt-3 mt-md-0 dash__width w-100">
-                <div class="card__header p-3">Lines</div>
-                <div class="py-2 px-3">
+        <div class="col-12 col-md-10 offset-md-1">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Lines</h3>
+                </div>
+                <div class="card-body">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -29,4 +29,3 @@
     </div>
 </div>
 @endsection
-

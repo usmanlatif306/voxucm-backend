@@ -1,25 +1,7 @@
-@extends('layouts.master')@section('title', 'Cart') @section('content')
-<!-- breadcrumbs start -->
-<section class="breadcrumbs-area pt-200 pb-140 bg-1 bg-blue fix">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <div class="breadcrumbs">
-                    <h2 class="page-title">Cart</h2>
-                    <ul>
-                        <li>
-                            <a class="active" href="#">Home</a>
-                        </li>
-                        <li>cart</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- breadcrumbs end -->
+@extends('layouts.account')@section('title', 'Cart') @section('content')
+
 <!-- Cart Start -->
-<div id="about" class="feature-area bg-light pt-40 pb-60 fix">
+<div id="about" class="feature-area  pb-60 fix">
     <div class="container">
         @if(count($orders) < 1) <div class="section-title text-center">
             <h2>Empty Cart</h2>
@@ -38,7 +20,7 @@
             </div>
             @endif
             <div class="border p-3 pb-5">
-                <table class="table table-hover">
+                <table class="table table-hover table-striped">
                     <thead>
                         <tr>
                             <th scope="col">No</th>

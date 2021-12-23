@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Did;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,8 @@ class OrderController extends Controller
     // Delete Order
     public function deleteOrder(Order $order)
     {
+        $did = Did::where('dialing_code', $order->dialing_code)->first();
+        $did->update(['status' => false]);
         $order->delete();
         return redirect()->back()->with('success', 'Order Deleted Successfully');
     }

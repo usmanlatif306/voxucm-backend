@@ -105,7 +105,7 @@ class VerificationController extends Controller
         if (password_verify($request->otp, $otp->otp)) {
             Auth::user()->is_phone_verified = 1;
             Auth::user()->save();
-            return redirect()->route('prison.dashboard')->with('success', "Congratulation your mobile number has been verified");
+            return redirect()->route('user.account')->with('success', "Congratulation your mobile number has been verified");
         }
         return redirect()->back()->with('error', "Invalid One Time Password");
     }

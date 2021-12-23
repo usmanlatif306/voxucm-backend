@@ -25,7 +25,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-12 col-md-8">
-                <div class="card">
+                <div class="card border-0">
                     <div class="card-body">
                         <form method="POST" action="{{ route('prison.registeruser') }}">
                             @csrf

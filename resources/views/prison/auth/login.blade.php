@@ -38,7 +38,7 @@
                     @endif
                 </div>
 
-                <div class="card">
+                <div class="card border-0">
                     <div class="card-body">
                         <form method="POST" action="{{ route('prison.loginuser') }}">
                             @csrf
@@ -116,7 +116,7 @@
                                     <a class="btn btn-link" href="{{ route('prison.forgetView') }}">
                                         {{ __("Forgot Your Password?") }}
                                     </a>
-                                    <a class="btn btn-link" href="{{ route('prison.register') }}">
+                                    <a class="btn btn-link pl-0" href="{{ route('prison.register') }}">
                                         {{ __("Create New Account?") }}
                                     </a>
                                     <!-- <hr /> -->

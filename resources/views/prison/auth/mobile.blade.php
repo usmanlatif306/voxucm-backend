@@ -19,7 +19,7 @@
 </section>
 <!-- breadcrumbs end -->
 <!-- Login -->
-<div id="contact" class="contact-area bg-light pt-50 pb-50">
+<div id="contact" class="contact-area pt-50 pb-50">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -36,7 +36,7 @@
                     @endif
                 </div>
 
-                <div class="card">
+                <div class="card border-0">
                     <div class="card-body">
                         <form method="POST" action="{{ route('mobile.verify') }}">
                             @csrf

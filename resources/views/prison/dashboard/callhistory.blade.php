@@ -1,10 +1,8 @@
-@extends('layouts.master')@section('title', 'Call History') @section('content')
-@include('prison.dashboard.bread')
-<div class="container pt-40 pb-40">
-
+@extends('layouts.account')@section('title', 'Call History') @section('content')
+<div class="containerpb-40">
     <div class="row">
-        <div class="col-12 col-md-3">@include('prison.dashboard.nav')</div>
-        <div class="col-12 col-md-9">
+
+        <div class="col-12 col-md-8 offset-md-2">
             <form action="{{route('prison.callhistory.search')}}" method="POST">
                 @csrf
                 <div class="row">
@@ -53,7 +51,7 @@
             <!-- call hstory record shows here -->
             <table class="table table-bordered table-hover tenant-dash mt-3">
                 <thead>
-                    <tr style="background: rgba(0, 145, 234, 0.95); color: #fff; text-align: center;">
+                    <tr style="text-align: center;">
                         <th>Extension</th>
                         <th>Caller ID</th>
                         <th>Callee</th>

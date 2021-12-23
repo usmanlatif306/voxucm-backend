@@ -1,12 +1,12 @@
-@extends('layouts.master')@section('title', 'Dashboard') @section('content')
-@include('prison.dashboard.bread')
-<div class="container pt-40 pb-40">
+@extends('layouts.account')@section('title', 'Dashboard') @section('content')
+<div class="container pb-40">
     <div class="row">
-        <div class="col-12 col-md-3">@include('prison.dashboard.nav')</div>
-        <div class="col-12 col-md-9">
-            <div class="border rounded ml-md-4 mt-3 mt-md-0">
-                <div class="card__header p-3">Account Balance</div>
-                <div class="py-2 px-3">
+        <div class="col-12 col-md-8 offset-md-2 mb-5">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Account Balance</h3>
+                </div>
+                <div class="card-body">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -17,12 +17,19 @@
                                 <td scope="col">Remaing Balance</td>
                             </tr>
                         </thead>
+                        <tbody>
+
+                        </tbody>
                     </table>
                 </div>
             </div>
-            <div class="border rounded ml-md-4 mt-5">
-                <div class="card__header p-3">Account Usage History</div>
-                <div class="py-2 px-3">
+        </div>
+        <div class="col-12 col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Account Balance</h3>
+                </div>
+                <div class="card-body">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -32,6 +39,9 @@
                                 <td scope="col">Duration</td>
                             </tr>
                         </thead>
+                        <tbody>
+
+                        </tbody>
                     </table>
                 </div>
             </div>

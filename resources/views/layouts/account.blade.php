@@ -25,244 +25,238 @@
     <link rel="stylesheet" href="{{ asset('prison/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('prison/css/custom.css') }}" />
     <link rel="stylesheet" href="{{ asset('prison/css/responsive.css') }}" />
+
     <script src="{{
                 asset('prison/js/vendor/modernizr-2.8.3.min.js')
             }}"></script>
+    <style>
+        /* footer {
+            position: sticky;
+            bottom: 0;
+        } */
+
+        footer.page-footer .footer-copyright {
+            overflow: hidden;
+            color: rgba(255, 255, 255, 0.6);
+            background-color: rgba(0, 0, 0, 0.2);
+
+        }
+    </style>
 </head>
 
 <body>
     <!-- Header Area Start -->
-    <header class="header-area fixed">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-2 col-md-4 col-6">
-                    <div class="logo">
-                        <a href="{{ route('prison.home') }}"><img src="{{
-                                        asset('/storage/images/'.$navlogo)
-                                    }}" alt="Prison Tel" /></a>
-                    </div>
-                </div>
-                <div class="col-lg-10 d-lg-block d-none">
-                    <div class="main-menu text-center">
-                        <nav>
-                            <ul>
-                                <li class="{{ request()->routeIs('prison.home') ? 'active' : '' }}">
-                                    <a href="{{ route('prison.home') }}">Home</a>
-                                </li>
-                                <li class="{{ request()->routeIs('prison.about') ? 'active' : '' }}">
-                                    <a href="{{ route('prison.about') }}">About</a>
-                                </li>
-                                <li class="{{ request()->routeIs('prison.features') ? 'active' : '' }}">
-                                    <a href="{{ route('prison.features') }}">Features</a>
-                                </li>
-                                <li class="{{ request()->routeIs('prison.pricing') ? 'active' : '' }}">
-                                    <a href="{{ route('prison.pricing') }}">Plans</a>
-                                </li>
-                                <li class="{{ request()->routeIs('prison.works') ? 'active' : '' }}">
-                                    <a href="{{ route('prison.works') }}">How It Works</a>
-                                </li>
-                                <li class="{{ request()->routeIs('prison.support') ? 'active' : '' }}">
-                                    <a href="{{ route('prison.support') }}">FAQ</a>
-                                </li>
-                                <li class="{{ request()->routeIs('prison.services') ? 'active' : '' }}">
-                                    <a href="{{ route('prison.services') }}">Services</a>
-                                </li>
-                                <li class="{{ request()->routeIs('prison.contact') ? 'active' : '' }}">
-                                    <a href="{{ route('prison.contact') }}">Contact</a>
-                                </li>
+    <header class="">
+        <div class="container">
+            <nav class="top-navbar-header d-flex py-2">
+                <a href="{{ route('prison.home') }}" class="d-none d-md-block">
+                    <img src="https://www.prisontel.co.uk/theme/site/img/logo-dark.png" alt="Prison Tel"
+                        style="width: 45px !important;" /></a>
+                <ul class="ml-auto pt-2">
+                    <button class="btn btn-sm btn-primary mx-2">Balance:
+                        {{number_format((float)session('balance'), 4,
+                        '.',
+                        '')}}</button>
+                    <button class="btn btn-sm btn-primary mx-2">Welcome {{session('username')}}</button>
+                    <button class="btn btn-sm btn-primary mx-2" onclick="window.location='/user/myaccount'">My
+                        Account</button>
+                    <button class="btn btn-sm btn-primary mx-2 mt-2 mt-md-0"
+                        onclick="window.location='/logout'">Logout</button>
 
-                                @guest
-                                <li
-                                    class="{{ request()->routeIs('prison.login')||request()->routeIs('prison.register') ? 'active' : '' }}">
-                                    <a href="{{ route('prison.login') }}">Login</a>
-                                </li>
-                                @endguest
+                </ul>
+            </nav>
+        </div>
+        <div class="w-100" style="background: rgba(0, 145, 234, 0.95);">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                                @auth
-                                <li
-                                    class="{{request()->routeIs('prison.dashboard')||request()->routeIs('user.setting')||request()->routeIs('user.buymore')||request()->routeIs('user.accounts')||request()->routeIs('user.usage')||request()->routeIs('user.expiry') ? 'active' : '' }}">
-                                    <a href="{{ route('prison.dashboard') }}">My Account</a>
-                                </li>
-                                <li class="{{ request()->routeIs('prison.cart') ? 'active' : '' }}">
-                                    <a href="{{ route('prison.cart') }}"><strong>{{ count($orders) }}
-                                        </strong>
-                                        Items In Cart</a>
-                                </li>
-                                @endauth
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-                <!-- <div class="col-lg-1 col-md-4 d-lg-block d-md-block d-none">
-                        <button
-                            class="modal-view nav-btn"
-                            data-toggle="modal"
-                            data-target="#productModal"
-                        >
-                            <i class="fa fa-bars"></i
-                            ><span>Sign In / Sign Up</span>
-                        </button>
-                    </div> -->
-                <div class="col-12">
-                    <div class="mobile-menu d-block d-lg-none">
-                        <nav>
-                            <ul>
-                                <li class="{{ request()->routeIs('prison.home') ? 'active' : '' }}">
-                                    <a href="{{ route('prison.home') }}">Home</a>
-                                </li>
-                                <li class="{{ request()->routeIs('prison.about') ? 'active' : '' }}">
-                                    <a href="{{ route('prison.about') }}">About</a>
-                                </li>
-                                <li class="{{ request()->routeIs('prison.features') ? 'active' : '' }}">
-                                    <a href="{{ route('prison.features') }}">Features</a>
-                                </li>
-                                <li class="{{ request()->routeIs('prison.pricing') ? 'active' : '' }}">
-                                    <a href="{{ route('prison.pricing') }}">Plans</a>
-                                </li>
-                                <li class="{{ request()->routeIs('prison.works') ? 'active' : '' }}">
-                                    <a href="{{ route('prison.works') }}">How It Works</a>
-                                </li>
-                                <li class="{{ request()->routeIs('prison.support') ? 'active' : '' }}">
-                                    <a href="{{ route('prison.support') }}">FAQ</a>
-                                </li>
-                                <li class="{{ request()->routeIs('prison.services') ? 'active' : '' }}">
-                                    <a href="{{ route('prison.services') }}">Services</a>
-                                </li>
-                                <li class="{{ request()->routeIs('prison.contact') ? 'active' : '' }}">
-                                    <a href="{{ route('prison.contact') }}">Contact</a>
-                                </li>
-                                @guest
-                                <li
-                                    class="{{ request()->routeIs('prison.login')||request()->routeIs('prison.register') ? 'active' : '' }}">
-                                    <a href="{{ route('prison.login') }}">Login</a>
-                                </li>
-                                @endguest
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="{{route('prison.dashboard')}}">Home</a>
+                            </li>
 
-                                @auth
-                                <li
-                                    class="{{request()->routeIs('prison.dashboard')||request()->routeIs('user.setting')||request()->routeIs('user.buymore')||request()->routeIs('user.accounts')||request()->routeIs('user.usage')||request()->routeIs('user.expiry') ? 'active' : '' }}">
-                                    <a href="{{ route('prison.dashboard') }}">My Account</a>
-                                </li>
-                                <li class="{{ request()->routeIs('prison.cart') ? 'active' : '' }}">
-                                    <a href="{{ route('prison.cart') }}"><strong>{{ count($orders) }}
-                                        </strong>
-                                        Items In Cart</a>
-                                </li>
-                                @endauth
-                            </ul>
-                        </nav>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Configuration
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Dial Pattern</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{route('prison.extension.index')}}"> Extension</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="">Ring Group</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{route('prison.did.index')}}">DID</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="">Day Night</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="">IVR</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="">VoiceMail</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Announcement</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Music On Hold</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Sound file</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Paging</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="">Conference</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Miscellaneous
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Feature Code </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#"> Pickup Group</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#"> Departments</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#"> Holidays</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Central Phonebook</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">API Users</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#"> LDAP Synchronization</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#"> Global CLI Config </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Tenant Users</a>
+
+                                </div>
+
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Billing</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Invoice</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#"> Balance List</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Payment History</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">My Rates</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Live Report</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Live Calls</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#"> Live Online SIP Users</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Call History</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{route('prison.callhistory')}}">Tenant Call
+                                        History</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#"> Top Destinations</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Fail Logs</a>
+
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Contact Center</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Queues</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#"> Agents</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Contact Center Call Monitoring</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Agent Statistics</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Agent Log Statistics</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Missed Call Report</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#"> Answered Call Statistics</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Account</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('user.account') }}">Profile</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ route('user.setting') }}"> Edit Profile</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ route('user.buymore') }}">Buy More Minutes</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ route('user.orders') }}">Order History</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ route('user.usage') }}">Account Usage</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ route('user.expiry') }}">Account Expiry</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('prison.cart') }}" class="nav-link text-light"><strong>{{
+                                        count($orders) }}
+                                    </strong>
+                                    Items In Cart</a>
+                            </li>
+                            <!-- <li class="nav-item dropdown">
+                                <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Fax</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Send Fax List</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#"> Fax Mail Group</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Receive Fax Configuration</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Received Fax List</a>
+                                </div>
+                            </li> -->
+                        </ul>
                     </div>
-                </div>
+                </nav>
             </div>
         </div>
+
     </header>
     <!-- Header Area End -->
 
-    @yield('content')
+    <main class="mt-5" style="min-height: 62vh;">
+        @yield('content')
+    </main>
 
-    <!-- Footer Area Start -->
-    <footer class="prison-footer">
-        <img src="{{ asset('prison/img/prison1.png') }}" class="mb-3" />
-        <div id="footer-menu">
-            <ul>
-                <!-- {{ route('prison.terms') }} -->
-                <li>
-                    <a href="{{ route('prison.terms') }}">Term and Conditions</a>
-                </li>
-                |
-                <li>
-                    <a href="{{ route('prison.privacy') }}">
-                        Privacy Policy
-                    </a>
-                </li>
-                |
-                <li>
-                    <a href="{{ route('prison.cancel') }}">Canellation Policy</a>
-                </li>
-                |
-                <li>
-                    <a href="{{ route('prison.cookie') }}">
-                        Cookies Policy
-                    </a>
-                </li>
-                |
-                <li>©2021 Prisontel right resrved.</li>
-            </ul>
+    <!-- Footer Area -->
+    <footer class="page-footer text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn"
+        style="background-color: #0d47a1">
+        <div class="footer-copyright py-3">
+            © 2019 Copyright:
+            <a href="https://www.xorexs.com/" target="_blank" style="color: #fff;"> Xorexs </a>
         </div>
     </footer>
-    <!-- Footer Area End -->
-    <!-- Login Register Start -->
-    <div id="quickview-login">
-        <div class="modal fade" id="productModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"><i class="fa fa-close"></i></span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="header-tab-menu">
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active">
-                                    <a href="#login" aria-controls="login" role="tab" data-toggle="tab">login</a>
-                                </li>
-                                <li role="presentation">
-                                    <a href="#register" aria-controls="register" role="tab" data-toggle="tab">Sign
-                                        Up</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="login">
-                                <div class="login-form-container">
-                                    <span>Please login using account detail
-                                        bellow.</span>
-                                    <form action="#" method="post">
-                                        <input type="text" name="user-name" placeholder="Username" />
-                                        <input type="password" name="user-password" placeholder="Password" />
-                                        <div class="button-box">
-                                            <div class="login-toggle-btn">
-                                                <input type="checkbox" id="remember" />
-                                                <label for="remember">Remember me</label>
-                                                <a href="#">Forgot Password?</a>
-                                            </div>
-                                            <button type="submit" class="
-                                                        default-btn
-                                                        floatright
-                                                    ">
-                                                Login
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="register">
-                                <div class="register-form">
-                                    <span>Please sign up using account detail
-                                        bellow.</span>
-                                    <form action="#" method="post">
-                                        <input type="text" name="user-name" placeholder="Username" />
-                                        <input type="password" name="user-password" placeholder="Password" />
-                                        <input type="email" name="user-email" placeholder="Email" />
-                                        <div class="button-box">
-                                            <button type="submit" class="
-                                                        default-btn
-                                                        floatright
-                                                    ">
-                                                Register
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Login Register End -->
+    <!-- Footer Area End-->
 
     <!-- All js here -->
     <script src="{{
@@ -279,37 +273,9 @@
     <script src="{{ asset('prison/js/counterup.js') }}"></script>
     <script src="{{ asset('prison/js/jquery.meanmenu.js') }}"></script>
     <script src="{{ asset('prison/js/plugins.js') }}"></script>
+
     <!-- google map api -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_qDiT4MyM7IxaGPbQyLnMjVUsJck02N0"></script>
-    <script>
-        var myCenter = new google.maps.LatLng(30.249796, -97.754667);
-        function initialize() {
-            var mapProp = {
-                center: myCenter,
-                scrollwheel: false,
-                zoom: 15,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-            };
-            var map = new google.maps.Map(
-                document.getElementById("hastech"),
-                mapProp
-            );
-            var marker = new google.maps.Marker({
-                position: myCenter,
-                animation: google.maps.Animation.BOUNCE,
-                icon: "img/map-marker.png",
-                map: map,
-            });
-            var styles = [
-                {
-                    stylers: [{ hue: "#c5c5c5" }, { saturation: -100 }],
-                },
-            ];
-            map.setOptions({ styles: styles });
-            marker.setMap(map);
-        }
-        google.maps.event.addDomListener(window, "load", initialize);
-    </script>
+
     <script src="{{ asset('prison/js/main.js') }}"></script>
     @stack('scripts')
 </body>

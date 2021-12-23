@@ -29,13 +29,16 @@ class PrisonController extends Controller
         $user = $this->getUserDetails();
         $extensions = $this->getExtensions();
 
-        return view('prison.dashboard.home', compact('user', 'extensions'));
+        session(['username' => $user->username]);
+        session(['balance' => $user->credit]);
+
+        return view('prison.dashboard.dashboard', compact('user', 'extensions'));
     }
 
     // account
     public function account()
     {
-        return view('prison.dashboard.myaccount');
+        return view('prison.dashboard.account');
     }
 
     // Extensions
@@ -110,7 +113,7 @@ class PrisonController extends Controller
     // accounts
     public function accounts()
     {
-        return view('prison.dashboard.accounts');
+        return view('prison.dashboard.order');
     }
     // usage
     public function usage()

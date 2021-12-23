@@ -18,11 +18,11 @@
     </div>
 </section>
 <!-- breadcrumbs end -->
-<div id="contact" class="contact-area bg-light pt-50 pb-50">
+<div id="contact" class="contact-area pt-50 pb-50">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
+                <div class="card border-0">
                     <div class="section-title text-center">
                         <h2>{{ __("Verify Your Email Address") }}</h2>
                     </div>

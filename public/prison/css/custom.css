@@ -1,3 +1,10 @@
+/* utilities classes */
+.decoration-none {
+    text-decoration: none;
+}
+.pointer {
+    cursor: pointer;
+}
 .dash__width {
     width: 75%;
 }
@@ -26,9 +33,7 @@ input[type="number"] {
     border: 2px solid;
     border-radius: 50%;
 }
-.decoration-none {
-    text-decoration: none;
-}
+
 .social-link:hover {
     text-decoration: none;
 }
