@@ -18,7 +18,7 @@
     </div>
 </section>
 <!-- breadcrumbs end -->
-<div id="contact" class="contact-area bg-light pt-50 pb-50">
+<div id="contact" class="contact-area pt-50 pb-50">
     <div class="container">
         <div class="section-title text-center">
             <h2>Register</h2>
@@ -140,13 +140,26 @@
                                     <a class="btn btn-link" href="{{ route('prison.login') }}">
                                         {{ __("Already Have an Account?") }}
                                     </a>
-                                    <hr />
-                                    <a class="btn btn-link pl-0" href="{{ route('prison.facebook') }}">
-                                        {{ __("Login With Facebook") }}
-                                    </a>
-                                    <a class="btn btn-link" href="{{ route('prison.google') }}">
-                                        {{ __("Login With Google") }}
-                                    </a>
+                                    <div class="separator">Or Login With</div>
+                                    <div class="text-center">
+                                        <a class="btn btn-link pl-0 social-link" href="{{ route('prison.facebook') }}"
+                                            title="Login With Facebook">
+                                            <!-- {{ __("Login With Facebook") }} -->
+                                            <span
+                                                class="circle d-flex justify-content-center align-items-center border-primary">
+                                                <i class="fab fa-facebook-f text-primary"></i>
+                                            </span>
+
+                                        </a>
+                                        <a class="btn btn-link social-link" href="{{ route('prison.google') }}"
+                                            title="Login With Google">
+                                            <!-- {{ __("Login With Google") }} -->
+                                            <span
+                                                class="circle d-flex justify-content-center align-items-center border-danger">
+                                                <i class="fab fa-google text-danger"></i>
+                                            </span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </form>

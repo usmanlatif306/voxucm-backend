@@ -26,16 +26,16 @@ class PrisonController extends Controller
     // dashboard
     public function dashboard()
     {
-        return view('prison.dashboard.myaccount');
+        $user = $this->getUserDetails();
+        $extensions = $this->getExtensions();
+
+        return view('prison.dashboard.home', compact('user', 'extensions'));
     }
 
     // account
     public function account()
     {
-        $user = $this->getUserDetails();
-        $extensions = $this->getExtensions();
-
-        return view('prison.dashboard.home', compact('user', 'extensions'));
+        return view('prison.dashboard.myaccount');
     }
 
     // Extensions

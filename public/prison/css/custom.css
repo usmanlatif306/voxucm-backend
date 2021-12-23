@@ -18,3 +18,39 @@ input[type="number"] {
         width: 100%;
     }
 }
+
+.circle {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 2px solid;
+    border-radius: 50%;
+}
+.decoration-none {
+    text-decoration: none;
+}
+.social-link:hover {
+    text-decoration: none;
+}
+/* Separation line with text */
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 15px 0;
+}
+
+.separator::before,
+.separator::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #ced4da;
+}
+
+.separator:not(:empty)::before {
+    margin-right: 0.25em;
+}
+
+.separator:not(:empty)::after {
+    margin-left: 0.25em;
+}
