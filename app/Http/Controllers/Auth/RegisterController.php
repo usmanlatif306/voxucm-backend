@@ -5,26 +5,19 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Voxucm\VoxTenant;
+use App\Models\Voxucm\VoxUser;
 use App\Notifications\VerifyEmailNotification;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
 
     use RegistersUsers;
 
@@ -37,7 +30,30 @@ class RegisterController extends Controller
     public function registerUser(Request $request)
     {
         $this->validator($request->all())->validate();
+
+        // tenant create
+        $voxuser = VoxUser::create([
+            'Username' => $request->name,
+            'password' => sha1($request->password),
+            'RoleId' => 25
+        ]);
+
+        if ($voxuser) {
+            $voxtenant = VoxTenant::create([
+                'login_id' => $voxuser->id,
+                'firstname' => $request->name,
+                'username' => $request->name,
+                'emailaddress' => $request->email,
+                'payment_terms' => 10
+            ]);
+        }
+
         $user = $this->create($request->all());
+        $user->update([
+            'tenant_user' => $voxuser->id,
+            'tenant_id' => $voxtenant->id
+        ]);
+
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $token = Str::random(64);

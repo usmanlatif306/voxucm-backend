@@ -3,7 +3,6 @@
 }
 .pointer {
     cursor: pointer;
-    font-size: 18px;
 }
 .order-modal {
     max-width: 50% !important;
@@ -14,4 +13,7 @@
 }
 .ck-content {
     height: 300px;
+}
+.font-large {
+    font-size: 18px;
 }

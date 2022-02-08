@@ -79,7 +79,7 @@
                                 <label for="phone" class="
                                         col-md-3 col-form-label
                                         text-md-right
-                                    ">{{ __("Number") }}</label>
+                                    ">{{ __("Phone Number") }}</label>
 
                                 <div class="col-md-8">
                                     <input id="phone" type="number" class="

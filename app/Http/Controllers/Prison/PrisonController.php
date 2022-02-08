@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Vox;
 use App\Models\Voxucm;
+use App\Models\Voxucm\VoxTenant;
+use App\Models\Voxucm\VoxUser;
+use App\Services\ExtensionService;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,9 +29,10 @@ class PrisonController extends Controller
     // dashboard
     public function dashboard()
     {
-        $user = $this->getUserDetails();
-        $extensions = $this->getExtensions();
 
+        $user = $this->getUserDetails();
+
+        $extensions = (new ExtensionService())->getExtensions();
         session(['username' => $user->username]);
         session(['balance' => $user->credit]);
 
@@ -44,7 +48,7 @@ class PrisonController extends Controller
     // Extensions
     public function extensions()
     {
-        $extensions = $this->getExtensions();
+        $extensions = (new ExtensionService())->getExtensions();
 
         return view('prison.dashboard.extensions', compact('extensions'));
     }
@@ -62,7 +66,8 @@ class PrisonController extends Controller
     // setting
     public function setting()
     {
-        return view('prison.dashboard.setting');
+        $user = VoxTenant::where('tenant_id', auth()->user()->tenant_id)->first();
+        return view('prison.dashboard.setting', compact('user'));
     }
 
     // updating password
@@ -76,6 +81,9 @@ class PrisonController extends Controller
             $user = User::where('email', auth()->user()->email)->first();
             $user->password = Hash::make($request->password);
             $user->save();
+            VoxUser::findOrFail(auth()->user()->tenant_user)->update([
+                'password' => sha1($request->password),
+            ]);
             return redirect()->back()->with('success', 'Password Successfully Updated');
         }
         return redirect()->back()->with('error', 'Invalid Old Password');
@@ -101,6 +109,15 @@ class PrisonController extends Controller
             $user->save();
         }
         $user->update($request->all());
+        VoxTenant::where('tenant_id', auth()->user()->tenant_id)->update([
+            'firstname' => $request->name,
+            'username' => $request->username,
+            'address' => $request->address,
+            'phonenumber' => $request->phone,
+            'billing_type' => $request->billing_type,
+            'billing_cycle_mode' => $request->billing_cycle,
+        ]);
+
         return redirect()->back()->with('status', 'User Details Successfully Updated');
     }
 
@@ -130,22 +147,6 @@ class PrisonController extends Controller
     // getting user details from msql2 connection
     private function getUserDetails()
     {
-        return  DB::connection('mysql2')->table('vox_tenant')->where('tenant_id', 21)->first();
-    }
-    // getting extensions for users
-    private function getExtensions()
-    {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
-            'SECTION' => 'EXTENSION',
-            'ACTION' => 'GETEXTENSIONS',
-            'DATA' => array("USERNAME" => "21_991010")
-        ));
-
-        $data = Voxucm::curlRequest($postdata);
-        $data = json_decode($data, true);
-
-        return $data['DATA']['RESULTLIST'];
+        return  DB::connection('mysql2')->table('vox_tenant')->where('tenant_id', auth()->user()->tenant_id)->first();
     }
 }

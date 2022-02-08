@@ -26,17 +26,11 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="col-md-8 offset-md-2">
-                    @if(session('success'))
-                    <div class="alert alert-success">
-                        {!! session('success') !!}
-                    </div>
-                    @endif @if(session('error'))
-                    <div class="alert alert-danger">
-                        {!! session('error') !!}
-                    </div>
-                    @endif
+                @if(session('error'))
+                <div class="alert alert-danger">
+                    {!! session('error') !!}
                 </div>
+                @endif
 
                 <div class="card border-0">
                     <div class="card-body">

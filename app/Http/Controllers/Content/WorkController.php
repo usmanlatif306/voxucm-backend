@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\content;
 
 use App\Http\Controllers\Controller;
-use App\Models\content\Work;
+use App\Models\Content\Work;
 use Illuminate\Http\Request;
 
 class WorkController extends Controller

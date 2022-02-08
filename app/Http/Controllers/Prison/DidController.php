@@ -14,8 +14,12 @@ class DidController extends Controller
 {
     public function index()
     {
-        $numbers = auth()->user()->numbers()->get();
-        return view('prison.config.did.index', compact('numbers'));
+
+        $plan = auth()->user()->plan;
+
+        $numbers = auth()->user()->numbers()->with('did')->get();
+
+        return view('prison.config.did.index', compact('numbers', 'plan'));
     }
     // purchase
     public function countries()
@@ -27,7 +31,7 @@ class DidController extends Controller
     // cities
     public function cities()
     {
-        $cities = City::paginate(8);
+        $cities = City::paginate(10);
         return view('prison.config.did.cities', compact('cities'));
     }
 
@@ -41,13 +45,18 @@ class DidController extends Controller
     // purchase Did
     public function purchase(Did $did)
     {
-        $purchase = Order::create([
+        $order = Order::create([
             'user_id' => auth()->user()->id,
-            "state" => 'United Kingdom',
-            'city' => $did->city->name,
-            'dialing_code' => $did->dialing_code,
+            'did_id' => $did->id,
             'price' => $did->price,
         ]);
+        $allowed = auth()->user()->plan->allowed_dids;
+        if ($allowed  !== 0) {
+            $order->update(['order_status' => "Paid"]);
+            auth()->user()->plan()->update(['allowed_dids' => $allowed - 1]);
+        }
+
+
 
         $did->update(['status' => true]);
 
@@ -57,9 +66,16 @@ class DidController extends Controller
     // delete a did
     public function delete(Order $order)
     {
-        $did = Did::where('dialing_code', $order->dialing_code)->first();
+
+        $did = Did::where('dialing_code', $order->did->dialing_code)->first();
         $did->update(['status' => false]);
         $order->delete();
+
+        $count = auth()->user()->numbers()->count();
+        $allowed = auth()->user()->plan->allowed_dids;
+        if ($count < (int)auth()->user()->plan->product->lines) {
+            auth()->user()->plan()->update(['allowed_dids' => $allowed + 1]);
+        }
         return back()->with('success', 'Did deleted successfully');
     }
 }

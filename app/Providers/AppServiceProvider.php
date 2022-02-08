@@ -27,12 +27,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        $home = Home::get()->first();
         view()->composer('layouts.master', function ($view) {
-            $view->with('orders',  auth()->user() ? auth()->user()->orders()->where('order_status', 'Unpaid')->get() : [])->with('navlogo', Home::get()->first()->navlogo);
+            $view->with('orders',  auth()->user() ? auth()->user()->orders()->where('order_status', 'Unpaid')->get() : [])->with('navlogo', Home::pluck('navlogo')->first());
         });
         view()->composer('layouts.account', function ($view) {
-            $view->with('orders',  auth()->user() ? auth()->user()->orders()->where('order_status', 'Unpaid')->get() : [])->with('navlogo', Home::get()->first()->navlogo);
+            $view->with('orders',  auth()->user() ? auth()->user()->orders()->where('order_status', 'Unpaid')->get() : [])->with('navlogo', Home::pluck('navlogo')->first());
         });
 
         Paginator::useBootstrap();

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\content\Product;
+use App\Models\Content\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,7 +16,7 @@ class Order extends Model
         // 'order_status',
         // 'payment_status',
         // 'expiry_date',
-        'user_id', 'state', 'city', 'dialing_code', 'price', 'order_status', 'payment_id', 'invoiced',
+        'user_id', 'product_id', 'did_id', 'city', 'dialing_code', 'price', 'order_status', 'payment_id', 'invoiced',
     ];
 
     public function user()
@@ -27,6 +27,11 @@ class Order extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function did()
+    {
+        return $this->belongsTo(Did::class);
     }
 
     public function billdetail()

@@ -44,12 +44,15 @@ class LoginController extends Controller
             if ($user->is_email_verified === 0) {
                 return redirect()->back()->with('error', "Please verify your email to login");
             }
+            if ($user->status === 0) {
+                return redirect()->back()->with('error', "Your account has been suspended by admin. please contact at 'admin@voxucm.com'");
+            }
             $credentials = $request->only('email', 'password');
             if (Auth::attempt($credentials)) {
-                if ($request->session()->has('redirect')) {
-                    $request->session()->forget('redirect');
-                    return redirect()->route('prison.cart');
-                }
+                // if ($request->session()->has('redirect')) {
+                //     $request->session()->forget('redirect');
+                //     return redirect()->route('prison.cart');
+                // }
 
                 return redirect()->route('prison.dashboard')
                     ->with('success', 'You have Successfully loggedin');

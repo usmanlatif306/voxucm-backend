@@ -8,8 +8,8 @@ use App\Http\Controllers\Content\HomeController;
 use App\Http\Controllers\Content\ServiceController;
 use App\Http\Controllers\Content\WorkController;
 use App\Http\Controllers\OrderController;
-use App\Models\content\Contact;
-use App\Models\content\Product;
+use App\Models\Content\Contact;
+use App\Models\Content\Product;
 use Illuminate\Support\Facades\Route;
 
 
@@ -20,7 +20,7 @@ Route::get('/about-us', [AboutController::class, 'about'])->name('prison.about')
 Route::get('/features', [FeatureController::class, 'features'])->name('prison.features');
 
 Route::get('/pricing', function () {
-    $products = Product::get();
+    $products = Product::where('status', true)->get();
     return view('prison.pricing', compact('products'));
 })->name('prison.pricing');
 
@@ -35,7 +35,7 @@ Route::get('/contact', function () {
     return view('prison.contact', compact('contact'));
 })->name('prison.contact');
 
-Route::get('/cart', [CartController::class, 'cart'])->name('prison.cart');
+Route::get('/user/cart', [CartController::class, 'cart'])->name('prison.cart');
 Route::post('/cart/save', [CartController::class, 'saveRecords'])->name('prison.cartsave');
 
 Route::get('/terms-conditions', function () {

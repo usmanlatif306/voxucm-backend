@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\content;
 
 use App\Http\Controllers\Controller;
-use App\Models\content\Feature;
+use App\Models\Content\Feature;
 use Illuminate\Http\Request;
 
 class FeatureController extends Controller

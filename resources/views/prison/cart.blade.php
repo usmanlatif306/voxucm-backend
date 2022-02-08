@@ -8,7 +8,7 @@
     </div>
     @else
     <div class="row">
-        <div class="col-12 col-md-8 offset-md-2">
+        <div class="col-12 col-md-10 offset-md-1">
             @if (session('success'))
             <div class="alert alert-success" role="alert">
                 {{ session("success") }}
@@ -24,6 +24,9 @@
                     <thead>
                         <tr>
                             <th scope="col">No</th>
+                            <th scope="col">Item Name</th>
+                            <th scope="col">Peckage Name</th>
+                            <th scope="col">Number of Lines</th>
                             <th scope="col">City</th>
                             <th scope="col">Dialing Code</th>
                             <th scope="col">Price</th>
@@ -34,8 +37,11 @@
                         @foreach ($orders as $order)
                         <tr>
                             <th>{{$loop->iteration}}</th>
-                            <th>{{$order->city}}</th>
-                            <th>{{$order->dialing_code}}</th>
+                            <th>{{$order->product_id ? 'Peckage':'DID'}}</th>
+                            <th>{{$order->product_id ? $order->product->name:'-'}}</th>
+                            <th>{{$order->product_id ? $order->product->lines:'-'}}</th>
+                            <th>{{$order->did_id ? $order->did->city->name :'-'}}</th>
+                            <th>{{$order->did_id ? $order->did->dialing_code : '-'}}</th>
                             <th>{{$order->price}}</th>
 
                             <!-- @if($order->order_status===0)
@@ -73,7 +79,7 @@
         <form action="{{ route('prison.cartsave') }}" method="post" class="validation" id="paymentForm"
             data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}">
             @csrf
-            <div class="col-12 col-md-8 offset-md-2 position-relative">
+            <div class="col-12 col-md-10 offset-md-1 position-relative">
                 <h3 class="py-4">1. Payment Method</h3>
                 <div class="
                             form-check
@@ -101,7 +107,7 @@
                 </div>
             </div>
             <!-- Billing Details -->
-            <div class="col-12 col-md-8 offset-md-2">
+            <div class="col-12 col-md-10 offset-md-1">
                 <h3 class="py-4">2. Billing Details</h3>
                 <div class="px-3 row">
 
@@ -205,7 +211,7 @@
                 </div>
             </div>
             <!-- presinor details -->
-            <div class="col-12 col-md-8 offset-md-2">
+            <div class="col-12 col-md-10 offset-md-1">
                 <h3 class="py-4">3. Prisoner Details</h3>
                 <div class="px-3 row">
                     <div class="col-12 col-md-6">
@@ -268,7 +274,7 @@
                 </div>
             </div>
             <!-- term and condions -->
-            <div class="col-12 col-md-8 offset-md-2">
+            <div class="col-12 col-md-10 offset-md-1">
                 <h4 class="pt-4 pb-3">term and condions</h4>
                 <div class="position-relative">
                     <input id="term-select" type="checkbox" class="cart-checkbox" required />
@@ -283,7 +289,7 @@
                     price.</span>
             </div>
             <!-- proceed -->
-            <div class="col-12 col-md-8 offset-md-2">
+            <div class="col-12 col-md-10 offset-md-1">
                 <button type="submit" class="btn btn-primary shadow-none float-right mt-5">
                     Proceed
                 </button>

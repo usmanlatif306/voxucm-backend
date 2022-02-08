@@ -86,6 +86,17 @@
                                     class="{{request()->routeIs('prison.dashboard')||request()->routeIs('user.setting')||request()->routeIs('user.buymore')||request()->routeIs('user.accounts')||request()->routeIs('user.usage')||request()->routeIs('user.expiry') ? 'active' : '' }}">
                                     <a href="{{ route('prison.dashboard') }}">My Account</a>
                                 </li>
+                                <li class="{{ request()->routeIs('prison.cart') ? 'active' : '' }}">
+                                    <a href="{{ route('prison.cart') }}">
+                                        <span class="relative">
+                                            <i class="fas fa-cart-plus"></i>
+                                            <span class="cart-amount">
+                                                {{count($orders) }}
+                                            </span>
+                                        </span>
+
+                                    </a>
+                                </li>
 
                                 @endauth
                             </ul>
@@ -141,6 +152,14 @@
                                 <li
                                     class="{{request()->routeIs('prison.dashboard')||request()->routeIs('user.setting')||request()->routeIs('user.buymore')||request()->routeIs('user.accounts')||request()->routeIs('user.usage')||request()->routeIs('user.expiry') ? 'active' : '' }}">
                                     <a href="{{ route('prison.dashboard') }}">My Account</a>
+                                </li>
+                                <li class="{{ request()->routeIs('prison.cart') ? 'active' : '' }}">
+                                    <a href="{{ route('prison.cart') }}">
+                                        <strong>{{
+                                            count($orders) }}
+                                        </strong>
+                                        Items In Cart
+                                    </a>
                                 </li>
 
                                 @endauth

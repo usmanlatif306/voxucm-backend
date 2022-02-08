@@ -29,6 +29,6 @@ class AccountController extends Controller
     // getting user details from msql2 connection
     private function getUserDetails()
     {
-        return  DB::connection('mysql2')->table('vox_tenant')->where('tenant_id', 21)->first();
+        return  DB::connection('mysql2')->table('vox_tenant')->where('tenant_id', auth()->user()->tenant_id)->first();
     }
 }

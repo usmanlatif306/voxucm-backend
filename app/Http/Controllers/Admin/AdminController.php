@@ -13,8 +13,8 @@ class AdminController extends Controller
     // Show All orders
     public function orders()
     {
-        $orders = Order::get();
-        return view('admin.orders', compact('orders'));
+        $orders = Order::with('user', 'prisonerdetail', 'billdetail')->get();
+        return view('admin.orders.index', compact('orders'));
     }
 
     // Edit Order Status
@@ -28,7 +28,7 @@ class AdminController extends Controller
     public function users()
     {
         $users = User::get();
-        return view('admin.users', compact('users'));
+        return view('admin.users.index', compact('users'));
     }
 
     // changing user status
@@ -44,7 +44,8 @@ class AdminController extends Controller
     public function userDetails(User $user)
     {
         $numbers = $user->numbers;
-        return view('admin.details', [
+        // dd($numbers[0]);
+        return view('admin.users.show', [
             'user' => $user,
             'numbers' => $numbers,
         ]);

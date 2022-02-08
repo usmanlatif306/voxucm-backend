@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\content;
 
 use App\Http\Controllers\Controller;
-use App\Models\content\Faq;
+use App\Models\Content\Faq;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 

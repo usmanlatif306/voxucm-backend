@@ -31,11 +31,13 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->foreignId('user_id')
                 ->constrained()
-                ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('state');
-            $table->string('city');
-            $table->string('dialing_code');
+            $table->foreignId('product_id')->nullable()
+                ->constrained()
+                ->onDelete('cascade');
+            $table->foreignId('did_id')->nullable()
+                ->constrained()
+                ->onDelete('cascade');
             $table->string('price');
             $table->string('order_status')->default('Unpaid');
             $table->string('payment_id')->default(false);

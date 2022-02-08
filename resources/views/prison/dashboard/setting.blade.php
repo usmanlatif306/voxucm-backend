@@ -19,35 +19,68 @@
                             <form action="{{ route('user.setting.details') }}" method="post">
                                 {{ method_field("PUT") }} @csrf
                                 <input type="hidden" name="id" value="{{auth()->user()->id}}" />
-                                <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" name="name" class="form-control" id="name" placeholder="Name"
-                                        value="{{auth()->user()->name}}" />
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="name">Name</label>
+                                        <input type="text" name="name" class="form-control" id="name" placeholder="Name"
+                                            value="{{auth()->user()->name}}" />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="name">Username</label>
+                                        <input type="text" name="username" class="form-control" id="name"
+                                            placeholder="Username" value="{{$user->username}}" />
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="telephone">Telephone</label>
-                                    <input type="number" name="phone" class="form-control" id="telephone"
-                                        placeholder="Telephone" value="{{auth()->user()->phone}}" />
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="telephone">Telephone</label>
+                                        <input type="number" name="phone" class="form-control" id="telephone"
+                                            placeholder="Telephone" value="{{auth()->user()->phone}}" />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="country">Country</label>
+                                        <input type="text" name="country" class="form-control" id="country"
+                                            placeholder="State" value="{{auth()->user()->country}}" />
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="city">City</label>
+                                        <input type="text" name="city" class="form-control" id="city" placeholder="City"
+                                            value="{{auth()->user()->city}}" />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="postcode">Post Code</label>
+                                        <input type="number" name="postcode" class="form-control" id="postcode"
+                                            placeholder="Post Code" value="{{auth()->user()->postcode}}" />
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="address">Address</label>
                                     <textarea class="form-control" id="address" name="address" rows="2"
                                         placeholder="Enter Address">{{auth()->user()->address}}</textarea>
                                 </div>
-                                <div class="form-group">
-                                    <label for="country">Country</label>
-                                    <input type="text" name="country" class="form-control" id="country"
-                                        placeholder="State" value="{{auth()->user()->country}}" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="city">City</label>
-                                    <input type="text" name="city" class="form-control" id="city" placeholder="City"
-                                        value="{{auth()->user()->city}}" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="postcode">Post Code</label>
-                                    <input type="number" name="postcode" class="form-control" id="postcode"
-                                        placeholder="Post Code" value="{{auth()->user()->postcode}}" />
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="city">Billing Type</label>
+                                        <select name="billing_type" id="" class="form-control">
+                                            <option value="PREPAID" {{ $user->billing_type === 'PREPAID'?
+                                                'selected' : '' }}>PREPAID
+                                            </option>
+                                            <option value="POSTPAID" {{ $user->billing_type === 'POSTPAID'?
+                                                'selected' : '' }}>POSTPAID</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="city">Billing Cycle</label>
+                                        <select name="billing_cycle" id="" class="form-control">
+                                            <option value="MONTHWISE" {{ $user->billing_cycle_mode=== 'MONTHWISE'?
+                                                'selected' : '' }}>MONTHWISE</option>
+                                            <option value="YEARWISE" {{ $user->billing_cycle_mode=== 'YEARWISE'?
+                                                'selected' : '' }}>YEARWISE</option>
+                                        </select>
+                                    </div>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">

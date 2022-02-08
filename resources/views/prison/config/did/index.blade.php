@@ -1,5 +1,4 @@
 @extends('layouts.account')@section('title', 'DID') @section('content')
-
 <div class="container">
     @if(session('success'))
     <div class="alert alert-success">
@@ -13,21 +12,26 @@
     @endif
     <div class="row">
         <div class="col-12">
+            @if(!$plan) <h3>User has currently no active plan. Please buy any plan first.</h3>
+            @else
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <h3 class="m-0 p-0">Order History</h3>
+                    <h3 class="m-0 p-0">All Dids</h3>
                     <a href="{{route('prison.did.cities')}}" class="btn btn-sm btn-primary shadow-none">Purchase New
                         DID</a>
                 </div>
-                <div class="py-2 px-3">
-                    <!-- extension list here -->
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h4>Active Plan: {{$plan->product->name}}</h4>
+                        <h4>Plan Allowed Dids: {{$plan->product->lines}}</h4>
+                        <h4>Remaining Dids: {{$plan->allowed_dids}}</h4>
+                    </div>
+                    <!-- did list here -->
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped table-hover tenant-dash mt-3">
                             <thead>
                                 <tr class="tableheading" style="text-align: center;">
                                     <th>No</th>
-                                    <th>User</th>
-                                    <th>State</th>
                                     <th>City</th>
                                     <th>DID</th>
                                     <th>Payment</th>
@@ -43,10 +47,9 @@
                                 @foreach($numbers as $number)
                                 <tr class="text-center">
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$number->user->name}}</td>
-                                    <td>{{$number->state}}</td>
-                                    <td>{{$number->city}}</td>
-                                    <td>{{$number->dialing_code}}</td>
+                                    <td>{{$number->did->city->name}}</td>
+
+                                    <td>{{$number->did->dialing_code}}</td>
                                     <td>
                                         @if($number->order_status==='Unpaid')
                                         <span class="text-danger">
@@ -77,6 +80,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 </div>

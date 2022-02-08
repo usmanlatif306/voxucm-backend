@@ -2,14 +2,15 @@
 
 use App\Http\Controllers\Admin\AAuthController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Content\AboutController;
 use App\Http\Controllers\Content\FaqController;
 use App\Http\Controllers\Content\FeatureController;
 use App\Http\Controllers\Content\HomeController;
-use App\Http\Controllers\Content\ProductController;
 use App\Http\Controllers\Content\ServiceController;
 use App\Http\Controllers\Content\TestController;
 use App\Http\Controllers\Content\WorkController;
+use App\Http\Controllers\Prison\UserPlanController;
 use Illuminate\Support\Facades\Route;
 
 // Admin Auth
@@ -34,7 +35,18 @@ Route::group(['middleware' => 'admin'], function () {
     Route::put('/admin/users/{user}', [AdminController::class, 'editStatus'])->name('admin.userstatus');
     Route::get('/admin/users/{user}/details', [AdminController::class, 'userDetails'])->name('admin.userdetails');
 
-    // Routes for dynamic content
+
+    // Peckages routes
+    Route::group(['prefix' => 'admin/home', 'as' => 'admin.'], function () {
+        Route::resource('/products', ProductController::class);
+        // Route::get('/peckages', [ProductController::class, 'index'])->name('peckage');
+        // Route::get('/peckages/{product}', [ProductController::class, 'update'])->name('peckage.edit');
+        // Route::put('/peckages/{product}', [ProductController::class, 'update'])->name('peckage.update');
+    });
+
+    // user plans
+    Route::get('/admin/plans', [UserPlanController::class, 'plans'])->name('admin.plans');
+    // Routes for content
     Route::get('/admin/content/home', [HomeController::class, 'index'])->name('content.home');
     Route::post('/admin/content/navbar/{home}', [HomeController::class, 'navlogo'])->name('content.nav.update');
     Route::post('/admin/content/home/{home}', [HomeController::class, 'update'])->name('content.home.update');
@@ -55,6 +67,4 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/admin/content/about/{about}', [AboutController::class, 'update'])->name('content.about.update');
     Route::get('/admin/content/how-it-work', [WorkController::class, 'index'])->name('content.work');
     Route::post('/admin/content/how-it-work/{work}', [WorkController::class, 'update'])->name('content.work.update');
-    Route::get('/admin/content/plans', [ProductController::class, 'index'])->name('content.plans');
-    Route::post('/admin/content/plans/{product}', [ProductController::class, 'update'])->name('content.plan.update');
 });

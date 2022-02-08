@@ -35,18 +35,9 @@
             <div class="col-lg-3 col-md-6 mb-4">
                 <form method="POST" action="{{ route('order.save') }}">
                     @csrf
-                    <input
-                        type="hidden"
-                        name="user_id"
-                        @auth
-                        value="{{auth()->user()->id}}"
-                        @endauth
-                    />
-                    <input
-                        type="hidden"
-                        name="product_id"
-                        value="{{$product->id}}"
-                    />
+                    <input type="hidden" name="user_id" @auth value="{{auth()->user()->id}}" @endauth />
+                    <input type="hidden" name="product_id" value="{{$product->id}}" />
+                    <input type="hidden" name="price" value="{{$product->price}}" />
                     <div class="single-table">
                         <div class="table-title">
                             <h4>{{$product->name}}</h4>
@@ -55,18 +46,10 @@
                         </div>
                         <div class="table-content">
                             <span>Number of Lines {{$product->lines}}</span>
-                            <span
-                                >Number of minutes allowed
-                                {{$product->numbers}}</span
-                            >
+                            <span>Number of minutes allowed
+                                {{$product->numbers}}</span>
                             <span>Plan used for {{$product->month}} Month</span>
-                            <button
-                                class="default-btn table-btn"
-                                type="submit"
-                                @guest
-                                disabled
-                                @endguest
-                            >
+                            <button class="default-btn table-btn" type="submit" @guest disabled @endguest>
                                 Add Plan
                             </button>
                         </div>
@@ -287,33 +270,16 @@
                     </div>
                     <div class="table-content px-2">
                         <div class="form-group">
-                            <input
-                                type="number"
-                                class="form-control shadow-none"
-                                placeholder="Enter Number of Lines"
-                            />
+                            <input type="number" class="form-control shadow-none" placeholder="Enter Number of Lines" />
                         </div>
                         <div class="form-group">
-                            <input
-                                type="number"
-                                class="form-control shadow-none"
-                                placeholder="Number of minutes allowed"
-                            />
+                            <input type="number" class="form-control shadow-none"
+                                placeholder="Number of minutes allowed" />
                         </div>
                         <div class="form-group">
-                            <input
-                                type="number"
-                                class="form-control shadow-none"
-                                placeholder="Plan used for Months"
-                            />
+                            <input type="number" class="form-control shadow-none" placeholder="Plan used for Months" />
                         </div>
-                        <button
-                            class="default-btn table-btn"
-                            type="submit"
-                            @guest
-                            disabled
-                            @endguest
-                        >
+                        <button class="default-btn table-btn" type="submit" @guest disabled @endguest>
                             Add Plan
                         </button>
                     </div>

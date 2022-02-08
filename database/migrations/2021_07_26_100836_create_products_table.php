@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('lines');
             $table->string('minutes');
             $table->string('month');
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

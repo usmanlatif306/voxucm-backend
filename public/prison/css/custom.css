@@ -59,3 +59,18 @@ input[type="number"] {
 .separator:not(:empty)::after {
     margin-left: 0.25em;
 }
+.relative {
+    position: relative;
+}
+.cart-amount {
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-color: rgb(190, 80, 131);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 12px;
+}

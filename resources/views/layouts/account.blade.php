@@ -158,9 +158,10 @@
                                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Live Report</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Live Calls</a>
+                                    <a class="dropdown-item" href="{{route('prison.reports.calls')}}">Live Calls</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#"> Live Online SIP Users</a>
+                                    <a class="dropdown-item" href="{{route('prison.reports.onlinesipuser')}}"> Live
+                                        Online SIP Users</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -207,6 +208,8 @@
                                     <a class="dropdown-item" href="{{ route('user.setting') }}"> Edit Profile</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('user.buymore') }}">Buy More Minutes</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ route('prison.plan.index') }}">Plan History</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('user.orders') }}">Order History</a>
                                     <div class="dropdown-divider"></div>
@@ -259,19 +262,17 @@
     <!-- Footer Area End-->
 
     <!-- All js here -->
-    <script src="{{
-                asset('prison/js/vendor/jquery-1.12.4.min.js')
-            }}"></script>
+    <script src="{{asset('prison/js/vendor/jquery-1.12.4.min.js')}}"></script>
+    <script src="{{ asset('prison/js/jquery.nav.js') }}"></script>
+    <script src="{{ asset('prison/js/jquery.ajaxchimp.min.js') }}"></script>
+    <script src="{{ asset('prison/js/jquery.meanmenu.js') }}"></script>
     <script src="{{ asset('prison/js/popper.min.js') }}"></script>
     <script src="{{ asset('prison/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('prison/js/jquery.nav.js') }}"></script>
     <script src="{{ asset('prison/js/slick.min.js') }}"></script>
     <script src="{{ asset('prison/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('prison/js/ajax-mail.js') }}"></script>
-    <script src="{{ asset('prison/js/jquery.ajaxchimp.min.js') }}"></script>
     <script src="{{ asset('prison/js/wow.min.js') }}"></script>
     <script src="{{ asset('prison/js/counterup.js') }}"></script>
-    <script src="{{ asset('prison/js/jquery.meanmenu.js') }}"></script>
     <script src="{{ asset('prison/js/plugins.js') }}"></script>
 
     <!-- google map api -->

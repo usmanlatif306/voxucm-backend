@@ -23,7 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'is_email_verified', 'phone', 'address', 'city', 'country', 'postcode', 'google_id', 'facebook_id'
+        'name', 'email', 'password', 'is_email_verified', 'phone', 'address', 'city', 'country', 'postcode', 'google_id', 'facebook_id', 'tenant_id'
     ];
 
     /**
@@ -45,6 +45,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    // User current plan
+    public function plan()
+    {
+        return $this->hasOne(Plan::class)->where('expired_at', '>=', now())->latest();
+    }
+
+
     // User orders
     public function orders()
     {
@@ -55,7 +62,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function numbers()
     {
         // return $this->hasMany(Purchase::class);
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class)->whereNotNull('did_id');
     }
 
 

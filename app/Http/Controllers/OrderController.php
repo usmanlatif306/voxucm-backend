@@ -11,6 +11,7 @@ class OrderController extends Controller
     // Save Order to DB
     public function saveOrder(Request $request)
     {
+
         $order = Order::create($request->all());
         if ($order) {
             return redirect()->back()->with('success', 'Order Has been Added');
