@@ -73,6 +73,16 @@
                                 <li class="{{ request()->routeIs('prison.contact') ? 'active' : '' }}">
                                     <a href="{{ route('prison.contact') }}">Contact</a>
                                 </li>
+                                <li class="{{ request()->routeIs('prison.cart') ? 'active' : '' }}">
+                                    <a href="{{ route('prison.cart') }}">
+                                        <span class="relative">
+                                            <i class="fas fa-cart-plus"></i>
+                                            <!-- <span class="ml-1">Cart</span> -->
+                                            <span class="cart-amount">{{count($orders)}}</span>
+                                        </span>
+
+                                    </a>
+                                </li>
 
                                 @guest
                                 <li
@@ -86,7 +96,7 @@
                                     class="{{request()->routeIs('prison.dashboard')||request()->routeIs('user.setting')||request()->routeIs('user.buymore')||request()->routeIs('user.accounts')||request()->routeIs('user.usage')||request()->routeIs('user.expiry') ? 'active' : '' }}">
                                     <a href="{{ route('prison.dashboard') }}">My Account</a>
                                 </li>
-                                <li class="{{ request()->routeIs('prison.cart') ? 'active' : '' }}">
+                                <!-- <li class="{{ request()->routeIs('prison.cart') ? 'active' : '' }}">
                                     <a href="{{ route('prison.cart') }}">
                                         <span class="relative">
                                             <i class="fas fa-cart-plus"></i>
@@ -96,7 +106,7 @@
                                         </span>
 
                                     </a>
-                                </li>
+                                </li> -->
 
                                 @endauth
                             </ul>
@@ -153,6 +163,7 @@
                                     class="{{request()->routeIs('prison.dashboard')||request()->routeIs('user.setting')||request()->routeIs('user.buymore')||request()->routeIs('user.accounts')||request()->routeIs('user.usage')||request()->routeIs('user.expiry') ? 'active' : '' }}">
                                     <a href="{{ route('prison.dashboard') }}">My Account</a>
                                 </li>
+                                @endauth
                                 <li class="{{ request()->routeIs('prison.cart') ? 'active' : '' }}">
                                     <a href="{{ route('prison.cart') }}">
                                         <strong>{{
@@ -161,8 +172,6 @@
                                         Items In Cart
                                     </a>
                                 </li>
-
-                                @endauth
                             </ul>
                         </nav>
                     </div>

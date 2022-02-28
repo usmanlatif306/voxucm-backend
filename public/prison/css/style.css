@@ -1586,7 +1586,7 @@ button.nav-btn span {
 .header-tab-menu .nav-tabs li a.active {
     color: #444;
 }
-.modal-dialog button.close {
+/* .modal-dialog button.close {
     background: #0091ea none repeat scroll 0 0;
     border-radius: 50%;
     color: #ffffff;
@@ -1672,7 +1672,7 @@ button.nav-btn span {
     position: relative;
     top: 1px;
     width: 17px;
-}
+} */
 .login-toggle-btn .default-btn {
     border-color: #0091ea;
 }

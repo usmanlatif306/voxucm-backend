@@ -74,3 +74,6 @@ input[type="number"] {
     border-radius: 50%;
     font-size: 12px;
 }
+.icon-large {
+    font-size: 50px;
+}

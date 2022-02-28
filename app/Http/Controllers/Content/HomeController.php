@@ -20,8 +20,9 @@ class HomeController extends Controller
     // showing home screen
     public function home()
     {
+        // dd(session('user.cart'));
         $home = Home::get()->first();
-        $products = Product::get();
+        $products = Product::limit(4)->get();
         $service = Service::get()->first();
         $feature = Feature::get()->first();
         $faq = Faq::get()->first();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Plan;
 use Illuminate\Http\Request;
 use Stripe;
@@ -10,6 +11,11 @@ class CartController extends Controller
 {
     public function cart()
     {
+        if (!auth()->user()) {
+            session(['redirect' => 'prison.cart']);
+            return redirect()->route('prison.login');
+        }
+        // dd(Order::whereIn('id', session('user.cart'))->where('order_status', 'Unpaid')->get());
         $orders = auth()->user()->orders()->where('order_status', 'Unpaid')->get();
 
         $price = 0;

@@ -56,8 +56,6 @@ class DidController extends Controller
             auth()->user()->plan()->update(['allowed_dids' => $allowed - 1]);
         }
 
-
-
         $did->update(['status' => true]);
 
         return redirect()->route('prison.did.index');

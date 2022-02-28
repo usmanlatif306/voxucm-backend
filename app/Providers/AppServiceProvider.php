@@ -28,10 +28,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         view()->composer('layouts.master', function ($view) {
-            $view->with('orders',  auth()->user() ? auth()->user()->orders()->where('order_status', 'Unpaid')->get() : [])->with('navlogo', Home::pluck('navlogo')->first());
+            $view->with('orders',  auth()->user() ? auth()->user()->orders()->where('order_status', 'Unpaid')->get() : session('user.cart') ?? [])->with('navlogo', Home::pluck('navlogo')->first());
         });
         view()->composer('layouts.account', function ($view) {
-            $view->with('orders',  auth()->user() ? auth()->user()->orders()->where('order_status', 'Unpaid')->get() : [])->with('navlogo', Home::pluck('navlogo')->first());
+            $view->with('orders',  auth()->user() ? auth()->user()->orders()->where('order_status', 'Unpaid')->get() : session('user.cart') ?? [])->with('navlogo', Home::pluck('navlogo')->first());
         });
 
         Paginator::useBootstrap();

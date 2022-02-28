@@ -7,19 +7,24 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\HtmlString;
 
-class VerifyEmailNotification extends Notification
+class SendingPasswordNotification extends Notification
 {
     use Queueable;
-    public $token;
+    public $username;
+    public $email;
+    public $password;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($token)
+    public function __construct($username, $email, $password)
     {
-        $this->token = $token;
+        $this->username = $username;
+        $this->email = $email;
+        $this->password = $password;
     }
 
     /**
@@ -41,16 +46,14 @@ class VerifyEmailNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url(route('user.verify', [
-            'token' => $this->token,
-            'email' => $notifiable->getEmailForPasswordReset(),
-        ], false));
-
         return (new MailMessage)
-            ->subject(Lang::get('Verify Email Address'))
-            ->line(Lang::get('Please click the button below to verify your email address.'))
-            ->action(Lang::get('Verify Email Address'), url($url))
-            ->line(Lang::get('If you did not create an account, no further action is required.'));
+            ->subject(Lang::get('New Account Created'))
+            ->line(Lang::get('Congratulations! You account has been created successfully with following credetials:'))
+            ->line(new HtmlString('<strong>Username: </strong>' . $this->username))
+            ->line(new HtmlString('<strong>Email: </strong>' . $this->email))
+            ->line(new HtmlString('<strong>Password: </strong>' . $this->password))
+            ->line(Lang::get('You can change you password anytime'))
+            ->line(Lang::get('Thank you for creating account.'));
     }
 
     /**

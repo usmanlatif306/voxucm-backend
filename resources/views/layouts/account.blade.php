@@ -47,8 +47,8 @@
 <body>
     <!-- Header Area Start -->
     <header class="">
-        <div class="container">
-            <nav class="top-navbar-header d-flex py-2">
+        <div class="container-fluid px-0 px-md-5 pl-3 pl-md-0">
+            <nav class="top-navbar-header d-flex py-2 px-0 px-md-5">
                 <a href="{{ route('prison.home') }}" class="d-none d-md-block">
                     <img src="https://www.prisontel.co.uk/theme/site/img/logo-dark.png" alt="Prison Tel"
                         style="width: 45px !important;" /></a>
@@ -58,7 +58,8 @@
                         '.',
                         '')}}</button>
                     <button class="btn btn-sm btn-primary mx-2">Welcome {{session('username')}}</button>
-                    <button class="btn btn-sm btn-primary mx-2" onclick="window.location='/user/myaccount'">My
+                    <button class="btn btn-sm btn-primary mx-2 mt-2 mt-md-0"
+                        onclick="window.location='/user/myaccount'">My
                         Account</button>
                     <button class="btn btn-sm btn-primary mx-2 mt-2 mt-md-0"
                         onclick="window.location='/logout'">Logout</button>
@@ -66,8 +67,8 @@
                 </ul>
             </nav>
         </div>
-        <div class="w-100" style="background: rgba(0, 145, 234, 0.95);">
-            <div class="container">
+        <div class="w-100 px-0 px-md-5" style="background: rgba(0, 145, 234, 0.95);">
+            <div class="container-fluid px-0 px-md-4">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -89,17 +90,17 @@
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="#">Dial Pattern</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{route('prison.extension.index')}}"> Extension</a>
+                                    <a class="dropdown-item" href="{{route('prison.extensions.index')}}"> Extension</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="">Ring Group</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{route('prison.did.index')}}">DID</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="">Day Night</a>
+                                    <a class="dropdown-item" href="{{route('prison.config.daynight')}}">Day Night</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="">IVR</a>
+                                    <a class="dropdown-item" href="{{route('prison.config.ivr')}}">IVR</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="">VoiceMail</a>
+                                    <a class="dropdown-item" href="{{route('prison.config.voicemail')}}">VoiceMail</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Announcement</a>
                                     <div class="dropdown-divider"></div>

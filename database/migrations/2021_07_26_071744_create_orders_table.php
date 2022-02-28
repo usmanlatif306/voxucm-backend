@@ -30,6 +30,7 @@ class CreateOrdersTable extends Migration
             // $table->timestamps();
             $table->id();
             $table->foreignId('user_id')
+                ->nullable()
                 ->constrained()
                 ->onDelete('cascade');
             $table->foreignId('product_id')->nullable()
@@ -40,7 +41,7 @@ class CreateOrdersTable extends Migration
                 ->onDelete('cascade');
             $table->string('price');
             $table->string('order_status')->default('Unpaid');
-            $table->string('payment_id')->default(false);
+            $table->string('payment_id')->nullable();
             $table->timestamp('invoiced')->nullable();
             $table->timestamps();
         });

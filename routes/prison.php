@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\ExtController;
 use App\Http\Controllers\Prison\AccountController;
+use App\Http\Controllers\Prison\ConfigController;
 use App\Http\Controllers\Prison\DidController;
 use App\Http\Controllers\Prison\PrisonController;
 use App\Http\Controllers\Prison\ReportController;
 use App\Http\Controllers\Prison\UserPlanController;
+use App\Http\Controllers\Prison\VoiceMailController;
 use App\Http\Controllers\Stripe\StripeController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +25,7 @@ Route::group(['prefix' => 'user'], function () {
         Route::delete('/{order}/delete', [DIDController::class, 'delete'])->name('delete');
     });
     // Extension Routes
-    Route::group(['prefix' => 'extension', 'as' => 'prison.extension.'], function () {
+    Route::group(['prefix' => 'extension', 'as' => 'prison.extensions.'], function () {
         Route::get('/', [PrisonController::class, 'extensions'])->name('index');
         Route::post('/', [ExtController::class, 'addExtensionWeb'])->name('add');
     });

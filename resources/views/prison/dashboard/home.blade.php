@@ -21,7 +21,7 @@
             </div>
             <div class="row">
                 <!-- pie graph show here -->
-                <div class="col-12">
+                <div class="col-8 offset-2 col-md-12 offset-md-0">
                     <div id="google-line-chart" style="height: 300px;"></div>
                 </div>
                 <div class="col-12 col-md-6">

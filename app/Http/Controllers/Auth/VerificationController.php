@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use App\Mail\VerifyEmail;
+use App\Models\Order;
 use App\Models\Otp;
 use App\Models\User;
 use App\Notifications\VerifyEmailNotification;
@@ -55,6 +56,21 @@ class VerificationController extends Controller
                 Auth::login($user);
             } else {
                 $message = "Your e-mail is already verified.";
+            }
+            // if session cart has orders then updating user_id for that orders
+            if (session('user.cart') && count(session('user.cart')) > 0) {
+                $orders = Order::whereIn('id', session('user.cart'))->where('order_status', 'Unpaid')->get();
+                // dd($orders);
+                foreach ($orders  as $order) {
+                    $order->update(['user_id' => auth()->id()]);
+                }
+                $request->session()->forget('user.cart');
+            }
+            // if user has to redirect to specific page after login
+            if ($request->session()->has('redirect')) {
+                $redirect = session('redirect');
+                $request->session()->forget('redirect');
+                return redirect()->route($redirect);
             }
             return redirect()->route('prison.dashboard')->with('success', $message);
         } else {

@@ -70,7 +70,7 @@
 
                     <div class="modal-body">
                         <h3>Add New Extension</h3>
-                        <form action="{{route('prison.extension.add')}}" method="POST">
+                        <form action="{{route('prison.extensions.add')}}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="extension">Extension</label>
