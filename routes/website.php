@@ -37,6 +37,8 @@ Route::get('/contact', function () {
 
 Route::get('/user/cart', [CartController::class, 'cart'])->name('prison.cart');
 Route::post('/cart/save', [CartController::class, 'saveRecords'])->name('prison.cartsave');
+// apply promo code to cart
+Route::post('coupon/apply', [CartController::class, 'promo'])->name('prison.promo');
 
 Route::get('/terms-conditions', function () {
     return view('prison.terms');

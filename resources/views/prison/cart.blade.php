@@ -19,6 +19,7 @@
                 {{ session("eoor") }}
             </div>
             @endif
+
             <div class="border p-3 pb-5">
                 <table class="table table-hover table-striped">
                     <thead>
@@ -71,9 +72,24 @@
                         ">
                     <p class="m-0 py-2">
                         Sub Total:
-                        <span class="font-weight-bold">£{{ $price }}</span>
+                        <span class="font-weight-bold sub_total">£{{ $price }}</span>
                     </p>
                 </div>
+                <!-- promo code -->
+                <form action="{{route('prison.promo')}}" id="promoForm" method="post" class="mt-3">
+                    @csrf
+                    <div class="alert d-none" id="promoAlert" role="alert">
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <input type="text" class="form-control" name="name" placeholder="Enter Coupon Code">
+                        </div>
+                        <div class="col-6">
+                            <button type="submit" id="promoBtn" class="btn btn-primary">Apply</button>
+                        </div>
+                    </div>
+                </form>
+                <!-- promo code end -->
             </div>
         </div>
         <form action="{{ route('prison.cartsave') }}" method="post" class="validation" id="paymentForm"
@@ -322,17 +338,21 @@
             }
         });
 
-
         $("#paymentForm").submit(function (e) {
             $('.error').addClass('d-none');
             e.preventDefault();
-            Stripe.setPublishableKey($("#paymentForm").data('stripe-publishable-key'));
-            Stripe.createToken({
-                number: $('#cardNumber').val(),
-                cvc: $('#cardCVC').val(),
-                exp_month: $('#cardMonth').val(),
-                exp_year: $('#cardYear').val()
-            }, stripeHandleResponse);
+            if ($("input[name='pay_method']:checked").val() === 'card') {
+                Stripe.setPublishableKey($("#paymentForm").data('stripe-publishable-key'));
+                Stripe.createToken({
+                    number: $('#cardNumber').val(),
+                    cvc: $('#cardCVC').val(),
+                    exp_month: $('#cardMonth').val(),
+                    exp_year: $('#cardYear').val()
+                }, stripeHandleResponse);
+            } else {
+                $(this).get(0).submit();
+            }
+
 
         });
         function stripeHandleResponse(status, response) {
@@ -347,8 +367,36 @@
                 $("#paymentForm").append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
                 $("#paymentForm").get(0).submit();
             }
-
         }
+
+        // apply promo code
+        $("#promoForm").submit(function (e) {
+            e.preventDefault();
+            $("#promoBtn").attr("disabled", false);
+            $("#promoAlert").addClass('d-none');
+            $.ajax({
+                url: "{{route('prison.promo')}}",
+                type: "POST",
+                data: $('#promoForm').serialize(),
+                success: function (response) {
+                    console.log(response);
+                    $("#promoAlert").removeClass('d-none');
+                    if (!response.error) {
+                        let cartPrize = $("input[name='price']").val();
+                        let couponDiscount = (Math.round((cartPrize * (response.discount / 100)) * 100) / 100).toFixed(2);
+                        let discountPrice = cartPrize - couponDiscount;
+                        $("input[name='price']").val(discountPrice);
+                        $('.sub_total').text('£' + discountPrice);
+                        $("#promoAlert").addClass('alert-success');
+                        $("#promoAlert").text('Coupon Code Applied');
+                    } else {
+                        $("#promoAlert").addClass('alert-danger');
+                        $("#promoAlert").text('Invalid Coupon Code');
+                    }
+                }
+            });
+        });
     });
 </script>
-@endpush @endsection
+@endpush
+@endsection

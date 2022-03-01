@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AAuthController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\PromoController;
 use App\Http\Controllers\Content\AboutController;
 use App\Http\Controllers\Content\FaqController;
 use App\Http\Controllers\Content\FeatureController;
@@ -67,4 +68,9 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/admin/content/about/{about}', [AboutController::class, 'update'])->name('content.about.update');
     Route::get('/admin/content/how-it-work', [WorkController::class, 'index'])->name('content.work');
     Route::post('/admin/content/how-it-work/{work}', [WorkController::class, 'update'])->name('content.work.update');
+
+    // promo codes and discount
+    Route::group(['prefix' => 'admin/', 'as' => 'admin.'], function () {
+        Route::resource('promos', PromoController::class);
+    });
 });

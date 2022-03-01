@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Plan;
+use App\Models\Promo;
 use Illuminate\Http\Request;
 use Stripe;
 
@@ -32,6 +33,7 @@ class CartController extends Controller
     // Save records
     public function saveRecords(Request $request)
     {
+        // dd($request->price);
         $orders = auth()->user()->orders()->where('order_status', 'Unpaid')->get();
         $plan = auth()->user()->orders()->whereNotNull('product_id')->where('order_status', 'Unpaid')->first();
 
@@ -64,5 +66,23 @@ class CartController extends Controller
         // PrisonerDetail::create($request->all());
 
         return redirect()->route('prison.did.index')->with('success', "Payment has been successfully done.");
+    }
+
+    // apply promo code to cart
+    public function promo(Request $request)
+    {
+        $promo = Promo::where('name', $request->name)->first();
+        if ($promo && $promo->status) {
+            return response([
+                'error' => false,
+                'message' => 'valid promo code',
+                'discount' => $promo->value,
+            ]);
+        } else {
+            return response([
+                'error' => true,
+                'message' => 'invalid promo code',
+            ]);
+        }
     }
 }
