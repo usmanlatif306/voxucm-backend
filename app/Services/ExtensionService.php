@@ -23,7 +23,7 @@ class ExtensionService
 
         $data = Voxucm::curlRequest($postdata);
         $data = json_decode($data, true);
-
+        // return $data;
         return $data['DATA']['RESULTLIST'];
     }
 

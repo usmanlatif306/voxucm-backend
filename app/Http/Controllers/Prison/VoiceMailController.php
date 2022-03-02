@@ -11,7 +11,9 @@ class VoiceMailController extends Controller
 {
     public function index()
     {
+        // dd(auth()->user()->tenant_id);
         $voicemails = DB::connection('mysql2')->table('vox_viocemail')->where('tenant_id', auth()->user()->tenant_id)->get();
+        // dd($voicemails);
 
         return view('prison.config.voicemail.index', compact('voicemails'));
     }

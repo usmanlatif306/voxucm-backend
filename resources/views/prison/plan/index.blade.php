@@ -11,7 +11,7 @@
     </div>
     @endif
 
-    @if($plan->expired_at->subDays(8)->lessThan(now()))
+    @if($plan && $plan->expired_at->subDays(8)->lessThan(now()))
     <div class="alert alert-danger">
         Your plan will expired after {{$plan->expired_at->diffInDays(now())}} days. kindly recharge it.
     </div>

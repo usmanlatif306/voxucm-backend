@@ -26,7 +26,7 @@ class UserPlanController extends Controller
     // all active plans
     public function plans()
     {
-        $plans = Plan::with('product', 'user')->where('expired_at', '>=', now())->get();
+        $plans = Plan::with(['product', 'user'])->where('expired_at', '>=', now())->get();
 
         return view('admin.plans.index', compact('plans'));
     }

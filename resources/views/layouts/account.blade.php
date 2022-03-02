@@ -111,6 +111,8 @@
                                     <a class="dropdown-item" href="#">Paging</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="">Conference</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{route('call_forwarding')}}">Call Forwarding</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ExtController;
 use App\Http\Controllers\Prison\AccountController;
+use App\Http\Controllers\Prison\CallForwardingController;
 use App\Http\Controllers\Prison\ConfigController;
 use App\Http\Controllers\Prison\DidController;
 use App\Http\Controllers\Prison\PrisonController;
@@ -73,5 +74,12 @@ Route::group(['prefix' => 'user'], function () {
     Route::group(['prefix' => 'plans', 'as' => 'prison.plan.'], function () {
         Route::get('/', [UserPlanController::class, 'index'])->name('index');
         // Route::get('/expired', [UserPlanController::class, 'expired'])->name('expire');
+    });
+
+    // Call frwarding
+    Route::group(['prefix' => 'call/forwarding'], function () {
+        Route::get('/', [CallForwardingController::class, 'index'])->name('call_forwarding');
+        Route::post('/', [CallForwardingController::class, 'setForwarding'])->name('set_call_forwarding');
+        Route::post('/disable', [CallForwardingController::class, 'disableForwarding'])->name('disable_call_forwarding');
     });
 });

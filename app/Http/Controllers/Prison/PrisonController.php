@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Prison;
 
 use App\Http\Controllers\Controller;
+use App\Models\CallForwarding;
 use App\Models\User;
 use App\Models\Vox;
 use App\Models\Voxucm;
@@ -49,7 +50,15 @@ class PrisonController extends Controller
     public function extensions()
     {
         $extensions = (new ExtensionService())->getExtensions();
-
+        foreach ($extensions as $key => $array) {
+            foreach ($array as $value) {
+                $SUBSCRIBERID = $array['SUBSCRIBERID'];
+                // $forwardings = DB::connection('mysql2')->table('vox_forwarding')->where('subscriber_id', $SUBSCRIBERID)->where('calltype', 'ALLFORWARD')->first();
+                $forwardings = CallForwarding::where('subscriber_id', $SUBSCRIBERID)->where('call_type', 'ALLFORWARD')->orderBy('created_at', 'DESC')->first();
+                $extensions[$key]['FORWARDING'] = $forwardings;
+            }
+        }
+        // dd($extensions);
         return view('prison.dashboard.extensions', compact('extensions'));
     }
 

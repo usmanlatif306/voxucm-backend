@@ -374,6 +374,8 @@
             e.preventDefault();
             $("#promoBtn").attr("disabled", false);
             $("#promoAlert").addClass('d-none');
+            $("#promoAlert").removeClass('alert-danger');
+            $("#promoAlert").removeClass('alert-success');
             $.ajax({
                 url: "{{route('prison.promo')}}",
                 type: "POST",
