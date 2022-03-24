@@ -5,9 +5,7 @@ use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\Api\ResetPasswordController;
 use App\Http\Controllers\Api\User\UserDetailController;
 use App\Http\Controllers\Api\VerificationController;
-use App\Http\Controllers\CityController;
 use App\Http\Controllers\ConferenceController;
-use App\Http\Controllers\CountryController;
 use App\Http\Controllers\DidController;
 use App\Http\Controllers\ExtController;
 use App\Http\Controllers\IVRController;
@@ -17,7 +15,6 @@ use App\Http\Controllers\QueuesController;
 use App\Http\Controllers\RingController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\VoiceController;
-use App\Http\Controllers\VoxExtensions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

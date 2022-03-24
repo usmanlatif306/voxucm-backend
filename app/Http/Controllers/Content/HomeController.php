@@ -21,15 +21,15 @@ class HomeController extends Controller
     public function home()
     {
         // dd(session('user.cart'));
-        $home = Home::get()->first();
+        $home = Home::first();
         $products = Product::limit(4)->get();
-        $service = Service::get()->first();
-        $feature = Feature::get()->first();
-        $faq = Faq::get()->first();
-        $test = Test::get()->first();
-        $contact = Contact::get()->first();
-        $news = NewsLetter::get()->first();
-        $call = TestCall::get()->first();
+        $service = Service::first();
+        $feature = Feature::first();
+        $faq = Faq::first();
+        $test = Test::first();
+        $contact = Contact::first();
+        $news = NewsLetter::first();
+        $call = TestCall::first();
 
         return view('prison.index', [
             'home' => $home,
@@ -62,7 +62,6 @@ class HomeController extends Controller
     // Update Navbar Logo
     public function navlogo(Home $home, Request $request)
     {
-
         $request->validate([
             'navlogo' => 'required|mimes:jpeg,png,jpg|max:5120',
         ]);
@@ -85,25 +84,25 @@ class HomeController extends Controller
     // Update top header section
     public function update(Home $home, Request $request)
     {
+
         $request->validate([
             'image' => 'mimes:jpeg,png,jpg|max:5120',
         ]);
-        if ($request->image) {
+        if ($request->has('image')) {
             $image = $request->image->getClientOriginalName();
             $filename = pathinfo($image, PATHINFO_FILENAME);
             $extension = pathinfo($image, PATHINFO_EXTENSION);
             $imageName = $filename . "-" . time() . "." . $extension;
             $request->image->storeAs("images", $imageName, "public");
-        }
-        if ($home->image) {
+
             Storage::delete('/public/images/' . $home->image);
+            $home->update(['image' => $imageName]);
         }
         $home->update([
             'title' => $request->title,
             'detail' => $request->detail,
             'button1' => $request->button1,
             'button2' => $request->button2,
-            'image' => $request->image ? $imageName : null,
         ]);
         return redirect()->back()->with('success', 'Data has been updated');
     }

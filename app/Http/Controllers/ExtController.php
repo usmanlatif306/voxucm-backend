@@ -29,13 +29,11 @@ class ExtController extends Controller
     // accounts
     public function accounts()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'EXTENSION',
             'ACTION' => 'GETEXTENSIONS',
             'DATA' => array("USERNAME" => "21_991010")
-        ));
+        );
 
         $data = Voxucm::curlRequest($postdata);
         return $data;
@@ -49,9 +47,7 @@ class ExtController extends Controller
     // Update Extension
     public function updateExt()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'EXTENSION',
             'ACTION' => 'EDIT',
             'DATA' => array(
@@ -90,19 +86,17 @@ class ExtController extends Controller
                 "VEDIOSUPPORT" => "1",
                 "FOLLOWME" => "FORWARDING"
             )
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Allow codec
     public function allowcodec()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'ALLOWEDCODECSDROPDOWN',
             'ACTION' => 'LIST'
-        ));
+        );
 
         $data = Voxucm::curlRequest($postdata);
         return $data;
@@ -110,85 +104,71 @@ class ExtController extends Controller
     // Country list
     public function countrylist()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'COUNTRYDROPDOWN',
             'ACTION' => 'LIST'
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Department list
     public function departmentlist()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'DEPARTMENTDROPDOWN',
             'ACTION' => 'LIST'
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Did list
     public function dids()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'EXTENSION',
             'SECTION' => 'INSECUREDROPDOWN',
             'ACTION' => 'LIST'
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // DTMP list
     public function dtmplist()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'DTMFMODEDROPDOWN',
             'ACTION' => 'LIST',
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Extension dropdown list
     public function extensiondropdownlist()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'EXTENSIONDROPDOWN',
             'ACTION' => 'LIST'
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Extension list
     public function extensionlist()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'EXTENSION',
             'ACTION' => 'LIST'
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Extension limit
     public function extensionlimit()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'EXTENSION',
             'ACTION' => 'GETEXTENSIONLIMIT',
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
@@ -207,72 +187,60 @@ class ExtController extends Controller
     // Holidaylist
     public function holidaylist()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'HOLIDAYDROPDOWN',
             'ACTION' => 'LIST',
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Media reinvite
     public function mediareinvite()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'MEDIAREINVITEDROPDOWN',
             'ACTION' => 'LIST',
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Music Lust
     public function musiclist()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'MOHDROPDOWN',
             'ACTION' => 'LIST',
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Nat Lust
     public function natlist()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'NATDROPDOWN',
             'ACTION' => 'LIST'
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Pickup list
     public function pickup()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'PICKUPGROUPDROPDOWN',
             'ACTION' => 'LIST',
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Ring Duraion
     public function ringduraion()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'RINGDURATIONDROPDOWN',
             'ACTION' => 'LIST'
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
@@ -293,6 +261,10 @@ class ExtController extends Controller
         if ($data['STATUS'] === 'FAILED') {
             return redirect()->back()->with('error', $error);
         }
+        // updating extension detail in db
+        auth()->user()->vox_user()->update([
+            'extension' => $data['DATA']["USERNAME"]
+        ]);
         return redirect()->back()->with('success', "Extension added successfully");
     }
 }

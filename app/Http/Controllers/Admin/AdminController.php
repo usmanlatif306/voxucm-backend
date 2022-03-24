@@ -10,11 +10,19 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
 
-    // Show All orders
-    public function orders()
+    // Show All did orders
+    public function didOrders()
     {
-        $orders = Order::with('user', 'prisonerdetail', 'billdetail')->get();
-        return view('admin.orders.index', compact('orders'));
+        $orders = Order::with('user', 'prisonerdetail', 'billdetail', 'did', 'did.city')->whereNotNull('did_id')->where('order_status', 'Paid')->paginate(10);
+        $type = 'did';
+        return view('admin.orders.index', compact('orders', 'type'));
+    }
+    // Show All did orders
+    public function planOrders()
+    {
+        $orders = Order::with('user', 'prisonerdetail', 'billdetail', 'product')->whereNotNull('product_id')->where('order_status', 'Paid')->paginate(10);
+        $type = 'plan';
+        return view('admin.orders.index', compact('orders', 'type'));
     }
 
     // Edit Order Status

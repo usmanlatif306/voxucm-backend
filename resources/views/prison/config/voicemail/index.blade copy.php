@@ -43,30 +43,24 @@
                                 @foreach($voicemails as $item)
                                 <tr class="text-center">
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$item['VOICEMAILUSER']}}</td>
-                                    <td>{{$item['VOICEMAILSECRET']}}</td>
-                                    <td>{{$item['EMAILADDRESS']}}</td>
+                                    <td>{{$item->extension}}</td>
+                                    <td>{{$item->voicemail_secret}}</td>
+                                    <td>{{$item->voice_mail}}</td>
                                     <td>
                                         <span class="px-2 py-1 bg-primary text-white rounded">
-                                            {{$item['STATUS']}}
+                                            {{$item->status}}
                                         </span>
                                     </td>
                                     <td>
-                                        <a href="{{route('prison.voicemail.edit',$item['VOICEMAILID'])}}"
-                                            title="Edit Voice Mail">
+                                        <a href="{{route('prison.voicemail.edit',$item->voicemail_id)}}" title="Edit Voice Mail">
                                             <i class="far fa-edit text-info"></i>
                                         </a>
-                                        <!-- "VOICEMAILID" -->
-                                        @php
-                                        $voiceMailId = $item['VOICEMAILID'];
-                                        @endphp
                                         <span class="ml-2 cursor-pointer" onclick="window.confirm(
-                                            document.getElementById('voicemail-{{$voiceMailId}}').submit()
+                                            document.getElementById('voicemail-{{$item->voicemail_id}}').submit()
                                         );" title="Delete Voice Mail">
                                             <i class="fas fa-trash text-danger"></i>
                                         </span>
-                                        <form action="{{route('prison.voicemail.delete',$item['VOICEMAILID'])}}"
-                                            method="post" id='voicemail-{{$item["VOICEMAILID"]}}'>
+                                        <form action="{{route('prison.voicemail.delete',$item->voicemail_id)}}" method="post" id='voicemail-{{$item->voicemail_id}}'>
                                             @csrf
                                             @method('delete')
                                         </form>
@@ -83,8 +77,7 @@
     </div>
 
     <!-- Add Voice Mail model shows here -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -96,19 +89,16 @@
                         @csrf
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" name="username" class="form-control" id="username"
-                                placeholder="Enter Username" required>
+                            <input type="text" name="username" class="form-control" id="username" placeholder="Enter Username" required>
                         </div>
                         <div class="form-group">
                             <label for="secret">Voice Secret</label>
-                            <input type="number" name="secret" class="form-control" id="secret"
-                                placeholder="Voice Secret" required>
+                            <input type="number" name="secret" class="form-control" id="secret" placeholder="Voice Secret" required>
                         </div>
 
                         <div class="form-group">
                             <label for="email">Voice Email</label>
-                            <input type="email" name="email" class="form-control" id="email" placeholder="Voice Email"
-                                required>
+                            <input type="email" name="email" class="form-control" id="email" placeholder="Voice Email" required>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>

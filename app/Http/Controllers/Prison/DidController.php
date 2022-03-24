@@ -7,8 +7,6 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\Did;
 use App\Models\Order;
-use App\Models\Purchase;
-use Illuminate\Http\Request;
 
 class DidController extends Controller
 {
@@ -64,7 +62,6 @@ class DidController extends Controller
     // delete a did
     public function delete(Order $order)
     {
-
         $did = Did::where('dialing_code', $order->did->dialing_code)->first();
         $did->update(['status' => false]);
         $order->delete();

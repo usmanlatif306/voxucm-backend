@@ -46,7 +46,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($extensions as $extension)
+                                @forelse($extensions as $extension)
                                 <tr class="text-center">
                                     <td>{{$loop->index+1}}</td>
                                     <td>{{$extension['EXTENSION']}}</td>
@@ -72,7 +72,12 @@
                                     <input type="hidden" name="destination" value="{{$extension['USERNAME']}}">
                                     <input type="hidden" name="subscriber_id" value="{{$extension['SUBSCRIBERID']}}">
                                 </form>
-                                @endforeach
+                                @empty
+                                <tr>
+                                    <td colspan="5" class="text-center">No Data</td>
+                                </tr>
+                                @endforelse
+
                             </tbody>
                         </table>
                     </div>
@@ -92,6 +97,11 @@
                     <h3>Add New Extension</h3>
                     <form action="{{route('prison.extensions.add')}}" method="POST">
                         @csrf
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Enter Name"
+                                required>
+                        </div>
                         <div class="form-group">
                             <label for="extension">Extension</label>
                             <input type="number" name="extension" class="form-control" id="extension"

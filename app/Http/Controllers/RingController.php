@@ -10,53 +10,45 @@ class RingController extends Controller
     // Ring group list
     public function ringgroup()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'RINGGROUP',
             'ACTION' => 'LIST',
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Ring Add extension
     public function ringaddext()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'RINGGROUP',
             'ACTION' => 'ADDEXTENSION',
             'DATA' => array(
                 "RINGGROUPID" => "1",
                 "EXTENSIONID" => "1"
             )
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Ring Delete extension
     public function ringdeltext()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'RINGGROUP',
             'ACTION' => 'DELETEEXTENSION',
             'DATA' => array(
                 "RINGGROUPID" => "34",
                 "EXTENSIONID" => "12"
             )
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Ring Add Group
     public function ringaddgroup()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'RINGGROUP',
             'ACTION' => 'ADD',
             'DATA' => array(
@@ -68,16 +60,14 @@ class RingController extends Controller
                 "FAILOVERAPP" => "HANGUP",
                 "FAILOVERAPPNOID" => ""
             )
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Edit Add Group
     public function ringeditgroup()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'RINGGROUP',
             'ACTION' => 'EDIT',
             'DATA' => array(
@@ -90,77 +80,65 @@ class RingController extends Controller
                 "FAILOVERAPP" => "VOICEMAIL",
                 "FAILOVERAPPNOID" => "6"
             )
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Delete Ring Group
     public function ringedeltgroup()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'ACTION' => 'DELETE',
             'DATA' => array("RINGGROUPID" => "28")
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Duration List
     public function durationlist()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'RINGDURATIONDROPDOWN',
             'ACTION' => 'LIST',
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Extension List
     public function extlist()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'RINGGROUP',
             'ACTION' => 'EXTENSIONDROPDWON',
             'DATA' => array("RINGGROUPID" => "1")
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Failure List
     public function failurelist()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'RINGGROUPFAILOVER',
             'ACTION' => 'LIST',
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // IVR List
     public function ivrlist()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'IVRDROPDOWN',
             'ACTION' => 'LIST',
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Update Ring group
     public function updateringgroup()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'RINGGROUP',
             'ACTION' => 'EDIT',
             'DATA' => array(
@@ -168,7 +146,7 @@ class RingController extends Controller
                 "FAILOVERAPP" => "VOICEMAIL",
                 "FAILOVERAPPNOID" => "2"
             )
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }

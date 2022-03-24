@@ -443,6 +443,45 @@
                                         </li>
                                     </ul>
                                 </li>
+
+                                <li
+                                    class="pcoded-hasmenu {{(request()->routeIs('admin.orders.did') || request()->routeIs('admin.orders.plan')) ? 'active pcoded-trigger' : '' }}">
+                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-archive"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Orders</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="{{ request()->routeIs('admin.orders.did') ? 'active' : '' }}">
+                                            <a href="{{
+                                                        route('admin.orders.did')
+                                                    }}" class="
+                                                        waves-effect waves-dark
+                                                    ">
+                                                <span class="pcoded-micon"><i class="
+                                                                ti-angle-right
+                                                            "></i></span>
+                                                <span class="pcoded-mtext"
+                                                    data-i18n="nav.basic-components.breadcrumbs">DID Orders</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class="{{ request()->routeIs('admin.orders.plan') ? 'active' : '' }}">
+                                            <a href="{{
+                                                        route('admin.orders.plan')
+                                                    }}" class="
+                                                        waves-effect waves-dark
+                                                    ">
+                                                <span class="pcoded-micon"><i class="
+                                                                ti-angle-right
+                                                            "></i></span>
+                                                <span class="pcoded-mtext"
+                                                    data-i18n="nav.basic-components.breadcrumbs">Plan Orders</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
                                 <li class="{{ request()->routeIs('admin.promos.index') ? 'active' : '' }}">
                                     <a href="{{ route('admin.promos.index') }}" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
@@ -454,17 +493,12 @@
                                 <li class="{{ request()->routeIs('admin.plans') ? 'active' : '' }}">
                                     <a href="{{ route('admin.plans') }}" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Plans</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Active
+                                            Plans</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="{{ request()->routeIs('admin.orders') ? 'active' : '' }}">
-                                    <a href="{{ route('admin.orders') }}" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Orders</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
+                                <!-- -->
                                 <li class="{{ request()->routeIs('admin.users') ? 'active' : '' }}">
                                     <a href="{{ route('admin.users') }}" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>

@@ -54,6 +54,8 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'vox_url' => env('VOX_URL', 'http://localhost'),
+
     'asset_url' => env('ASSET_URL', null),
 
     /*

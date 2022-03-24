@@ -13,6 +13,7 @@ use App\Notifications\SendingPasswordNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Notifications\VerifyEmailNotification;
+use App\Services\TenantService;
 use Illuminate\Support\Facades\Hash;
 
 class FacebookController extends Controller
@@ -53,38 +54,20 @@ class FacebookController extends Controller
                 'is_email_verified' => 1,
             ]);
 
-            // tenant create
-            $voxuser = VoxUser::create([
-                'Username' => $newUser->name,
-                'password' => sha1($password),
-                'RoleId' => 25
+            // creating voxucm user
+            $voxUser = (new TenantService())->createVoxUser($newUser->name, $newUser->name, $password);
+
+            // saving voxusm user details in db
+            $newUser->vox_user()->create([
+                'tenant_id' => $voxUser->tenant_id,
+                'api_username' => $voxUser->extension,
+                'api_password' => $voxUser->apisecret,
             ]);
 
-            if ($voxuser) {
-                $voxtenant = VoxTenant::create([
-                    'login_id' => $voxuser->id,
-                    'firstname' => $newUser->name,
-                    'username' => $newUser->name,
-                    'emailaddress' => $newUser->email,
-                    'payment_terms' => 10
-                ]);
-            }
-
-            $newUser->update([
-                'tenant_user' => $voxuser->id,
-                'tenant_id' => $voxtenant->id
-            ]);
             // if tenant user created then sending password through email
-            if ($voxuser) {
+            if ($voxUser) {
                 $newUser->notify(new SendingPasswordNotification($newUser->name, $newUser->email, $password));
             }
-            // sending verification email
-            // if ($newUser) {
-            //     $token = Str::random(64);
-            //     $newUser->verification_token = $token;
-            //     $newUser->save();
-            //     $newUser->notify(new VerifyEmailNotification($token));
-            // }
 
             Auth::login($newUser);
 

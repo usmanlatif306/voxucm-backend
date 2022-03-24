@@ -67,9 +67,11 @@
                                             @csrf
                                             @method('delete')
                                         </form>
-                                        <span class="cursor-pointer" style="cursor: pointer;" onclick="window.confirm(
-                                                document.getElementById('did-{{$number->id}}').submit()
-                                            );"><i class="fas fa-trash text-danger"></i></span>
+                                        <span class="cursor-pointer" style="cursor: pointer;"
+                                            onclick="document.getElementById('did-{{$number->id}}').submit();"><i
+                                                class="fas fa-trash text-danger"></i></span>
+                                        <!-- <span class="cursor-pointer deleteDid" style="cursor: pointer;"
+                                            data-id="{{$number->id}}"><i class="fas fa-trash text-danger"></i></span> -->
                                     </td>
                                 </tr>
                                 @endforeach
@@ -85,3 +87,14 @@
     </div>
 </div>
 @endsection
+<!-- @push('scripts')
+<script>
+    $('.deleteDid').on('click', function () {
+        let id = $(this).data('id');
+        confirm(
+            $('#did-' + id).submit()
+        );
+
+    })
+</script>
+@endpush -->

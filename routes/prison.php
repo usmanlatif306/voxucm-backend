@@ -7,6 +7,7 @@ use App\Http\Controllers\Prison\ConfigController;
 use App\Http\Controllers\Prison\DidController;
 use App\Http\Controllers\Prison\PrisonController;
 use App\Http\Controllers\Prison\ReportController;
+use App\Http\Controllers\Prison\TarrifController;
 use App\Http\Controllers\Prison\UserPlanController;
 use App\Http\Controllers\Prison\VoiceMailController;
 use App\Http\Controllers\Stripe\StripeController;
@@ -54,6 +55,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/setting', [PrisonController::class, 'setting'])->name('user.setting');
     Route::put('/setting/update-password', [PrisonController::class, 'updatePassword'])->name('user.setting.password');
     Route::put('/setting/update-details', [PrisonController::class, 'updateDetails'])->name('user.setting.details');
+    Route::put('/setting/update-prison', [PrisonController::class, 'updatePrisonDetails'])->name('user.setting.prison');
 
     Route::get('/buymore', [PrisonController::class, 'buymore'])->name('user.buymore');
     Route::get('/orders', [PrisonController::class, 'accounts'])->name('user.orders');
@@ -81,5 +83,11 @@ Route::group(['prefix' => 'user'], function () {
         Route::get('/', [CallForwardingController::class, 'index'])->name('call_forwarding');
         Route::post('/', [CallForwardingController::class, 'setForwarding'])->name('set_call_forwarding');
         Route::post('/disable', [CallForwardingController::class, 'disableForwarding'])->name('disable_call_forwarding');
+    });
+
+    // Tarrif Routes
+    Route::group(['prefix' => 'tarrif'], function () {
+        Route::get('/', [TarrifController::class, 'index'])->name('prison.tarrif');
+        Route::post('/', [TarrifController::class, 'setTarrif'])->name('set_tarrif');
     });
 });

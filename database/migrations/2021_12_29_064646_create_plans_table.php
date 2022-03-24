@@ -21,7 +21,7 @@ class CreatePlansTable extends Migration
             $table->foreignId('product_id')
                 ->constrained()
                 ->onDelete('cascade');
-            $table->timestamp('expired_at');
+            $table->timestamp('expired_at')->nullable();
             $table->timestamps();
         });
     }

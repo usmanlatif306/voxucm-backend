@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Models\Content;
+namespace App\Models\Voxucm;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class About extends Model
+class VoxUserDetail extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'content', 'image'
-    ];
+
+    protected $guarded = [];
 }

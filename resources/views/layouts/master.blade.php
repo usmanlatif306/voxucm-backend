@@ -40,9 +40,9 @@
                         <!-- <a href="{{ route('prison.home') }}"><img src="{{
                                         asset('/storage/images/'.$navlogo)
                                     }}" alt="Prison Tel" /></a> -->
-                        <a href="{{ route('prison.home') }}" class="d-none d-md-block">
+                        <!-- <a href="{{ route('prison.home') }}" class="d-none d-md-block">
                             <img src="https://www.prisontel.co.uk/theme/site/img/logo-dark.png" alt="Prison Tel"
-                                style="width: 45px !important;" /></a>
+                                style="width: 45px !important;" /></a> -->
                     </div>
                 </div>
                 <div class="col-lg-10 d-lg-block d-none">

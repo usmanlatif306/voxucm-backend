@@ -19,14 +19,9 @@ class CartController extends Controller
         // dd(Order::whereIn('id', session('user.cart'))->where('order_status', 'Unpaid')->get());
         $orders = auth()->user()->orders()->where('order_status', 'Unpaid')->get();
 
-        $price = 0;
-        foreach ($orders as $order) {
-            $price = $price + $order->price;
-        }
-
         return view('prison.cart', [
             'orders' => $orders,
-            'price' => $price,
+            'price' => $orders->sum('price'),
         ]);
     }
 

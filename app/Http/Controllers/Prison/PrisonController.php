@@ -30,9 +30,7 @@ class PrisonController extends Controller
     // dashboard
     public function dashboard()
     {
-
         $user = $this->getUserDetails();
-
         $extensions = (new ExtensionService())->getExtensions();
         session(['username' => $user->username]);
         session(['balance' => $user->credit]);
@@ -43,7 +41,9 @@ class PrisonController extends Controller
     // account
     public function account()
     {
-        return view('prison.dashboard.account');
+        $user = auth()->user();
+        $user->load('user_details');
+        return view('prison.dashboard.account', compact('user'));
     }
 
     // Extensions
@@ -129,7 +129,27 @@ class PrisonController extends Controller
 
         return redirect()->back()->with('status', 'User Details Successfully Updated');
     }
-
+    // update prison details
+    public function updatePrisonDetails(Request $request)
+    {
+        $request->validate([
+            'prison_fname' => ['required', 'string', 'max:255'],
+            'prison_lname' => ['required', 'string', 'max:255'],
+            'prison_number' => ['required', 'numeric'],
+            'prison_status' => ['required'],
+            'release_date' => [$request->prison_status === 'sentenced' ? 'required' : 'nullable', 'date'],
+            'prison_relation' => ['required', 'string', 'max:255'],
+        ]);
+        auth()->user()->user_details()->update([
+            'prison_fname' => $request->prison_fname,
+            'prison_lname' => $request->prison_lname,
+            'prison_number' => $request->prison_number,
+            'prison_status' => $request->prison_status,
+            'release_date' => $request->release_date,
+            'prison_relation' => $request->prison_relation,
+        ]);
+        return redirect()->back()->with('prison_status', 'User Details Successfully Updated');
+    }
     // buymore
     public function buymore()
     {
@@ -156,6 +176,6 @@ class PrisonController extends Controller
     // getting user details from msql2 connection
     private function getUserDetails()
     {
-        return  DB::connection('mysql2')->table('vox_tenant')->where('tenant_id', auth()->user()->tenant_id)->first();
+        return  DB::connection('mysql2')->table('vox_tenant')->where('tenant_id', auth()->user()->vox_user->tenant_id)->first();
     }
 }

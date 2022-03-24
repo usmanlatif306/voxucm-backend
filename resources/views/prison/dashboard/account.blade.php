@@ -43,6 +43,10 @@
                                 </td>
                             </tr>
                             <tr>
+                                <th scope="row">Address</th>
+                                <td>{{auth()->user()->address}}</td>
+                            </tr>
+                            <tr>
                                 <th scope="row">Country</th>
                                 <td>{{auth()->user()->country}}</td>
                             </tr>
@@ -70,6 +74,8 @@
                 </div>
 
             </div>
+
+
 
         </div>
         <!--Grid column-->

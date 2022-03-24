@@ -10,21 +10,17 @@ class ConferenceController extends Controller
     // Conference List
     public function conflist()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'CONFERENCE',
             'ACTION' => 'LIST'
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Add Conference
     public function addconference()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'CONFERENCE',
             'ACTION' => 'ADD',
             'DATA' => array(
@@ -36,16 +32,14 @@ class ConferenceController extends Controller
                 "ENDTIME" => "2021-06-21 09:40:14",
                 "RECORDING" => "1"
             )
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Update Conference
     public function editconference()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'CONFERENCE',
             'ACTION' => 'EDIT',
             'DATA' => array(
@@ -58,20 +52,18 @@ class ConferenceController extends Controller
                 "ENDTIME" => "2021-06-21 09:40:14",
                 "RECORDING" => "1"
             )
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }
     // Delete Conference
     public function deleteconference()
     {
-        $postdata = json_encode(array(
-            'APIUSER' => '21_apiuser',
-            'APIPASSWORD' => MD5('123456'),
+        $postdata = array(
             'SECTION' => 'CONFERENCE',
             'ACTION' => 'DELETE',
             'DATA' => array("CONFERENCEID" => "9")
-        ));
+        );
         $data = Voxucm::curlRequest($postdata);
         return $data;
     }

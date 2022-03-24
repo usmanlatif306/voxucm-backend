@@ -17,9 +17,15 @@
                 <tr>
                     <th scope="col">No</th>
                     <th scope="col">User Name</th>
-                    <th scope="col">State</th>
+                    @if($type==='did')
                     <th scope="col">City</th>
                     <th scope="col">DID</th>
+                    @else
+                    <th scope="col">Name</th>
+                    <th scope="col">Lines</th>
+                    <th scope="col">Minutes</th>
+                    <th scope="col">Month</th>
+                    @endif
                     <th scope="col">Price</th>
                     <th scope="col">Order Status</th>
                     <th scope="col">Action</th>
@@ -31,12 +37,18 @@
                 <tr>
                     <th>{{$loop->iteration}}</th>
                     <td>{{$order->user->name}}</td>
-                    <td>{{$order->state}}</td>
-                    <td>{{$order->city}}</td>
-                    <td>{{$order->dialing_code}}</td>
+                    @if($type==='did')
+                    <td>{{$order->did->city->name}}</td>
+                    <td>{{$order->did->dialing_code}}</td>
+                    @else
+                    <td>{{$order->product->name}}</td>
+                    <td>{{$order->product->lines}}</td>
+                    <td>{{$order->product->minutes}}</td>
+                    <td>{{$order->product->month}}</td>
+                    @endif
                     <td>£ {{$order->price}}</td>
                     <td>
-                        <form id="{{'orderedit-'.$order->id}}" action="{{ route('admin.editorder',$order->id)}}"
+                        <form id="{{'orderedit-'.$order->id}}" action="{{ route('admin.orders.editorder',$order->id)}}"
                             method="post">
                             @csrf @method('put')
                             <select name="order_status" class="form-control shadow-none">
@@ -76,6 +88,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{$orders->links()}}
     </div>
 </div>
 

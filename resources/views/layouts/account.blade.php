@@ -49,9 +49,9 @@
     <header class="">
         <div class="container-fluid px-0 px-md-5 pl-3 pl-md-0">
             <nav class="top-navbar-header d-flex py-2 px-0 px-md-5">
-                <a href="{{ route('prison.home') }}" class="d-none d-md-block">
+                <!-- <a href="{{ route('prison.home') }}" class="d-none d-md-block">
                     <img src="https://www.prisontel.co.uk/theme/site/img/logo-dark.png" alt="Prison Tel"
-                        style="width: 45px !important;" /></a>
+                        style="width: 45px !important;" /></a> -->
                 <ul class="ml-auto pt-2">
                     <button class="btn btn-sm btn-primary mx-2">Balance:
                         {{number_format((float)session('balance'), 4,
@@ -112,7 +112,7 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="">Conference</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{route('call_forwarding')}}">Call Forwarding</a>
+                                    <a class="dropdown-item" href="{{route('prison.tarrif')}}">Tarrif</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">

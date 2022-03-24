@@ -25,16 +25,23 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-12 col-md-8">
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                 <div class="card border-0">
                     <div class="card-body">
                         <form method="POST" action="{{ route('prison.registeruser') }}">
                             @csrf
-
                             <div class="form-group row">
                                 <label for="name" class="
                                         col-md-3 col-form-label
-                                        text-md-right
-                                    ">{{ __("Name") }}</label>
+                                    ">{{ __("Full Name") }}</label>
 
                                 <div class="col-md-8">
                                     <input id="name" type="text" class="
@@ -43,7 +50,7 @@
                                             is-invalid
                                             @enderror
                                         " name="name" value="{{ old('name') }}" required autocomplete="name"
-                                        autofocus />
+                                        placeholder="Full Name" autofocus />
 
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -56,7 +63,6 @@
                             <div class="form-group row">
                                 <label for="email" class="
                                         col-md-3 col-form-label
-                                        text-md-right
                                     ">{{ __("E-Mail Address") }}</label>
 
                                 <div class="col-md-8">
@@ -65,7 +71,8 @@
                                             @error('email')
                                             is-invalid
                                             @enderror
-                                        " name="email" value="{{ old('email') }}" required autocomplete="email" />
+                                        " name="email" placeholder="Email Address" value="{{ old('email') }}" required
+                                        autocomplete="email" />
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -78,7 +85,6 @@
                             <div class="form-group row">
                                 <label for="phone" class="
                                         col-md-3 col-form-label
-                                        text-md-right
                                     ">{{ __("Phone Number") }}</label>
 
                                 <div class="col-md-8">
@@ -87,8 +93,8 @@
                                             @error('phone')
                                             is-invalid
                                             @enderror
-                                        " name="phone" value="{{ old('phone') }}" required autocomplete="phone"
-                                        autofocus />
+                                        " name="phone" placeholder="Phone Number" value="{{ old('phone') }}" required
+                                        autocomplete="phone" autofocus />
 
                                     @error('phone')
                                     <span class="invalid-feedback" role="alert">
@@ -99,9 +105,91 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="phone" class="
+                                        col-md-3 col-form-label
+                                    ">{{ __("Address") }}</label>
+
+                                <div class="col-md-8">
+                                    <input id="phone" type="text" class="
+                                            form-control
+                                            @error('address')
+                                            is-invalid
+                                            @enderror
+                                        " name="address" placeholder="Address" value="{{ old('address') }}" required />
+
+                                    @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="phone" class="
+                                        col-md-3 col-form-label
+                                    ">{{ __("City Name") }}</label>
+
+                                <div class="col-md-8">
+                                    <input id="phone" type="text" class="
+                                            form-control
+                                            @error('city')
+                                            is-invalid
+                                            @enderror
+                                        " name="city" placeholder="City Name" value="{{ old('city') }}" required />
+
+                                    @error('city')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="phone" class="
+                                        col-md-3 col-form-label
+                                    ">{{ __("Country") }}</label>
+
+                                <div class="col-md-8">
+                                    <input id="phone" type="text" class="
+                                            form-control
+                                            @error('country')
+                                            is-invalid
+                                            @enderror
+                                        " name="country" placeholder="Country" value="{{ old('country') }}" required />
+
+                                    @error('country')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="phone" class="
+                                        col-md-3 col-form-label
+                                    ">{{ __("Post Code") }}</label>
+
+                                <div class="col-md-8">
+                                    <input id="phone" type="number" class="
+                                            form-control
+                                            @error('postcode')
+                                            is-invalid
+                                            @enderror
+                                        " name="postcode" placeholder="Post Code" value="{{ old('postcode') }}"
+                                        required autocomplete="postcode" autofocus />
+
+                                    @error('postcode')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="password" class="
                                         col-md-3 col-form-label
-                                        text-md-right
                                     ">{{ __("Password") }}</label>
 
                                 <div class="col-md-8">
@@ -110,7 +198,8 @@
                                             @error('password')
                                             is-invalid
                                             @enderror
-                                        " name="password" required autocomplete="new-password" />
+                                        " name="password" placeholder="Password" required
+                                        autocomplete="new-password" />
 
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -123,14 +212,113 @@
                             <div class="form-group row">
                                 <label for="password-confirm" class="
                                         col-md-3 col-form-label
-                                        text-md-right
                                     ">{{ __("Confirm Password") }}</label>
 
                                 <div class="col-md-8">
                                     <input id="password-confirm" type="password" class="form-control"
-                                        name="password_confirmation" required autocomplete="new-password" />
+                                        name="password_confirmation" placeholder="Confirm Password" required
+                                        autocomplete="new-password" />
+                                </div>
+
+                            </div>
+                            <!-- prison details -->
+                            <div class="form-group row">
+                                <label for="password-confirm" class="
+                                        col-md-3 col-form-label
+                                    ">{{ __("Prisoner First Name") }}</label>
+
+                                <div class="col-md-8">
+                                    <input type="text" name="prison_fname" class="form-control @error('prison_fname')
+                                    is-invalid
+                                    @enderror" value="{{ old('prison_fname') }}" placeholder="Prisoner First Name"
+                                        required />
+                                </div>
+                                @error('prison_fname')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="password-confirm" class="
+                                        col-md-3 col-form-label
+                                    ">{{ __("Prisoner Last Name") }}</label>
+
+                                <div class="col-md-8">
+                                    <input type="text" name="prison_lname" class="form-control @error('prison_lname')
+                                    is-invalid
+                                    @enderror" value="{{ old('prison_lname') }}" placeholder="Prisoner Last Name"
+                                        required />
+                                </div>
+                                @error('prison_lname')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="form-group row">
+                                <label for="password-confirm" class="
+                                        col-md-3 col-form-label
+                                    ">{{ __("Prisoner Number") }}</label>
+
+                                <div class="col-md-8">
+                                    <input type="number" name="prison_number" class="form-control @error('prison_number')
+                                    is-invalid
+                                    @enderror" value="{{ old('prison_number') }}" placeholder="Prisoner Number"
+                                        required />
+                                </div>
+                                @error('prison_number')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="form-group row">
+                                <label for="password-confirm" class="
+                                        col-md-3 col-form-label
+                                    ">{{ __("Prison Status") }}</label>
+
+                                <div class="col-md-8">
+                                    <select name="prison_status" class="form-control" id="prison-status">
+                                        <option value="">
+                                            Select Prison Status
+                                        </option>
+                                        <option value="sentenced">Sentenced</option>
+                                        <option value="remanded">Remanded</option>
+                                    </select>
                                 </div>
                             </div>
+                            <div class="form-group row d-none" id="releaseDate">
+                                <label for="password-confirm" class="
+                                        col-md-3 col-form-label
+                                    ">{{ __("Release Date") }}</label>
+
+                                <div class="col-md-8">
+                                    <input type="date" name="release_date" class="form-control"
+                                        placeholder="Release Date" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="password-confirm" class="
+                                        col-md-3 col-form-label
+                                    ">{{ __("Relation With Prison") }}</label>
+
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input type="text" name="prison_relation" class="form-control @error('prison_relation')
+                                        is-invalid
+                                        @enderror" value="{{ old('prison_relation') }}"
+                                            placeholder="Relation With Prison" required />
+                                    </div>
+                                </div>
+                                @error('prison_relation')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-3">
@@ -170,3 +358,18 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+<script>
+    $(document).ready(function () {
+        $("select[name='prison_status']").change(function (e) {
+            var status = e.target.value;
+            if (status === "sentenced") {
+                $("#releaseDate").removeClass("d-none");
+            } else {
+                $("#releaseDate").addClass("d-none");
+            }
+        });
+    })
+
+</script>
+@endpush

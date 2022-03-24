@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Voxucm\VoxUserDetail;
 use App\Notifications\PasswordResetNotification;
 use App\Notifications\VerifyEmailNotification;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -23,7 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'is_email_verified', 'phone', 'address', 'city', 'country', 'postcode', 'google_id', 'facebook_id', 'tenant_id'
+        'name', 'email', 'password', 'is_email_verified', 'phone', 'address', 'city', 'country', 'postcode', 'google_id', 'facebook_id', 'tenant_id', 'api_password', 'api_username'
     ];
 
     /**
@@ -44,6 +45,18 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // User Details
+    public function user_details()
+    {
+        return $this->hasOne(UserDetail::class);
+    }
+
+    // Voxucm User Details
+    public function vox_user()
+    {
+        return $this->hasOne(VoxUserDetail::class);
+    }
 
     // User current plan
     public function plan()

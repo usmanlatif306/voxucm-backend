@@ -17,15 +17,11 @@ class CallForwardingController extends Controller
     // setting callforwarding
     public function setForwarding(Request $request)
     {
-        $postdata = json_encode(
-            array(
-                'APIUSER' => '21_apiuser',
-                'APIPASSWORD' => MD5('123456'),
-                'SIPUSER' => $request->destination,
-                'SECTION' => 'FORWARDING',
-                'ACTION' => 'NORMAL',
-                'DATA' => array('FW_ENABLE' => '1', 'ALLWAYS' => $request->number)
-            )
+        $postdata  = array(
+            'SIPUSER' => $request->destination,
+            'SECTION' => 'FORWARDING',
+            'ACTION' => 'NORMAL',
+            'DATA' => array('FW_ENABLE' => '1', 'ALLWAYS' => $request->number)
         );
 
         $data = Voxucm::curlRequest($postdata);
@@ -53,15 +49,11 @@ class CallForwardingController extends Controller
     // disabling callforwarding
     public function disableForwarding(Request $request)
     {
-        $postdata = json_encode(
-            array(
-                'APIUSER' => '21_apiuser',
-                'APIPASSWORD' => MD5('123456'),
-                'SIPUSER' => $request->destination,
-                'SECTION' => 'FORWARDING',
-                'ACTION' => 'NORMAL',
-                'DATA' => array('FW_ENABLE' => '0', 'ALLWAYS' => $request->number)
-            )
+        $postdata =  array(
+            'SIPUSER' => $request->destination,
+            'SECTION' => 'FORWARDING',
+            'ACTION' => 'NORMAL',
+            'DATA' => array('FW_ENABLE' => '0', 'ALLWAYS' => $request->number)
         );
 
         $data = Voxucm::curlRequest($postdata);
