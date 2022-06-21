@@ -36,6 +36,7 @@ class HomeController extends Controller
             'products' => $products,
             'service' => $service,
             'faq' => $faq,
+            'faqs' => json_decode($faq->faqs, true),
             'feature' => $feature,
             'test' => $test,
             'contact' => $contact,

@@ -171,10 +171,15 @@
                                 <option value="london">
                                     Select Area Prefix
                                 </option>
-                                <option value="london">London</option>
+                                @foreach($codes as $code)
+                                <option value="{{$code->code}}">
+                                    {{$code->city}} <small>({{$code->code}})</small>
+                                </option>
+                                @endforeach
+                                <!-- <option value="london">London</option>
                                 <option value="manchestor">
                                     Manchestor
-                                </option>
+                                </option> -->
                             </select>
                         </div>
                     </div>
@@ -261,7 +266,7 @@
                     </div>
                     <div id="release" class="col-12 col-md-6 d-none">
                         <div class="form-group">
-                            <input type="text" name="release_date" class="form-control" placeholder="Release Date" />
+                            <input type="date" name="release_date" class="form-control" placeholder="Release Date" />
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
@@ -381,7 +386,6 @@
                 type: "POST",
                 data: $('#promoForm').serialize(),
                 success: function (response) {
-                    console.log(response);
                     $("#promoAlert").removeClass('d-none');
                     if (!response.error) {
                         let cartPrize = $("input[name='price']").val();

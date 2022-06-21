@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Admin;
+use App\Models\AreaCode;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -13,14 +16,14 @@ class AdminController extends Controller
     // Show All did orders
     public function didOrders()
     {
-        $orders = Order::with('user', 'prisonerdetail', 'billdetail', 'did', 'did.city')->whereNotNull('did_id')->where('order_status', 'Paid')->paginate(10);
+        $orders = Order::with('user', 'prisonerdetail', 'billdetail', 'did', 'did.city')->whereNotNull('did_id')->paginate(10);
         $type = 'did';
         return view('admin.orders.index', compact('orders', 'type'));
     }
     // Show All did orders
     public function planOrders()
     {
-        $orders = Order::with('user', 'prisonerdetail', 'billdetail', 'product')->whereNotNull('product_id')->where('order_status', 'Paid')->paginate(10);
+        $orders = Order::with('user', 'prisonerdetail', 'billdetail', 'product')->whereNotNull('product_id')->paginate(10);
         $type = 'plan';
         return view('admin.orders.index', compact('orders', 'type'));
     }
@@ -58,4 +61,19 @@ class AdminController extends Controller
             'numbers' => $numbers,
         ]);
     }
+
+    // public function csv(Request $request)
+    // {
+    //     $data = array_map('str_getcsv', file($request->file));
+    //     $header =  ['city', 'code'];
+    //     unset($data[0]);
+    //     unset($data[1]);
+    //     unset($data[2]);
+    //     foreach ($data as $item) {
+    //         $val = array_combine($header, $item);
+    //         AreaCode::create($val);
+    //     }
+
+    //     dd('done');
+    // }
 }

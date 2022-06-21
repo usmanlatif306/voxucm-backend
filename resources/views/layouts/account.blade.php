@@ -88,13 +88,13 @@
                                     Configuration
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Dial Pattern</a>
-                                    <div class="dropdown-divider"></div>
+                                    <!-- <a class="dropdown-item" href="#">Dial Pattern</a>
+                                    <div class="dropdown-divider"></div> -->
                                     <a class="dropdown-item" href="{{route('prison.extensions.index')}}"> Extension</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="">Ring Group</a>
-                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{route('prison.did.index')}}">DID</a>
+                                    <!-- <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="">Ring Group</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{route('prison.config.daynight')}}">Day Night</a>
                                     <div class="dropdown-divider"></div>
@@ -112,10 +112,10 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="">Conference</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{route('prison.tarrif')}}">Tarrif</a>
+                                    <a class="dropdown-item" href="{{route('prison.tarrif')}}">Tarrif</a> -->
                                 </div>
                             </li>
-                            <li class="nav-item dropdown">
+                            <!-- <li class="nav-item dropdown">
                                 <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown"
                                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Miscellaneous
@@ -140,8 +140,7 @@
                                     <a class="dropdown-item" href="#">Tenant Users</a>
 
                                 </div>
-
-                            </li>
+                            </li> -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown"
                                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -178,10 +177,9 @@
                                     <a class="dropdown-item" href="#"> Top Destinations</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Fail Logs</a>
-
                                 </div>
                             </li>
-                            <li class="nav-item dropdown">
+                            <!-- <li class="nav-item dropdown">
                                 <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown"
                                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Contact Center</a>
@@ -226,7 +224,7 @@
                                         count($orders) }}
                                     </strong>
                                     Items In Cart</a>
-                            </li>
+                            </li> -->
                             <!-- <li class="nav-item dropdown">
                                 <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

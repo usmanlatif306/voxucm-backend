@@ -247,14 +247,19 @@ class ExtController extends Controller
     // Ring Duraion
     public function getextensions()
     {
-        $extensions = (new ExtensionService())->getExtensions();
+        $extensions = (new ExtensionService())->getExtensions(auth()->user()->vox_user->extension);
         return $extensions;
     }
 
     // Add Extension Web
     public function addExtensionWeb(Request $request)
     {
-        $data = (new ExtensionService())->addExtension($request);
+        $values = [
+            'name' => $request->name,
+            'extension' => $request->extension,
+            'password' => $request->password,
+        ];
+        $data = (new ExtensionService())->addExtension($values);
         $data = json_decode($data, true);
 
         $error = $data['DATA']['MESSAGE'];

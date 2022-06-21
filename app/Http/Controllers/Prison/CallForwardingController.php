@@ -17,6 +17,7 @@ class CallForwardingController extends Controller
     // setting callforwarding
     public function setForwarding(Request $request)
     {
+        dd($request->all());
         $postdata  = array(
             'SIPUSER' => $request->destination,
             'SECTION' => 'FORWARDING',

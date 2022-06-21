@@ -20,10 +20,6 @@ class CreateUsersTable extends Migration
             $table->boolean('status')->default(1);
             $table->string('password');
             $table->string('phone');
-            $table->string('address')->nullable();
-            $table->string('city')->nullable();
-            $table->string('country')->nullable();
-            $table->string('postcode')->nullable();
             $table->boolean('is_email_verified')->default(0);
             $table->boolean('is_phone_verified')->default(0);
             $table->string('verification_token')->nullable();

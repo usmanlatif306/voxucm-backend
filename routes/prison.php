@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'user'], function () {
     Route::get('dashboard', [PrisonController::class, 'dashboard'])->name('prison.dashboard');
 
+    Route::view('/profile', 'prison.profile')->name('user_profile');
+    Route::post('/profile', [PrisonController::class, 'updateProfile'])->name('user_update_profile');
+
     // did purchase routes
     Route::group(['prefix' => 'did', 'as' => 'prison.did.'], function () {
         Route::get('/', [DidController::class, 'index'])->name('index');

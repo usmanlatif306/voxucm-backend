@@ -104,7 +104,7 @@
                         </div>
                         <div class="form-group">
                             <label for="extension">Extension</label>
-                            <input type="number" name="extension" class="form-control" id="extension"
+                            <input type="text" name="extension" class="form-control" id="extension"
                                 placeholder="Enter Extension" required>
                         </div>
                         <div class="form-group">

@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\Content\AboutController;
 use App\Http\Controllers\Content\FaqController;
 use App\Http\Controllers\Content\FeatureController;
+use App\Http\Controllers\Content\GeneralTasksController;
 use App\Http\Controllers\Content\HomeController;
 use App\Http\Controllers\Content\ServiceController;
 use App\Http\Controllers\Content\WorkController;
@@ -19,10 +20,7 @@ Route::get('/about-us', [AboutController::class, 'about'])->name('prison.about')
 
 Route::get('/features', [FeatureController::class, 'features'])->name('prison.features');
 
-Route::get('/pricing', function () {
-    $products = Product::where('status', true)->get();
-    return view('prison.pricing', compact('products'));
-})->name('prison.pricing');
+Route::get('/pricing', [GeneralTasksController::class, 'pricing'])->name('prison.pricing');
 
 Route::get('/how-it-works', [WorkController::class, 'works'])->name('prison.works');
 
@@ -30,10 +28,8 @@ Route::get('/faq', [FaqController::class, 'faqs'])->name('prison.support');
 
 Route::get('/services', [ServiceController::class, 'services'])->name('prison.services');
 
-Route::get('/contact', function () {
-    $contact = Contact::get()->first();
-    return view('prison.contact', compact('contact'));
-})->name('prison.contact');
+Route::get('/contact', [GeneralTasksController::class, 'contact'])->name('prison.contact');
+Route::post('/contact', [GeneralTasksController::class, 'sendMessage'])->name('send_contact_message');
 
 Route::get('/user/cart', [CartController::class, 'cart'])->name('prison.cart');
 Route::post('/cart/save', [CartController::class, 'saveRecords'])->name('prison.cartsave');

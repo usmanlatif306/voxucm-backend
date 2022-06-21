@@ -12,35 +12,48 @@ class FaqController extends Controller
 
     public function faqs()
     {
-        $faq = Faq::get()->first();
-        return view('prison.support', compact('faq'));
+        $faq = Faq::first();
+        $faqs = json_decode($faq->faqs, true);
+        return view('prison.support', compact('faq', 'faqs'));
     }
     public function index()
     {
-        $faq = Faq::get()->first();
-        return view('content.faq', compact('faq'));
+        $faq = Faq::first();
+        $faqs = json_decode($faq->faqs, true);
+
+        return view('content.faq', compact('faq', 'faqs'));
     }
 
     public function update(Faq $faq, Request $request)
     {
+
         $request->validate([
+            'faq_heading' => 'required|string|max:255',
+            'faq_title' => 'required|string',
+            'faq_about' => 'required|string',
             'image' => 'mimes:jpeg,png,jpg|max:5120',
         ]);
+        $questions = $request->question;
+        $answers = $request->answer;
+        $faqs = array_combine($questions, $answers);
+
+        $faq->update([
+            'faq_heading' => $request->faq_heading,
+            'faq_title' => $request->faq_title,
+            'faq_about' => $request->faq_about,
+            'faqs' => json_encode($faqs)
+        ]);
+        // if request has image
         if ($request->image) {
             $image = $request->image->getClientOriginalName();
             $filename = pathinfo($image, PATHINFO_FILENAME);
             $extension = pathinfo($image, PATHINFO_EXTENSION);
             $imageName = $filename . "-" . time() . "." . $extension;
             $request->image->storeAs("images", $imageName, "public");
-        }
-        if ($faq->image) {
-            Storage::delete('/public/images/' . $faq->image);
-        }
-        $faq->update($request->all());
-        if ($request->image) {
             $faq->update([
                 'image' => $imageName
             ]);
+            Storage::delete('/public/images/' . $faq->image);
         }
         return redirect()->back()->with('success', 'Data has been updated');
     }

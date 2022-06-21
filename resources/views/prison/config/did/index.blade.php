@@ -34,7 +34,7 @@
                                     <th>No</th>
                                     <th>City</th>
                                     <th>DID</th>
-                                    <th>Payment</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

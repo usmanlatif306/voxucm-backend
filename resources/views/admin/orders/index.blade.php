@@ -2,8 +2,8 @@
 
 <div class="bg-white mt-2 pt-3">
     <h1 class="text-center">Orders List</h1>
-    @if(count($orders) < 1) <div class="section-title text-center">
-        <h2>Empty Cart</h2>
+    @if(count($orders) < 1) <div class="section-title text-center pb-4">
+        <h3 class="mt-3">No Order</h3>
 </div>
 @else @if (session('success'))
 <div class="alert alert-success" role="alert">

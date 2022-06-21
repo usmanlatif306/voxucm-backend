@@ -276,123 +276,44 @@
                 <div class="faq-left-sec">
                     <div class="faq-title-image fix">
                         <div class="faq-title">
-                            <h2>FAQ :</h2>
-                            <h3>{{$faq->intro_title}}</h3>
+                            <h2>{{$faq->faq_heading}} :</h2>
+                            <h3>{{$faq->faq_title}}</h3>
                         </div>
                         <div class="faq-image">
                             <img src="{{ asset('/storage/images/'.$faq->image) }}" alt="" />
                         </div>
                     </div>
-                    <div class="faq-wrapper fix">
+                    <div class="pb-4 fix">
                         <p>
-                            {{$faq->intro1}}
-                        </p>
-                        <p>
-                            {{$faq->intro2}}
-                        </p>
-                        <p>
-                            {{$faq->intro3}}
+                            {{$faq->faq_about}}
                         </p>
                     </div>
                 </div>
             </div>
             <div class="col-xl-6 col-lg-7 mt-sm-30">
                 <div class="accordion" id="accordionExample">
+                    @foreach($faqs as $question=>$answer)
                     <div class="card">
-                        <div class="card-header" id="headingOne">
+                        <div class="card-header" id="heading{{$loop->iteration}}">
                             <h4 class="card-title">
-                                <a role="button" data-toggle="collapse" aria-expanded="true" href="#one"
-                                    aria-controls="one">
-                                    <span></span> {{$faq->q1}}
+                                <a role="button" data-toggle="collapse" aria-expanded="true"
+                                    href="#faq{{$loop->iteration}}" aria-controls="faq{{$loop->iteration}}">
+                                    <span></span> {{$question}}
                                 </a>
                             </h4>
                         </div>
-                        <div id="one" class="collapse show" role="tabpanel" aria-labelledby="headingOne"
+                        <div id="faq{{$loop->iteration}}" class="collapse {{$loop->iteration === 1 ? 'show' :''}}"
+                            role="tabpanel" aria-labelledby="heading{{$loop->iteration}}"
                             data-parent="#accordionExample">
                             <div class="card-body">
                                 <p>
-                                    {{$faq->ans1}}
+                                    {{$answer}}
                                 </p>
                                 <span class="arrow"></span>
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header" id="headingTwo">
-                            <h4 class="card-title">
-                                <a class="collapsed" data-toggle="collapse" aria-expanded="false" href="#two"
-                                    aria-controls="two">
-                                    <span></span> {{$faq->q2}}
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="two" class="collapse" role="tabpanel" aria-labelledby="headingTwo"
-                            data-parent="#accordionExample">
-                            <div class="card-body">
-                                <p>
-                                    {{$faq->ans2}}
-                                </p>
-                                <span class="arrow"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" role="tab" id="headingThree">
-                            <h4 class="card-title">
-                                <a class="collapsed" data-toggle="collapse" aria-expanded="false" href="#three"
-                                    aria-controls="three">
-                                    <span></span> {{$faq->q3}}
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="three" class="collapse" role="tabpanel" aria-labelledby="headingThree"
-                            data-parent="#accordionExample">
-                            <div class="card-body">
-                                <p>
-                                    {{$faq->ans3}}
-                                </p>
-                                <span class="arrow"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" role="tab" id="headingFour">
-                            <h4 class="card-title">
-                                <a class="collapsed" data-toggle="collapse" aria-expanded="false" href="#four"
-                                    aria-controls="four">
-                                    <span></span> {{$faq->q4}}
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="four" class="collapse" role="tabpanel" aria-labelledby="headingFour"
-                            data-parent="#accordionExample">
-                            <div class="card-body">
-                                <p>
-                                    {{$faq->ans4}}
-                                </p>
-                                <span class="arrow"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" role="tab" id="headingFive">
-                            <h4 class="card-title">
-                                <a class="collapsed" data-toggle="collapse" aria-expanded="false" href="#five"
-                                    aria-controls="five">
-                                    <span></span> {{$faq->q5}}
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="five" class="collapse" role="tabpanel" aria-labelledby="headingFive"
-                            data-parent="#accordionExample">
-                            <div class="card-body">
-                                <p>
-                                    {{$faq->ans5}}
-                                </p>
-                                <span class="arrow"></span>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

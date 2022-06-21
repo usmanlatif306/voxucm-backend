@@ -27,7 +27,6 @@ class RegisterController extends Controller
 
     public function registerUser(Request $request)
     {
-
         $this->validator($request->all())->validate();
 
         // creating voxucm user
@@ -35,7 +34,7 @@ class RegisterController extends Controller
 
         $user = $this->create($request->all());
         // creating user details
-        $user->user_details()->create($request->all());
+        // $user->user_details()->create($request->all());
         // saving voxusm user details in db
         $user->vox_user()->create([
             'tenant_id' => $voxUser->tenant_id,
@@ -43,13 +42,15 @@ class RegisterController extends Controller
             'api_password' => $voxUser->apisecret,
         ]);
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $token = Str::random(64);
-            $user->verification_token = $token;
-            $user->save();
-            $user->notify(new VerifyEmailNotification($token));
-        }
-        return view('prison.auth.verify', compact('user'));
+        // if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        //     $token = Str::random(64);
+        //     $user->verification_token = $token;
+        //     $user->save();
+        //     $user->notify(new VerifyEmailNotification($token));
+        // }
+        // return view('prison.auth.verify', compact('user'));
+        Auth::login($user);
+        return redirect()->route('prison.dashboard');
     }
 
 
@@ -79,20 +80,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:30'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name' => ['required', 'string', 'max:30', 'unique:mysql2.vox_tenant,username'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'unique:mysql2.vox_tenant,emailaddress'],
             'phone' => ['required', 'numeric',],
-            'postcode' => ['required', 'numeric'],
-            'address' => ['required', 'string', 'max:255'],
-            'city' => ['required', 'string', 'max:255'],
-            'country' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'prison_fname' => ['required', 'string', 'max:255'],
-            'prison_lname' => ['required', 'string', 'max:255'],
-            'prison_number' => ['required', 'numeric'],
-            'prison_status' => ['required',],
-            'release_date' => [$data['prison_status'] === 'sentenced' ? 'required' : 'nullable', 'date'],
-            'prison_relation' => ['required', 'string', 'max:255'],
         ]);
     }
 
@@ -108,11 +99,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
-            'address' => $data['address'],
-            'city' => $data['city'],
-            'country' => $data['country'],
-            'postcode' => $data['postcode'],
             'password' => Hash::make($data['password']),
+            'is_email_verified' => true
         ]);
     }
 }

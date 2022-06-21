@@ -27,10 +27,9 @@ class TenantService
             $voxtenant = VoxTenant::create([
                 'login_id' => $voxuser->id,
                 'firstname' => $name,
-                'username' => Str::lower($name),
+                'username' => $name,
                 'emailaddress' => $email,
                 'payment_terms' => 10,
-                'max_extension' => 10
             ]);
             $extension = $voxtenant->id . '_' . $username;
             $user = ApiUser::create([

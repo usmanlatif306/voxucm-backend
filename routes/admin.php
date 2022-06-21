@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\AAuthController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminExtensionController;
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\PromoController;
 use App\Http\Controllers\Content\AboutController;
@@ -33,6 +35,9 @@ Route::group(['middleware' => 'admin', 'prefix' => '/admin'], function () {
     Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
     Route::put('/users/{user}', [AdminController::class, 'editStatus'])->name('admin.userstatus');
     Route::get('/users/{user}/details', [AdminController::class, 'userDetails'])->name('admin.userdetails');
+    Route::resource('admins', AdminUserController::class);
+    Route::post('/csv', [AdminController::class, 'csv'])->name('admin.csv');
+
 
     // admin orders routes
     Route::group(['prefix' => '/orders', 'as' => 'admin.orders.'], function () {
@@ -78,4 +83,9 @@ Route::group(['middleware' => 'admin', 'prefix' => '/admin'], function () {
     Route::group(['as' => 'admin.'], function () {
         Route::resource('promos', PromoController::class);
     });
+
+    // Admin Extensions routes
+    Route::get('/extensions', [AdminExtensionController::class, 'index'])->name('admin.extensions');
+    Route::get('/extensions/{id}', [AdminExtensionController::class, 'show'])->name('admin.extensions.show');
+    Route::post('/extensions/did', [AdminExtensionController::class, 'saveDid'])->name('admin.extensions.did');
 });

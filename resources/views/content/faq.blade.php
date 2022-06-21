@@ -1,6 +1,5 @@
 @extends('layouts.admin') @section('content')
 <div class="bg-white mt-2 py-3">
-    <h1 class="text-center pb-3">FAQ</h1>
     <div class="w-50 mx-auto">
         @if (session('success'))
         <div class="alert alert-success" role="alert">
@@ -15,135 +14,44 @@
             </ul>
         </div>
         @endif
-        <form
-            action="{{route('content.faq.update',$faq->id)}}"
-            method="post"
-            enctype="multipart/form-data"
-        >
+        <form action="{{route('content.faq.update',$faq->id)}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <input
-                    type="text"
-                    name="intro_title"
-                    class="form-control"
-                    value="{{ $faq->intro_title }}"
-                />
+                <label for="">Faq Heading</label>
+                <input type="text" name="faq_heading" class="form-control" value="{{ $faq->faq_heading }}"
+                    placeholder="Faq Heading" />
             </div>
 
             <div class="form-group">
-                <textarea
-                    type="text"
-                    name="intro1"
-                    class="form-control"
-                    rows="5"
-                    >{{ $faq->intro1}}</textarea
-                >
+                <label for="">Faq Title</label>
+                <input type="text" name="faq_title" class="form-control" placeholder="Faq Tilte"
+                    value="{{ $faq->faq_title}}"></input>
             </div>
             <div class="form-group">
-                <textarea
-                    type="text"
-                    name="intro2"
-                    class="form-control"
-                    rows="5"
-                    >{{ $faq->intro2}}</textarea
-                >
+                <label for="">Faq About</label>
+                <textarea type="text" name="faq_about" class="form-control" placeholder="Faq About" rows="3"
+                    value="">{{ $faq->faq_about}}</textarea>
             </div>
             <div class="form-group">
-                <textarea
-                    type="text"
-                    name="intro3"
-                    class="form-control"
-                    rows="5"
-                    >{{ $faq->intro3}}</textarea
-                >
-            </div>
-            <div class="form-group">
-                <input
-                    type="text"
-                    name="q1"
-                    class="form-control"
-                    value="{{ $faq->q1 }}"
-                />
-            </div>
-            <div class="form-group">
-                <textarea
-                    type="text"
-                    name="ans1"
-                    class="form-control"
-                    rows="5"
-                    >{{ $faq->ans1}}</textarea
-                >
-            </div>
-            <div class="form-group">
-                <input
-                    type="text"
-                    name="q2"
-                    class="form-control"
-                    value="{{ $faq->q2 }}"
-                />
-            </div>
-            <div class="form-group">
-                <textarea
-                    type="text"
-                    name="ans2"
-                    class="form-control"
-                    rows="5"
-                    >{{ $faq->ans2}}</textarea
-                >
-            </div>
-            <div class="form-group">
-                <input
-                    type="text"
-                    name="q3"
-                    class="form-control"
-                    value="{{ $faq->q3 }}"
-                />
-            </div>
-            <div class="form-group">
-                <textarea
-                    type="text"
-                    name="ans3"
-                    class="form-control"
-                    rows="5"
-                    >{{ $faq->ans3}}</textarea
-                >
-            </div>
-            <div class="form-group">
-                <input
-                    type="text"
-                    name="q4"
-                    class="form-control"
-                    value="{{ $faq->q4 }}"
-                />
-            </div>
-            <div class="form-group">
-                <textarea
-                    type="text"
-                    name="ans4"
-                    class="form-control"
-                    rows="5"
-                    >{{ $faq->ans4}}</textarea
-                >
-            </div>
-            <div class="form-group">
-                <input
-                    type="text"
-                    name="q5"
-                    class="form-control"
-                    value="{{ $faq->q5 }}"
-                />
-            </div>
-            <div class="form-group">
-                <textarea
-                    type="text"
-                    name="ans5"
-                    class="form-control"
-                    rows="5"
-                    >{{ $faq->ans5}}</textarea
-                >
-            </div>
-            <div class="form-group">
+                <label for="">Faq Section Image</label>
                 <input type="file" name="image" class="form-control" />
+                <small>Don't update if you want to show old image</small>
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+                <h3>Faqs</h3>
+                <span id="addNew" class="pointer pt-2" title="Add New Faq"><i
+                        class="fas fa-plus-circle fa-2x text-primary"></i></span>
+            </div>
+            <div id="faqGroup" class="">
+                @foreach($faqs as $question=>$answer)
+                <div class="form-group">
+                    <input type="text" name="question[]" class="form-control" value="{{$question}}" />
+                </div>
+                <div class="form-group">
+                    <textarea name="answer[]" rows="5" class="form-control">{{$answer}}
+                    </textarea>
+                </div>
+                @endforeach
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Save</button>
@@ -152,3 +60,10 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+<script>
+    $('#addNew').on('click', function () {
+        $('#faqGroup').append('<div class="form-group"><input type="text" name="question[]" class="form-control" placeholder="Question" /></div><div class="form-group"><textarea name="answer[]" class="form-control" rows="3" placeholder="Answer"></textarea></div>');
+    });
+</script>
+@endpush

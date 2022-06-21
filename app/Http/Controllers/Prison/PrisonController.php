@@ -31,7 +31,7 @@ class PrisonController extends Controller
     public function dashboard()
     {
         $user = $this->getUserDetails();
-        $extensions = (new ExtensionService())->getExtensions();
+        $extensions = (new ExtensionService())->getExtensions(auth()->user()->vox_user->extension);
         session(['username' => $user->username]);
         session(['balance' => $user->credit]);
 
@@ -49,7 +49,7 @@ class PrisonController extends Controller
     // Extensions
     public function extensions()
     {
-        $extensions = (new ExtensionService())->getExtensions();
+        $extensions = (new ExtensionService())->getExtensions(auth()->user()->vox_user->extension);
         foreach ($extensions as $key => $array) {
             foreach ($array as $value) {
                 $SUBSCRIBERID = $array['SUBSCRIBERID'];
@@ -172,10 +172,37 @@ class PrisonController extends Controller
         return view('prison.dashboard.expiry');
     }
 
+    // updateProfile
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'postcode' => ['required', 'numeric'],
+            'address' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
+            'country' => ['required', 'string', 'max:255'],
+            'prison_fname' => ['required', 'string', 'max:255'],
+            'prison_lname' => ['required', 'string', 'max:255'],
+            'prison_number' => ['required', 'numeric'],
+            'prison_status' => ['required',],
+            'release_date' => [$request->prison_status === 'sentenced' ? 'required' : 'nullable', 'date'],
+            'prison_relation' => ['required', 'string', 'max:255'],
+        ]);
+        auth()->user()->user_details()->create($request->all());
+        // if user has to redirect to specific page after login
+        if ($request->session()->has('redirect')) {
+            $redirect = session('redirect');
+            $request->session()->forget('redirect');
+            return redirect()->route($redirect);
+        }
+        // redirect to dashboard
+        return redirect()->route('prison.dashboard')
+            ->with('success', 'You have Successfully updated profile details');
+    }
+
 
     // getting user details from msql2 connection
     private function getUserDetails()
     {
-        return  DB::connection('mysql2')->table('vox_tenant')->where('tenant_id', auth()->user()->vox_user->tenant_id)->first();
+        return  DB::connection('mysql2')->table('vox_tenant')->select(['username', 'credit'])->where('tenant_id', auth()->user()->vox_user->tenant_id)->first();
     }
 }

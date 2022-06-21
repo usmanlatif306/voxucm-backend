@@ -452,7 +452,7 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        <li class="{{ request()->routeIs('admin.orders.did') ? 'active' : '' }}">
+                                        <!-- <li class="{{ request()->routeIs('admin.orders.did') ? 'active' : '' }}">
                                             <a href="{{
                                                         route('admin.orders.did')
                                                     }}" class="
@@ -465,7 +465,7 @@
                                                     data-i18n="nav.basic-components.breadcrumbs">DID Orders</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
-                                        </li>
+                                        </li> -->
                                         <li class="{{ request()->routeIs('admin.orders.plan') ? 'active' : '' }}">
                                             <a href="{{
                                                         route('admin.orders.plan')
@@ -482,6 +482,46 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <!-- Users -->
+                                <li
+                                    class="pcoded-hasmenu {{(request()->routeIs('admins.index')||request()->routeIs('admin.users')||request()->routeIs('admin.extensions')) ? 'active pcoded-trigger' : '' }}">
+                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Users</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="{{ request()->routeIs('admin.index') ? 'active' : '' }}">
+                                            <a href="{{ route('admins.index') }}" class="waves-effect waves-dark">
+                                                <span class="pcoded-mtext"
+                                                    data-i18n="nav.form-components.main">Admins</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <!-- <li class="{{ request()->routeIs('admin.users') ? 'active' : '' }}">
+                                            <a href="{{ route('admin.users') }}" class="waves-effect waves-dark">
+                                                <span class="pcoded-mtext"
+                                                    data-i18n="nav.form-components.main">Editors</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li> -->
+                                        <li class="{{ request()->routeIs('admin.users') ? 'active' : '' }}">
+                                            <a href="{{ route('admin.users') }}" class="waves-effect waves-dark">
+                                                <span class="pcoded-mtext"
+                                                    data-i18n="nav.form-components.main">Users</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class="{{ request()->routeIs('admin.extensions') ? 'active' : '' }}">
+                                            <a href="{{ route('admin.extensions') }}" class="waves-effect waves-dark">
+                                                <span class="pcoded-mtext" data-i18n="nav.form-components.main">User
+                                                    Extensions</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- Promo Codes -->
                                 <li class="{{ request()->routeIs('admin.promos.index') ? 'active' : '' }}">
                                     <a href="{{ route('admin.promos.index') }}" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
@@ -495,14 +535,6 @@
                                         <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Active
                                             Plans</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <!-- -->
-                                <li class="{{ request()->routeIs('admin.users') ? 'active' : '' }}">
-                                    <a href="{{ route('admin.users') }}" class="waves-effect waves-dark">
-                                        <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Users</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>

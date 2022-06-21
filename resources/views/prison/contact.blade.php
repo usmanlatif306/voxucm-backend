@@ -27,16 +27,16 @@
         <div class="row">
             <div class="offset-lg-2 col-lg-8 text-center">
                 <div class="contact-from">
-                    <form id="contact-form" action="mail.php" method="post">
-                        <input name="name" type="text" placeholder="Name" />
-                        <input name="email" type="text" placeholder="Email" />
-                        <textarea
-                            name="message"
-                            placeholder="Your message"
-                        ></textarea>
-                        <input class="submit" type="submit" value="SUBMIT" />
+                    <form id="contactForm" action="{{route('send_contact_message')}}" method="post">
+                        @csrf
+                        <input name="name" type="text" placeholder="Name" required />
+                        <input name="email" type="text" placeholder="Email" required />
+                        <textarea name="message" placeholder="Your message" required></textarea>
+                        {!! htmlFormSnippet() !!}
+                        <input class="submit" style="cursor:pointer" type="submit" value="Submit" />
                     </form>
-                    <p class="form-messege"></p>
+                    <div id="alertMesg" class="alert mt-3 d-none">
+                    </div>
                 </div>
             </div>
         </div>
@@ -89,3 +89,39 @@
 </div>
 <!-- Contact Us end-->
 @endsection
+
+@push('scripts')
+<script>
+    $('#contactForm').on('submit', function (e) {
+        e.preventDefault();
+        $('#alertMesg').addClass('d-none');
+        $(".submit").attr("disabled", true);
+        $('.submit').val('Sending...');
+        let url = $(this).attr('action');
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: $(this).serialize(),
+            success: function (response) {
+                // console.log(response)
+                $('#alertMesg').removeClass('d-none');
+                $('#alertMesg').removeClass('alert-danger');
+                $('#alertMesg').addClass('alert-success');
+                $('#alertMesg').text('Message has been send');
+                $('.submit').val('Submit');
+                $(".submit").attr("disabled", false);
+                document.getElementById("contactForm").reset();
+            },
+            error: function (err) {
+                // console.log(err.responseJSON.message)
+                $('.submit').val('Submit');
+                $(".submit").attr("disabled", false);
+                $('#alertMesg').removeClass('d-none');
+                $('#alertMesg').removeClass('alert-success');
+                $('#alertMesg').addClass('alert-danger');
+                $('#alertMesg').text(err.responseJSON.message);
+            }
+        });
+    })
+</script>
+@endpush

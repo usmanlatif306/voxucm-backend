@@ -11,56 +11,33 @@ use App\Models\Voxucm;
 class ExtensionService
 {
     // Getting extensions
-    public function getExtensions()
+    public function getExtensions($id = null)
     {
-        // $data = json_encode(array(
-        //     'APIUSER' => '74_usman',
-        //     'APIPASSWORD' => MD5('12345678'),
-        //     'SECTION' => 'AUTHAPIUSER',
-        //     'ACTION' => 'AUTHAPIUSER'
-        // ));
-        // $ch = curl_init();
-        // curl_setopt($ch, CURLOPT_URL, 'http://141.94.55.55/voxucm/api/api.php');
-        // curl_setopt($ch, CURLOPT_POST, 1);
-        // curl_setopt($ch, CURLOPT_POSTFIELDS, 'request=' . $data);
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        // $server_output = curl_exec($ch);
-        // curl_close($ch);
-        // dd(json_decode($server_output, true));
-
-        // $postdata = json_encode(array(
-        //     'APIUSER' => '21_apiuser',
-        //     'APIPASSWORD' => MD5('123456'),
-        //     'SECTION' => 'EXTENSION',
-        //     'ACTION' => 'GETEXTENSIONS',
-        //     'DATA' => array("USERNAME" => "21_991010")
-        // ));
-
         $postdata = array(
             'SECTION' => 'EXTENSION',
             'ACTION' => 'GETEXTENSIONS',
-            'DATA' => array("USERNAME" => auth()->user()->vox_user->extension)
+            'DATA' => array("USERNAME" => $id)
         );
 
         $data = Voxucm::curlRequest($postdata);
         $data = json_decode($data, true);
         // dd($data);
-        if (auth()->user()->vox_user->extension) {
+        if ($data["STATUS"] === "SUCCESS") {
             return $data['DATA']['RESULTLIST'];
         }
         return [];
     }
 
     // Adding extensions
-    public function addExtension($request)
+    public function addExtension($data)
     {
         $postdata = array(
             'SECTION' => 'EXTENSION',
             'ACTION' => 'ADD',
             'DATA' => array(
-                "FULLNAME" => $request->name,
-                "EXTENSION" => $request->extension,
-                "PASSWORD" => $request->password,
+                "FULLNAME" => $data['name'],
+                "EXTENSION" => $data['extension'],
+                "PASSWORD" => $data['password'],
                 "CALLERIDEXTERNAL" => "",
                 "MAXCALLS" => "1",
                 "DENY" => "0.0.0.0/0.0.0.0",
@@ -98,5 +75,24 @@ class ExtensionService
 
         $data = Voxucm::curlRequest($postdata);
         return $data;
+    }
+
+    // extensions for admin user
+    // Getting extensions
+    public function getExtensionsAdmin($id = null, $data)
+    {
+        $postdata = array(
+            'SECTION' => 'EXTENSION',
+            'ACTION' => 'GETEXTENSIONS',
+            'DATA' => array("USERNAME" => $id)
+        );
+
+        $data = Voxucm::curlRequestAdmin($postdata, $data);
+        $data = json_decode($data, true);
+        // dd($data);
+        if ($data["STATUS"] === "SUCCESS") {
+            return $data['DATA']['RESULTLIST'];
+        }
+        return [];
     }
 }
