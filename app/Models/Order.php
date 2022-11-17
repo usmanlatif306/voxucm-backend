@@ -16,7 +16,7 @@ class Order extends Model
         // 'order_status',
         // 'payment_status',
         // 'expiry_date',
-        'user_id', 'product_id', 'did_id', 'city', 'dialing_code', 'price', 'order_status', 'payment_id', 'invoiced',
+        'user_id', 'product_id', 'did_id', 'area_code_id', 'city', 'dialing_code', 'price', 'order_status', 'payment_id', 'invoiced',
     ];
 
     public function user()

@@ -79,7 +79,7 @@ class ExtensionService
 
     // extensions for admin user
     // Getting extensions
-    public function getExtensionsAdmin($id = null, $data)
+    public function getExtensionsAdmin($id, $data)
     {
         $postdata = array(
             'SECTION' => 'EXTENSION',

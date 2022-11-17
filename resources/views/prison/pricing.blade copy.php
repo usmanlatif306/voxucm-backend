@@ -95,25 +95,15 @@
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Select Area Code</h5>
+
+                <div class="modal-body text-center mt-5">
+                    <i class="far fa-check-circle text-success fa-5x"></i>
+                    <h3 class="mt-4">Added to your cart</h3>
                 </div>
-                <div class="modal-body">
-                    <div id="area" class="alert alert-danger d-none" role="alert">
-                        Something Went Wrong
-                    </div>
-                    <div class="form-group">
-                        <label for="area">Select Area Code</label>
-                        <select id="city" class="form-control" name="city">
-                            @foreach ($codes as $code)
-                                <option value="{{ $code->id }}">
-                                    {{ $code->city }} <small>({{ $code->code }})</small>
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <button id="areaCode" class="btn btn-primary">Select</button>
-                    {{-- </form> --}}
+                <div class="modal-footer border-top-0 mt-3">
+                    <button type="button" class="btn btn-primary text-uppercase" data-dismiss="modal">Continue
+                        Shopping</button>
+                    <a href="{{ route('prison.cart') }}" class="btn btn-secondary text-uppercase">Checkout</a>
                 </div>
             </div>
         </div>
@@ -123,6 +113,7 @@
     <script>
         $('.save-plan').on('click', function(e) {
             e.preventDefault();
+
             let id = $(this).data("id");
             $.ajax({
                 url: "{{ route('order.save') }}",
@@ -134,33 +125,11 @@
                         $('.cart-amount').text(parseInt(oldCart) + 1)
                         $('#planSavedModel').modal('show')
                     } else {
-                        alert('Something went wrong');
+                        alert('Something Went Wrong');
                     }
                 },
                 error: function(error) {
-                    alert('Something went wrong');
-                }
-            });
-        });
-
-        $('#areaCode').on('click', function(e) {
-            $('#area').addClass('d-none');
-            e.preventDefault();
-            $.ajax({
-                url: "{{ route('order.city') }}",
-                type: "POST",
-                data: {
-                    city: $('#city').val()
-                },
-                success: function(response) {
-                    if (!response.error) {
-                        window.location.href = "{{ route('prison.register') }}";
-                    } else {
-                        $('#area').removeClass('d-none');
-                    }
-                },
-                error: function(error) {
-                    $('#area').removeClass('d-none');
+                    alert('Something Went Wrong');
                 }
             });
         });

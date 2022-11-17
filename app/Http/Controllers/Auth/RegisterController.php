@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Notifications\VerifyEmailNotification;
+use App\Services\AuthService;
 use App\Services\TenantService;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -50,6 +52,23 @@ class RegisterController extends Controller
         // }
         // return view('prison.auth.verify', compact('user'));
         Auth::login($user);
+
+        // if session cart has orders then updating user_id for that orders
+        if (session('user.cart') && count(session('user.cart')) > 0) {
+            $orders = Order::whereIn('id', session('user.cart'))->where('order_status', 'Unpaid')->get();
+            foreach ($orders  as $order) {
+                $order->update(['user_id' => auth()->id()]);
+            }
+            $request->session()->forget('user.cart');
+            return redirect()->route('prison.cart');
+        }
+        // if user has to redirect to specific page after login
+        if ($request->session()->has('redirect')) {
+            $redirect = session('redirect');
+            $request->session()->forget('redirect');
+            return redirect()->route($redirect);
+        }
+
         return redirect()->route('prison.dashboard');
     }
 

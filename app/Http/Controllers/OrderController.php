@@ -13,6 +13,7 @@ class OrderController extends Controller
     {
         $order = Order::create($request->all());
         $request->session()->push('user.cart', $order->id);
+        $request->session()->put('orderId', $order->id);
         if ($order) {
             // return redirect()->back()->with('success', 'Order Has been Added');
             return response([
@@ -21,6 +22,23 @@ class OrderController extends Controller
             ]);
         }
         // return redirect()->back()->with('error', 'Something Went Wrong');
+        return response([
+            'error' => true,
+            'message' => 'Something Went Wrong'
+        ]);
+    }
+
+    // Save Order to DB
+    public function orderCity(Request $request)
+    {
+        $order = Order::find($request->session()->get('orderId'))->update(['area_code_id' => $request->city]);
+
+        if ($order) {
+            return response([
+                'error' => false,
+                'message' => 'City has been added'
+            ]);
+        }
         return response([
             'error' => true,
             'message' => 'Something Went Wrong'

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Content;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Admin;
+use App\Models\AreaCode;
 use App\Models\Content\Contact;
 use App\Models\Content\Product;
 use App\Notifications\ContactMessageNotification;
@@ -15,7 +16,9 @@ class GeneralTasksController extends Controller
     public function pricing()
     {
         $products = Product::where('status', true)->get();
-        return view('prison.pricing', compact('products'));
+        $codes = AreaCode::orderBy('city')->get();
+
+        return view('prison.pricing', compact('products', 'codes'));
     }
 
     // website contact page

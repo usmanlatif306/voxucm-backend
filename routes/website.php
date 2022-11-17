@@ -52,4 +52,5 @@ Route::get('/cookies-policy', function () {
 
 // Prison order Routes
 Route::post('save-order', [OrderController::class, 'saveOrder'])->name('order.save');
+Route::post('order/city', [OrderController::class, 'orderCity'])->name('order.city');
 Route::delete('/delete-order/{order}', [OrderController::class, 'deleteOrder'])->name('order.delete');
