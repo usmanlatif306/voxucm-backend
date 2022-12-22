@@ -124,7 +124,6 @@ class CartController extends Controller
             ]);
         }
 
-
         // BillDetail::create($request->all());
         // PrisonerDetail::create($request->all());
 

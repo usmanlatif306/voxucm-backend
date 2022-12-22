@@ -101,7 +101,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:30', 'unique:mysql2.vox_tenant,username'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'unique:mysql2.vox_tenant,emailaddress'],
-            'phone' => ['required', 'numeric',],
+            'phone' => ['required', 'string',],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }

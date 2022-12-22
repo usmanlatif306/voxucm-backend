@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Content;
 
 use App\Http\Controllers\Controller;
+use App\Models\AreaCode;
 use App\Models\Content\Contact;
 use App\Models\Content\Faq;
 use App\Models\Content\Feature;
@@ -20,7 +21,6 @@ class HomeController extends Controller
     // showing home screen
     public function home()
     {
-        // dd(session('user.cart'));
         $home = Home::first();
         $products = Product::limit(4)->get();
         $service = Service::first();
@@ -30,6 +30,7 @@ class HomeController extends Controller
         $contact = Contact::first();
         $news = NewsLetter::first();
         $call = TestCall::first();
+        $codes = AreaCode::orderBy('city')->get();
 
         return view('prison.index', [
             'home' => $home,
@@ -42,6 +43,7 @@ class HomeController extends Controller
             'contact' => $contact,
             'news' => $news,
             'call' => $call,
+            'codes' => $codes,
         ]);
     }
     // Showig admin home content edit
